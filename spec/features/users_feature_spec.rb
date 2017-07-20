@@ -13,6 +13,6 @@ feature 'User Management' do
     fill_in :password_confirmation, with: 'Password123'
     click_button 'Sign up'
 
-    expect(page).to have_content('Successfully signed up as test_email@gmail.com')
+    expect(page).to have_content('Signed in as: test_email@gmail.com')
   end
 end
