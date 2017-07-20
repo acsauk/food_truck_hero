@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-Rspec.describe Recipe, type: :model do
-  it 'has a valid factory' do
-    expect(recipe).to be_valid
-  end
+RSpec.describe Recipe, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
