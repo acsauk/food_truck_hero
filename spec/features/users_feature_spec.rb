@@ -13,6 +13,6 @@ feature 'User Management' do
     fill_in :user_password_confirmation, with: 'Password123'
     click_button 'Sign up'
 
-    expect(page).to have_content('Signed in as: test_email@gmail.com')
+    expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
   end
 end
