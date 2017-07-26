@@ -7,10 +7,10 @@ feature 'User Management' do
 
   scenario 'I can sign up as a new user' do
     visit '/'
-    click_button 'Sign up'
-    fill_in :email, with: 'test_email@gmail.com'
-    fill_in :password, with: 'Password123'
-    fill_in :password_confirmation, with: 'Password123'
+    click_link 'Sign up'
+    fill_in :user_email, with: 'test_email@gmail.com'
+    fill_in :user_password, with: 'Password123'
+    fill_in :user_password_confirmation, with: 'Password123'
     click_button 'Sign up'
 
     expect(page).to have_content('Signed in as: test_email@gmail.com')
