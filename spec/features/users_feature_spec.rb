@@ -27,9 +27,9 @@ feature 'User Management' do
       click_link 'Sign in'
       fill_in :user_email, with: 'test_email@gmail.com'
       fill_in :user_password, with: 'Password123'
-      click_button 'Sign in'
+      click_button 'Log in'
 
-      expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
+      expect(page).to have_content(I18n.t('devise.sessions.signed_in'))
     end
 
     scenario 'I can see sign in/up links' do
