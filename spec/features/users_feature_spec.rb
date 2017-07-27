@@ -18,8 +18,13 @@ feature 'User Management' do
 
     scenario 'I can see sign in/up links' do
       visit '/'
-      expect(page).to have_content('Sign in')
-      expect(page).to have_content('Sign up')
+      expect(page).to have_link('Sign in')
+      expect(page).to have_link('Sign up')
+    end
+
+    scenario 'I cannot see sign out link' do
+      visit '/'
+      expect(page).to have_no_link('Sign out')
     end
   end
 end
