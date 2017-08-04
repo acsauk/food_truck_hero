@@ -1,5 +1,6 @@
 feature 'Recipes' do
   scenario 'adding recipes' do
+    puts 'adding recipes'
     visit '/'
     sign_up
     click_link 'Add Recipe'

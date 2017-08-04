@@ -5,8 +5,8 @@ abort("The Rails environment is running in development mode!") if Rails.env.deve
 
 require 'rspec/rails'
 require 'capybara/rails'
-require 'support/database_cleaner'
 require 'support/users_helper'
+require 'support/database_cleaner'
 
 ActiveRecord::Migration.maintain_test_schema!
 
