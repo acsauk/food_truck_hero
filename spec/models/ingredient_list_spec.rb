@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe IngredientList, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:ingredient_lists) { FactoryGirl.build(:ingredient_list) }
+
+  it 'has a valid factory' do
+    expect(ingredient_lists).to be_valid
+  end
+
+  it { is_expected.to belong_to(:recipe) }
+  it { is_expected.to belong_to(:ingredient) }
+  it { is_expected.to accept_nested_attributes_for(:ingredient) }
 end
