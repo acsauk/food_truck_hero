@@ -44,6 +44,7 @@ feature 'User Management' do
     before(:each) do
       visit '/'
       sign_up
+      click_link 'Sign out'
       click_link 'Sign in'
       fill_in :user_email, with: 'test@gmail.com'
       fill_in :user_password, with: 'password123'

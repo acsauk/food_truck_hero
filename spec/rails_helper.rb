@@ -4,9 +4,9 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 abort("The Rails environment is running in development mode!") if Rails.env.development?
 
 require 'rspec/rails'
-require 'capybara/rails'
+require 'capybara/rspec'
 require 'support/users_helper'
-require 'support/database_cleaner'
+require 'spec_helper'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -15,6 +15,26 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
