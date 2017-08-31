@@ -10,4 +10,6 @@ RSpec.describe Recipe, type: :model do
 
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:instructions) }
+  it { is_expected.to have_many(:ingredients).through(:ingredientLists) }
+  it { is_expected.to have_many(:ingredientLists) }
 end

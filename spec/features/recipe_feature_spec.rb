@@ -3,7 +3,6 @@ feature 'Recipes' do
     puts 'adding recipes'
     visit '/'
     sign_up
-    save_and_open_page
     click_link 'New Recipe'
     fill_in 'Title', with: 'Recipe title'
     fill_in 'Instructions', with: 'Recipe instructions'
