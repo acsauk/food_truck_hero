@@ -13,14 +13,16 @@
   .field
     = form.label :instructions
     = form.text_area :instructions, id: :recipe_instructions
-  .field
-    = form.label :ingredient
-    = form.text_field :ingredient, id: :ingredient_1
-  .field
-    = form.label :quantity
-    = form.text_field :quantity, id: :quantity_1
-  .field
-    = form.label :unit
-    = form.text_field :unit, id: :unit_1
+
+  = form.fields_for :ingredients do |ingredients_form|
+    .field
+      = ingredients_form.label :name
+      = ingredients_form.text_field :name, id: :name
+    .field
+      = ingredients_form.label :amount
+      = ingredients_form.text_field :amount, id: :amount
+    .field
+      = ingredients_form.label :unit
+      = ingredients_form.text_field :unit, id: :unit
   .actions
     = form.submit
