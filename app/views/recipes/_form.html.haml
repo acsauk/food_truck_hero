@@ -1,4 +1,4 @@
-= form_with(model: recipe, local: true) do |form|
+= form_with model: recipe, local: true do |form|
   - if recipe.errors.any?
     #error_explanation
       %h2
@@ -14,15 +14,15 @@
     = form.label :instructions
     = form.text_area :instructions, id: :recipe_instructions
 
-  = form.fields_for :ingredients do |ingredients_form|
+  = form.fields_for :ingredients do |ingredients_fields|
     .field
-      = ingredients_form.label :name
-      = ingredients_form.text_field :name, id: :name
+      = ingredients_fields.label :name
+      = ingredients_fields.text_field :name, id: :name
     .field
-      = ingredients_form.label :amount
-      = ingredients_form.text_field :amount, id: :amount
+      = ingredients_fields.label :amount
+      = ingredients_fields.text_field :amount, id: :amount
     .field
-      = ingredients_form.label :unit
-      = ingredients_form.text_field :unit, id: :unit
+      = ingredients_fields.label :unit
+      = ingredients_fields.text_field :unit, id: :unit
   .actions
     = form.submit
