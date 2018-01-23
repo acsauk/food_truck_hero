@@ -8,7 +8,9 @@
 %p
   %strong Ingredients:
   - @recipe.ingredients.each do |ingredient|
-    = ingredient.name ingredient.amount ingredient.unit
+    = ingredient.name
+    = ingredient.amount
+    = ingredient.unit
 = link_to 'Edit', edit_recipe_path(@recipe)
 |
 = link_to 'Back', recipes_path
