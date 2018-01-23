@@ -15,6 +15,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
+    @recipe.ingredientLists.build.build_ingredient
   end
 
   # GET /recipes/1/edit
@@ -31,6 +32,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
       else
+        @recipe.ingredientLists.build.build_ingredient
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
@@ -69,6 +71,9 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:title, :instructions)
+      params.require(:recipe).permit(:title, :instructions,
+                                     ingredientLists_attributes: [
+                                       ingredient_attributes: %i[name amount unit]
+                                     ])
     end
 end
