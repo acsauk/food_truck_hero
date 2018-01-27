@@ -7,10 +7,10 @@
   = @recipe.instructions
 %p
   %strong Ingredients:
-  - @recipe.ingredients.each do |ingredient|
-    = ingredient.name
-    = ingredient.amount
-    = ingredient.unit
+  - @recipe.ingredientLists.each do |ils|
+    = ils.ingredient.name
+    = ils.amount
+    = ils.unit
 = link_to 'Edit', edit_recipe_path(@recipe)
 |
 = link_to 'Back', recipes_path
