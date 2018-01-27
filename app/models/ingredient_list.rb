@@ -3,7 +3,6 @@ class IngredientList < ApplicationRecord
   belongs_to :ingredient, optional: true
 
   def ingredient_attributes=(ingredient_attributes)
-
     if ingredient_attributes['name']
       new_ingredient = Ingredient.find_or_create_by(name: ingredient_attributes['name']) do |i|
         i.amount = ingredient_attributes['amount']

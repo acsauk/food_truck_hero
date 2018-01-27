@@ -29,11 +29,25 @@ RSpec.describe RecipesController, type: :controller do
   # Recipe. As you add validations to Recipe, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      title: 'A recipe title',
+      instructions: 'Some instructions on making the recipe',
+      ingredientLists_attributes:
+        [ingredient_attributes:
+          [name: 'Ingredient Name', amount: '200', unit: 'grams']
+        ]
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      title: '',
+      instructions: '',
+      ingredientLists_attributes:
+        [ingredient_attributes:
+          [name: '', amount: '', unit: '']
+        ]
+    }
   }
 
   # This should return the minimal set of values that should be in the session

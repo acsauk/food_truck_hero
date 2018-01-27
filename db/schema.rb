@@ -16,16 +16,16 @@ ActiveRecord::Schema.define(version: 20170831100206) do
   enable_extension "plpgsql"
 
   create_table "ingredient_lists", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "ingredient_id"
+    t.integer "recipe_id", null: false
+    t.integer "ingredient_id", null: false
+    t.float "amount", null: false
+    t.string "unit", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "amount", null: false
-    t.string "unit", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
