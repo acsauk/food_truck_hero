@@ -17,6 +17,10 @@
     = f.text_area :instructions, id: :recipe_instructions
 
   = f.fields_for :ingredientLists do |il|
+    = il.fields_for :ingredient do |i|
+      .field
+        = i.label :name
+        = i.text_field :name, id: :name
     .field
       = il.label :amount
       = il.text_field :amount, id: :amount
@@ -24,11 +28,6 @@
     .field
       = il.label :unit
       = il.text_field :unit, id: :unit
-      
-    = il.fields_for :ingredient do |i|
-      .field
-        = i.label :name
-        = i.text_field :name, id: :name
 
   .actions
     = f.submit
