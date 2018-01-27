@@ -32,10 +32,10 @@ RSpec.describe RecipesController, type: :controller do
     {
       title: 'A recipe title',
       instructions: 'Some instructions on making the recipe',
-      ingredientLists_attributes:
-        [ingredient_attributes:
-          [name: 'Ingredient Name', amount: '200', unit: 'grams']
-        ]
+      ingredientLists_attributes: [
+        [amount: '200', unit: 'grams'],
+        [ingredient_attributes: [name: 'Ingredient Name']]
+      ]
     }
   }
 
@@ -43,10 +43,10 @@ RSpec.describe RecipesController, type: :controller do
     {
       title: '',
       instructions: '',
-      ingredientLists_attributes:
-        [ingredient_attributes:
-          [name: '', amount: '', unit: '']
-        ]
+      ingredientLists_attributes: [
+        [amount: '', unit: ''],
+        [ingredient_attributes: [name: '']]
+      ]
     }
   }
 
