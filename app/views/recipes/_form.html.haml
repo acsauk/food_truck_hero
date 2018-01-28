@@ -7,9 +7,11 @@
       %ul
         - @recipe.errors.full_messages.each do |message|
           %li= message
+
   .field
     = f.label :title
     = f.text_field :title, id: :recipe_title
+
   .field
     = f.label :instructions
     = f.text_area :instructions, id: :recipe_instructions
@@ -19,11 +21,13 @@
       .field
         = i.label :name
         = i.text_field :name, id: :name
-      .field
-        = i.label :amount
-        = i.text_field :amount, id: :amount
-      .field
-        = i.label :unit
-        = i.text_field :unit, id: :unit
+    .field
+      = il.label :amount
+      = il.text_field :amount, id: :amount
+
+    .field
+      = il.label :unit
+      = il.text_field :unit, id: :unit
+
   .actions
     = f.submit

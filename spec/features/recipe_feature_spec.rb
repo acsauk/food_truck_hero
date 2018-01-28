@@ -13,6 +13,6 @@ feature 'Recipes' do
     expect(page).to have_content 'Recipe was successfully created'
     expect(page).to have_content 'Title: Recipe title'
     expect(page).to have_content 'Instructions: Recipe instructions'
-    expect(page).to have_content 'Ingredients: Ingredient name 20 Ingredient unit'
+    expect(page).to have_content 'Ingredients: Ingredient name 20.0 Ingredient unit'
   end
 end
