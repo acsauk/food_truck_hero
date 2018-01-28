@@ -4,9 +4,9 @@ class IngredientList < ApplicationRecord
 
   validates_presence_of :unit, :amount
 
-  def ingredient_attributes=(ingredient_attributes)
-    if ingredient_attributes['name']
-      new_ingredient = Ingredient.find_or_create_by(name: ingredient_attributes['name'])
+  def ingredient_attributes=(attributes)
+    if attributes['name']
+      new_ingredient = Ingredient.find_or_create_by(name: attributes['name'])
       self.ingredient = new_ingredient
     end
   end

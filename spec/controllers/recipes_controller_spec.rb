@@ -28,27 +28,31 @@ RSpec.describe RecipesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Recipe. As you add validations to Recipe, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
-      title: 'A recipe title',
-      instructions: 'Some instructions on making the recipe',
-      ingredientLists_attributes: [
-        [amount: '200', unit: 'grams'],
-        [ingredient_attributes: [name: 'Ingredient Name']]
-      ]
+      'title' => 'Ham',
+      'instructions' => 'Some ham cooked',
+      'ingredientLists_attributes' =>
+        { '0' =>
+          { 'ingredient_attributes' =>
+            { 'name' => 'Pig' },
+            'amount' => '2000',
+            'unit' => 'grams' } }
     }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
-      title: '',
-      instructions: '',
-      ingredientLists_attributes: [
-        [amount: '', unit: ''],
-        [ingredient_attributes: [name: '']]
-      ]
+      'title' => '',
+      'instructions' => '',
+      'ingredientLists_attributes' =>
+        { '0' =>
+          { 'ingredient_attributes' =>
+            { 'name' => '' },
+            'amount' => '',
+            'unit' => '' } }
     }
-  }
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
