@@ -6,5 +6,32 @@ FactoryBot.define do
     sequence :instructions do |n|
       "Instructions text #{n}"
     end
+
+    transient do
+      ingredients_count 2
+      amount 1
+      unit 'grams'
+      ingredient_name nil
+    end
+
+    factory :recipe_with_ingredients do
+      after(:create) do |recipe, evaluator|
+        (0...evaluator.ingredients_count).each do
+          case evaluator.ingredient_name
+          when nil
+            recipe.ingredientLists <<
+              FactoryBot.build(
+                :ingredient_list, ingredient: FactoryBot.build(:ingredient)
+              )
+          else
+            recipe.ingredientLists <<
+              FactoryBot.build(
+                :ingredient_list, ingredient:
+                  FactoryBot.build(:ingredient, name: evaluator.ingredient_name)
+              )
+          end
+        end
+      end
+    end
   end
 end
