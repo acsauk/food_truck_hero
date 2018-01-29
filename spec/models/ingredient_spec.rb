@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Ingredient, type: :model do
-  let(:ingredient) { FactoryGirl.build(:ingredient) }
+  let(:ingredient) { FactoryBot.build(:ingredient) }
 
   it 'has a valid factory' do
     expect(ingredient).to be_valid

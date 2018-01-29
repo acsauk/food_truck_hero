@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :recipe do
     sequence :title do |n|
       "Title text #{n}"
