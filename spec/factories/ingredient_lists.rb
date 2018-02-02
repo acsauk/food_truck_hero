@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :ingredient_list do
+  factory :ingredientList do
     recipe
     ingredient
     amount "MyString"

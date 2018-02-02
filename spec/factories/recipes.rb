@@ -21,12 +21,12 @@ FactoryBot.define do
           when nil
             recipe.ingredientLists <<
               FactoryBot.build(
-                :ingredient_list, ingredient: FactoryBot.build(:ingredient)
+                :ingredientList, ingredient: FactoryBot.build(:ingredient)
               )
           else
             recipe.ingredientLists <<
               FactoryBot.build(
-                :ingredient_list, ingredient:
+                :ingredientList, ingredient:
                   FactoryBot.build(:ingredient, name: evaluator.ingredient_name)
               )
           end
