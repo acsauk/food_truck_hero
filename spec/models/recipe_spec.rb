@@ -16,6 +16,13 @@ RSpec.describe Recipe, type: :model do
   it { is_expected.to have_many(:ingredientLists) }
   it { is_expected.to accept_nested_attributes_for(:ingredientLists) }
 
+it 'can have multiple ingredients associated with a recipe' do
+  ingredients_count = 4
+  four_ingredient_recipe = FactoryBot.create:recipe_with_ingredients,
+                                            ingredients_count: ingredients_count
+  expect(four_ingredient_recipe.ingredients.size).to equal ingredients_count
+end
+
   it 'deletes associated IngredientLists when destroyed' do
     expect { rwi.destroy }.to change(IngredientList, :count).by(-IngredientList.all.size)
   end

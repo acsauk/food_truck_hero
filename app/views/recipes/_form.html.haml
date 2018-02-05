@@ -20,14 +20,14 @@
     = il.fields_for :ingredient do |i|
       .field
         = i.label :name
-        = i.text_field :name, id: :name
+        = i.text_field :name, id: "name-#{il.index}"
     .field
       = il.label :amount
-      = il.text_field :amount, id: :amount
+      = il.text_field :amount, id: "amount-#{il.index}"
 
     .field
       = il.label :unit
-      = il.text_field :unit, id: :unit
+      = il.text_field :unit, id: "unit-#{il.index}"
 
   .actions
     = f.submit

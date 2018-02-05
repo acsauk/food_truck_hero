@@ -1,10 +1,11 @@
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../../config/environment', __FILE__)
-abort("The Rails environment is running in production mode!") if Rails.env.production?
-abort("The Rails environment is running in development mode!") if Rails.env.development?
+abort('The Rails env is running in production mode!') if Rails.env.production?
+abort('The Rails env is running in development mode!') if Rails.env.development?
 
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'support/recipes_helper'
 require 'support/users_helper'
 require 'spec_helper'
 
