@@ -29,4 +29,15 @@ feature 'Recipes' do
     expect(page).not_to have_content delete_link
     expect(page).to have_content 'Recipe was successfully destroyed.'
   end
+
+  scenario 'viewing recipes' do
+    visit root_path
+    sign_up
+    create_recipe(ingredients_count: 2)
+    visit recipe_path Recipe.last
+    expect(page).to have_content 'Title: Recipe title'
+    expect(page).to have_content 'Instructions: Recipe instructions'
+    expect(page).to have_content 'Ingredient name 1 20.0 Ingredient unit 1'
+    expect(page).to have_content 'Ingredient name 2 21.0 Ingredient unit 2'
+  end
 end
