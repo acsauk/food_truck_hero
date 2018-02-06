@@ -18,4 +18,15 @@ feature 'Recipes' do
     click_link 'Delete'
     expect(page).to have_content 'Recipe was successfully destroyed.'
   end
+
+  scenario 'deleting recipes - recipes view' do
+    visit root_path
+    sign_up
+    recipe = FactoryBot.create :recipe
+    visit recipes_path
+    delete_link = find("a[href='#{recipe_path recipe}']"){ |el| el['data-method'] == 'delete' }
+    delete_link.click
+    expect(page).not_to have_content delete_link
+    expect(page).to have_content 'Recipe was successfully destroyed.'
+  end
 end
