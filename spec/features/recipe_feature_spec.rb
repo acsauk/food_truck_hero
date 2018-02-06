@@ -1,7 +1,10 @@
 feature 'Recipes' do
-  scenario 'adding recipes - multiple ingredients' do
+  before {
     visit root_path
     sign_up
+  }
+
+  scenario 'adding recipes - multiple ingredients' do
     create_recipe(ingredients_count: 2)
     expect(page).to have_content 'Recipe was successfully created'
     expect(page).to have_content 'Title: Recipe title'
@@ -11,8 +14,6 @@ feature 'Recipes' do
   end
 
   scenario 'deleting recipes - recipe show view' do
-    visit root_path
-    sign_up
     recipe = FactoryBot.create :recipe
     visit recipe_path recipe
     click_link 'Delete'
@@ -20,8 +21,6 @@ feature 'Recipes' do
   end
 
   scenario 'deleting recipes - recipes view' do
-    visit root_path
-    sign_up
     recipe = FactoryBot.create :recipe
     visit recipes_path
     delete_link = find("a[href='#{recipe_path recipe}']"){ |el| el['data-method'] == 'delete' }
@@ -31,8 +30,6 @@ feature 'Recipes' do
   end
 
   scenario 'viewing recipes' do
-    visit root_path
-    sign_up
     create_recipe(ingredients_count: 2)
     visit recipe_path Recipe.last
     expect(page).to have_content 'Title: Recipe title'
