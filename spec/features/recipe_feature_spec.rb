@@ -13,9 +13,9 @@ feature 'Recipes' do
   scenario 'deleting recipes - recipe show view' do
     visit root_path
     sign_up
-    create_recipe(ingredients_count: 2)
-    visit recipes_path 1
+    recipe = FactoryBot.create :recipe
+    visit recipe_path recipe
     click_link 'Delete'
-    expect(page).to have_content 'Recipe was successfully deleted'
+    expect(page).to have_content 'Recipe was successfully destroyed.'
   end
 end
