@@ -9,9 +9,9 @@ def create_recipe(title: 'Recipe title',
   fill_in 'Instructions', with: instructions
   count = 0
   until count == ingredients_count
-    fill_in "name-#{count}", with: "#{ingredient_name} #{count + 1}"
+    fill_in "name-#{count}", with: "#{ingredient_name} #{count.next}"
     fill_in "amount-#{count}", with: ingredient_amount + count
-    fill_in "unit-#{count}", with: "#{ingredient_unit} #{count + 1}"
+    fill_in "unit-#{count}", with: "#{ingredient_unit} #{count.next}"
     count += 1
   end
   click_button 'Create Recipe'
@@ -22,9 +22,9 @@ def edit_recipe(recipe)
   fill_in 'Instructions', with: "#{recipe.instructions} edit"
   count = 0
   until count == recipe.ingredients.size
-    fill_in "name-#{count}", with: "#{recipe.ingredients[count].name} #{count + 1} edit"
-    fill_in "amount-#{count}", with: recipe.ingredientLists[count].amount + count + 1
-    fill_in "unit-#{count}", with: "#{recipe.ingredientLists[count].unit} #{count + 1} edit"
+    fill_in "name-#{count}", with: "name edit #{count.next}"
+    fill_in "amount-#{count}", with: recipe.ingredientLists[count].amount * 2
+    fill_in "unit-#{count}", with: "unit edit #{count.next}"
     count += 1
   end
   click_button 'Update Recipe'
