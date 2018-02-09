@@ -15,6 +15,7 @@ RSpec.describe Recipe, type: :model do
   it { is_expected.to have_many(:ingredients).through(:ingredientLists) }
   it { is_expected.to have_many(:ingredientLists) }
   it { is_expected.to accept_nested_attributes_for(:ingredientLists) }
+  it { is_expected.to belong_to(:user) }
 
 it 'can have multiple ingredients associated with a recipe' do
   ingredients_count = 4
