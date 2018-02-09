@@ -61,11 +61,11 @@ feature 'User Management' do
     end
 
     scenario 'I can see recipes that belong to me' do
-      expect(page).to have_link(recipe_1.title)
+      expect(page).to have_content(recipe_1.title)
     end
 
     scenario 'I cannot see recipes that belong to another user' do
-      expect(page).to have_no_link(recipe_2.title)
+      expect(page).to have_no_content(recipe_2.title)
     end
   end
 end
