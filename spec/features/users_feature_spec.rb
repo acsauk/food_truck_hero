@@ -21,8 +21,8 @@ feature 'User Management' do
 
     scenario 'I can sign in as an existing user' do
       sign_up(email: 'test2@gmail.com', password: 'password123')
-      click_link 'Sign out'
-      click_link 'Sign in'
+      click_sign_out_link_nav
+      click_sign_in_link_nav
       fill_in :user_email, with: 'test2@gmail.com'
       fill_in :user_password, with: 'password123'
       click_button 'Log in'

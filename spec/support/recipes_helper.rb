@@ -1,9 +1,9 @@
-def create_recipe(title = 'Recipe title',
-                  instructions = 'Recipe instructions',
-                  ingredients_count = 2,
-                  ingredient_name = 'Ingredient name',
-                  ingredient_amount = 20,
-                  ingredient_unit = 'Ingredient unit')
+def create_recipe(title: 'Recipe title',
+                  instructions: 'Recipe instructions',
+                  ingredients_count: 2,
+                  ingredient_name: 'Ingredient name',
+                  ingredient_amount: 20,
+                  ingredient_unit: 'Ingredient unit')
   click_link 'New Recipe'
   fill_in 'Title', with: title
   fill_in 'Instructions', with: instructions
