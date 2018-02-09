@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "recipes/new", type: :view do
+RSpec.describe "recipes/new", type: :view, :skip => true do
   before(:each) do
     assign(:recipe, Recipe.new(
       :title => "MyString",

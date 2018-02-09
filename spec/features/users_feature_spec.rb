@@ -1,13 +1,8 @@
 feature 'User Management' do
-  let(:recipe_with_user) do
-    FactoryBot.create:recipe_with_user,
-                     email: 'a@b.com'
-  end
-
-  let(:recipe_with_user_2) do
-    FactoryBot.create:recipe_with_user,
-                     email: 'a@c.com'
-  end
+  let!(:user_1)   { FactoryBot.create(:user, email: 'a@b.com') }
+  let!(:user_2)   { FactoryBot.create(:user, email: 'a@c.com') }
+  let!(:recipe_1) { FactoryBot.create(:recipe, user: user_1) }
+  let!(:recipe_2) { FactoryBot.create(:recipe, user: user_2) }
 
   scenario 'Shows a welcome page when navigation to /' do
     visit '/'
@@ -25,12 +20,13 @@ feature 'User Management' do
     end
 
     scenario 'I can sign in as an existing user' do
-      sign_up(email: 'test2@gmail.com')
+      sign_up(email: 'test2@gmail.com', password: 'password123')
       click_link 'Sign out'
       click_link 'Sign in'
       fill_in :user_email, with: 'test2@gmail.com'
       fill_in :user_password, with: 'password123'
       click_button 'Log in'
+      # binding.pry
 
       expect(page).to have_content(I18n.t('devise.sessions.signed_in'))
     end
@@ -45,13 +41,14 @@ feature 'User Management' do
     end
 
     scenario 'I cannot see any recipes' do
-      expect(page).to have_no_link(recipe_with_user.title)
+      expect(page).to have_no_link(recipe_1.title)
     end
   end
 
   context 'when signed in' do
     before(:each) do
-      sign_in(recipe_with_user.user.email, recipe_with_user.user.password)
+      login_as(user_1, scope: :user)
+      visit '/'
     end
 
     scenario 'I cannot see sign in/up links' do
@@ -64,11 +61,11 @@ feature 'User Management' do
     end
 
     scenario 'I can see recipes that belong to me' do
-      expect(page).to have_link(recipe_with_user.title)
+      expect(page).to have_link(recipe_1.title)
     end
 
     scenario 'I cannot see recipes that belong to another user' do
-      expect(page).to have_no_link(recipe_with_user_2.title)
+      expect(page).to have_no_link(recipe_2.title)
     end
   end
 end
