@@ -86,6 +86,7 @@ jobs:
 
     # working_directory: ~/food-truck-hero
     steps:
+      - checkout
       - run:
           name: Run setup script
           command: bash .circleci/setup-heroku.sh
