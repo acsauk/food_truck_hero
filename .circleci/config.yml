@@ -13,7 +13,7 @@ jobs:
            BUNDLE_RETRY: 3
            BUNDLE_PATH: vendor/bundle
            PGHOST: 127.0.0.1
-           PGUSER: food_truck_hero_test
+           PGUSER: acsauk
            RAILS_ENV: test
        - image: circleci/postgres:9.5-alpine
          environment:
