@@ -98,14 +98,14 @@ jobs:
             heroku run rails db:migrate
             heroku restart
 
- workflows:
-   version: 2
-   build-deploy:
-     jobs:
-       - build
-       - deploy-job:
-           requires:
-             - build
-           filters:
-             branches:
-               only: master
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+     - build
+      - deploy-job:
+         requires:
+           - build
+          filters:
+            branches:
+              only: master
