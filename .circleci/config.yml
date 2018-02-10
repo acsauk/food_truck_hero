@@ -59,9 +59,3 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
-  deployment:
-    staging:
-      branch: develop
-      heroku:
-        appname: food-truck-hero
