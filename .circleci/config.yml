@@ -21,7 +21,7 @@ jobs:
            POSTGRES_DB: food_truck_hero_test
            POSTGRES_PASSWORD: ""
 
-    # working_directory: ~/food-truck-hero
+    working_directory: ~/food-truck-hero
 
     steps:
       - checkout
@@ -84,7 +84,7 @@ jobs:
            POSTGRES_DB: food_truck_hero_test
            POSTGRES_PASSWORD: ""
 
-    # working_directory: ~/food-truck-hero
+    working_directory: ~/food-truck-hero
     steps:
       - checkout
       - run:
