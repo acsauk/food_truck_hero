@@ -68,6 +68,7 @@ jobs:
           destination: test-results
 
   deploy-job:
+    docker:
       # specify the version you desire here
        - image: circleci/ruby:2.5.0-node-browsers
          environment:
