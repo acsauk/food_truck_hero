@@ -61,7 +61,7 @@ jobs:
           destination: test-results
 
   deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: food-truck-hero
+    staging:
+      branch: master
+      heroku:
+        appname: food-truck-hero
