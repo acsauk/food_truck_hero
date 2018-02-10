@@ -9,10 +9,10 @@ jobs:
       # specify the version you desire here
        - image: circleci/ruby:2.5.0-node-browsers
        - image: circleci/postgres:9.6.3
-         # environment:
-         #   PGHOST: localhost
-         #   PGUSER: myapp-test
-         #   RAILS_ENV: test
+         environment:
+           POSTGRES_USER: acsauk
+           POSTGRES_DB: food_truck_hero_test
+           POSTGRES_PASSWORD: ""
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
