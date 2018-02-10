@@ -63,5 +63,5 @@ jobs:
   deployment:
     staging:
       branch: develop
-      heroku: master
+      heroku:
         appname: food-truck-hero
