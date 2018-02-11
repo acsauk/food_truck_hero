@@ -99,6 +99,12 @@ feature 'User Management' do
       click_button 'Update'
       expect(current_path).to eq root_path
       expect(page).to have_content('Your account has been updated successfully')
+      click_link("#{user_1.first_name} #{user_1.last_name}")
+      click_edit_user_link
+      fill_in :user_current_password, with: 'password1'
+      click_button 'Update'
+      expect(current_path).to eq root_path
+      expect(page).to have_content('Your account has been updated successfully')
     end
   end
 end
