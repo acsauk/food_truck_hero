@@ -70,13 +70,14 @@ feature 'User Management' do
 
     scenario 'I can edit my name' do
       click_link("#{user_1.first_name} #{user_1.last_name}")
-      click_link(edit_user_registration_path)
-      fill_in :first_name, with: "#{user_1.first_name} edit"
-      fill_in :last_name, with: "#{user_1.last_name} edit"
-      click_button 'Submit'
-      expect(current_path).to be user_path
-      exepct(page). to have_content("#{user_1.first_name} edit")
-      exepct(page). to have_content("#{user_1.last_name} edit")
+      click_edit_user_link
+      fill_in :user_first_name, with: "Different"
+      fill_in :user_last_name, with: "Name"
+      save_and_open_page
+      fill_in :user_current_password, with: user_1.password
+      click_button 'Update'
+      expect(current_path).to eq root_path
+      expect(page). to have_content("Different Name")
     end
   end
 end

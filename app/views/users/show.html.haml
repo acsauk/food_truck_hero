@@ -1,0 +1,7 @@
+%p
+  %strong= "#{@user.first_name} #{@user.last_name.to_s}"
+%p
+  %strong Registered email:
+  = @user.email
+%p
+  =link_to 'Edit user details', edit_user_registration_path
