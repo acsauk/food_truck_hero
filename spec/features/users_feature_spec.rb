@@ -73,11 +73,21 @@ feature 'User Management' do
       click_edit_user_link
       fill_in :user_first_name, with: "Different"
       fill_in :user_last_name, with: "Name"
-      save_and_open_page
       fill_in :user_current_password, with: user_1.password
       click_button 'Update'
       expect(current_path).to eq root_path
-      expect(page). to have_content("Different Name")
+      expect(page).to have_content("Different Name")
+    end
+
+    scenario 'I can edit my email address' do
+      click_link("#{user_1.first_name} #{user_1.last_name}")
+      click_edit_user_link
+      fill_in :user_email, with: "a@z.com"
+      fill_in :user_current_password, with: user_1.password
+      click_button 'Update'
+      expect(current_path).to eq root_path
+      click_link("#{user_1.first_name} #{user_1.last_name}")
+      expect(page).to have_content("a@z.com")
     end
   end
 end
