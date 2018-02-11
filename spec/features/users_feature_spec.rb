@@ -107,12 +107,11 @@ feature 'User Management' do
       expect(page).to have_content('Your account has been updated successfully')
     end
 
-    scenario 'I can delete my account' do
+    scenario 'I can delete my account', js: true do
       click_link("#{user_1.first_name} #{user_1.last_name}")
       click_edit_user_link
       click_button 'Cancel my account'
-      click_button 'Ok'
-      expect(current_path).to eq root_path
+      page.accept_confirm
       sign_in(email: user_1.email, password: user_1.password)
       expect(page).to have_content('Invalid Email or password')
     end
