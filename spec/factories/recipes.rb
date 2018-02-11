@@ -6,6 +6,7 @@ FactoryBot.define do
     sequence :instructions do |n|
       "Instructions text #{n}"
     end
+    association :user
 
     transient do
       ingredients_count 2

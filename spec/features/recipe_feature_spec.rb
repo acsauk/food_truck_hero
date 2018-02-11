@@ -14,14 +14,14 @@ feature 'Recipes' do
   end
 
   scenario 'deleting recipes - recipe show view' do
-    recipe = FactoryBot.create :recipe
-    visit recipe_path recipe
+    create_recipe
     click_link 'Delete'
     expect(page).to have_content 'Recipe was successfully destroyed.'
   end
 
   scenario 'deleting recipes - recipes view' do
-    recipe = FactoryBot.create :recipe
+    create_recipe
+    recipe = Recipe.last
     visit recipes_path
     delete_link = find("a[href='#{recipe_path recipe}']"){ |el| el['data-method'] == 'delete' }
     delete_link.click

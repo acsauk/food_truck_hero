@@ -56,6 +56,7 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'poltergeist'
   gem 'pry'
   gem 'rspec_junit_formatter'
 end
