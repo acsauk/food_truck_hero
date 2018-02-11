@@ -41,3 +41,11 @@ end
 def click_sign_out_link_nav
   find("#nav_bar > a[href='#{destroy_user_session_path}']").click
 end
+
+def click_user_account_link_nav(user)
+  find("#nav_bar > a[href='#{user_path(user.id)}']").click
+end
+
+def click_edit_user_link
+  find("a[href='#{edit_user_registration_path}']").click
+end
