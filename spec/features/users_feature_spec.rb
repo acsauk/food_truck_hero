@@ -69,7 +69,7 @@ feature 'User Management' do
     end
 
     scenario 'I can edit my name' do
-      click_link((user_1.first_name.to_s + user_1.last_name.to_s))
+      click_link("#{user_1.first_name} #{user_1.last_name}")
       click_link(edit_user_registration_path)
       fill_in :first_name, with: "#{user_1.first_name} edit"
       fill_in :last_name, with: "#{user_1.last_name} edit"
