@@ -1,7 +1,12 @@
-def sign_up(email: 'test@gmail.com', password: 'password123')
+def sign_up(email:      'test@gmail.com',
+            password:   'password123',
+            first_name: 'Joe',
+            last_name:  'Blogss')
   visit '/'
   click_sign_up_link_nav
   fill_in :user_email, with: email
+  fill_in :user_first_name, with: first_name
+  fill_in :user_last_name, with: last_name
   fill_in :user_password, with: password
   fill_in :user_password_confirmation, with: password
   click_button 'Sign up'
