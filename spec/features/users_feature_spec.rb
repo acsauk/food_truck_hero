@@ -71,23 +71,34 @@ feature 'User Management' do
     scenario 'I can edit my name' do
       click_link("#{user_1.first_name} #{user_1.last_name}")
       click_edit_user_link
-      fill_in :user_first_name, with: "Different"
-      fill_in :user_last_name, with: "Name"
+      fill_in :user_first_name, with: 'Different'
+      fill_in :user_last_name, with: 'Name'
       fill_in :user_current_password, with: user_1.password
       click_button 'Update'
       expect(current_path).to eq root_path
-      expect(page).to have_content("Different Name")
+      expect(page).to have_content('Different Name')
     end
 
     scenario 'I can edit my email address' do
       click_link("#{user_1.first_name} #{user_1.last_name}")
       click_edit_user_link
-      fill_in :user_email, with: "a@z.com"
+      fill_in :user_email, with: 'a@z.com'
       fill_in :user_current_password, with: user_1.password
       click_button 'Update'
       expect(current_path).to eq root_path
       click_link("#{user_1.first_name} #{user_1.last_name}")
-      expect(page).to have_content("a@z.com")
+      expect(page).to have_content('a@z.com')
+    end
+
+    scenario 'I can edit my password' do
+      click_link("#{user_1.first_name} #{user_1.last_name}")
+      click_edit_user_link
+      fill_in :user_password, with: 'password1'
+      fill_in :user_password_confirmation, with: 'password1'
+      fill_in :user_current_password, with: user_1.password
+      click_button 'Update'
+      expect(current_path).to eq root_path
+      expect(page).to have_content('Your account has been updated successfully')
     end
   end
 end
