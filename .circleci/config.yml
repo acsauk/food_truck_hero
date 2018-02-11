@@ -66,8 +66,43 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+      # - run:
+      #     name: Run Heroku setup script
+      #     command: bash .circleci/setup-heroku.sh
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "01:64:9c:48:c5:43:ff:52:ad:bf:da:48:0c:d6:8a:87"
+      # - run:
+      #     name: Deploy Master to Heroku
+      #     command: |
+      #       if [ "${CIRCLE_BRANCH}" == "master" ]; then
+      #         git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
+      #         heroku run rails db:migrate --app $HEROKU_APP_NAME
+      #         heroku restart --app $HEROKU_APP_NAME
+      #       fi
+
+  deploy-job:
+    docker:
+      # specify the version you desire here
+       - image: circleci/ruby:2.5.0-node-browsers
+         environment:
+           BUNDLE_JOBS: 3
+           BUNDLE_RETRY: 3
+           BUNDLE_PATH: vendor/bundle
+           PGHOST: 127.0.0.1
+           PGUSER: acsauk
+           RAILS_ENV: test
+       - image: circleci/postgres:9.5-alpine
+         environment:
+           POSTGRES_USER: acsauk
+           POSTGRES_DB: food_truck_hero_test
+           POSTGRES_PASSWORD: ""
+
+    working_directory: ~/food-truck-hero
+    steps:
+      - checkout
       - run:
-          name: Run Heroku setup script
+          name: Run setup script
           command: bash .circleci/setup-heroku.sh
       - add_ssh_keys:
           fingerprints:
@@ -75,55 +110,18 @@ jobs:
       - run:
           name: Deploy Master to Heroku
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
               git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
               heroku run rails db:migrate --app $HEROKU_APP_NAME
-              heroku restart
-            fi
+              heroku restart --app $HEROKU_APP_NAME
 
-  # deploy-job:
-  #   docker:
-  #     # specify the version you desire here
-  #      - image: circleci/ruby:2.5.0-node-browsers
-  #        environment:
-  #          BUNDLE_JOBS: 3
-  #          BUNDLE_RETRY: 3
-  #          BUNDLE_PATH: vendor/bundle
-  #          PGHOST: 127.0.0.1
-  #          PGUSER: acsauk
-  #          RAILS_ENV: test
-  #      - image: circleci/postgres:9.5-alpine
-  #        environment:
-  #          POSTGRES_USER: acsauk
-  #          POSTGRES_DB: food_truck_hero_test
-  #          POSTGRES_PASSWORD: ""
-
-    # working_directory: ~/food-truck-hero
-    # steps:
-    #   - checkout
-    #   - run:
-    #       name: Run setup script
-    #       command: bash .circleci/setup-heroku.sh
-    #   - add_ssh_keys:
-    #       fingerprints:
-    #         - "01:64:9c:48:c5:43:ff:52:ad:bf:da:48:0c:d6:8a:87"
-    #   - run:
-    #       name: Deploy Master to Heroku
-    #       command: |
-    #         if [ "${CIRCLE_BRANCH}" == "master" ]; then
-    #           git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
-    #           heroku run rails db:migrate
-    #           heroku restart
-    #         fi
-
-# workflows:
-#   version: 2
-#   build-deploy:
-#     jobs:
-#       - build
-#       - deploy-job:
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only: master
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-job:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
