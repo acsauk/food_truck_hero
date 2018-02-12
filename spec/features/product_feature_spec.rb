@@ -2,8 +2,9 @@ require 'rails_helper'
 
 feature 'Products' do
   scenario 'adding a Product' do
+    login_user
     visit root_path
-    find("a[href='#{products_path}']").click
+    find("#nav_bar > a[href='#{products_path}']").click
     find("a[href='#{new_product_path}']").click
     fill_in :name, with: name
     fill_in :brand, with: brand
