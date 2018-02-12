@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180211221650) do
     t.string "name", null: false
     t.string "brand", null: false
     t.string "unit", null: false
-    t.float "size", null: false
+    t.float "amount", null: false
     t.float "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
