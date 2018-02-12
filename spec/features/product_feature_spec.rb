@@ -3,7 +3,8 @@ require 'rails_helper'
 feature 'Products' do
   scenario 'adding a Product' do
     visit root_path
-    click_link(new_product_path)
+    find("a[href='#{products_path}']").click
+    find("a[href='#{new_product_path}']").click
     fill_in :name, with: name
     fill_in :brand, with: brand
     fill_in :brand, with: unit
