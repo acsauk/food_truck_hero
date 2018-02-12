@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 feature 'Recipes' do
   before {
     visit root_path
