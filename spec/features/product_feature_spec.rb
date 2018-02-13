@@ -24,4 +24,15 @@ feature 'Products' do
     expect(page).to have_content "Price: £#{product.price}"
     expect(page).to have_content "Amount: #{product.amount} #{product.unit}"
   end
+
+  scenario 'showing products index' do
+    product = FactoryBot.create :product
+    login_user
+    visit root_path
+    find("#nav_bar > a[href='#{products_path}']").click
+    expect(page).to have_content "#{product.name}"
+    expect(page).to have_content "#{product.brand}"
+    expect(page).to have_content "£#{product.price}"
+    expect(page).to have_content "#{product.amount} #{product.unit}"
+  end
 end
