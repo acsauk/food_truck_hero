@@ -1,4 +1,4 @@
-class CreateProducts < ActiveRecord::Migration[5.1]
+class CreateProductsAddRefToIngredients < ActiveRecord::Migration[5.1]
   def change
     create_table :products do |t|
       t.string :name, null: false
@@ -10,6 +10,8 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_reference :ingredients, :product, index: true, foreign_key: true
+    change_table :ingredients do |t|
+      t.belongs_to :product, index: { unique: true }, foreign_key: true
+    end
   end
 end

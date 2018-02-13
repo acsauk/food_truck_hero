@@ -12,5 +12,5 @@ RSpec.describe Product, type: :model do
   it { is_expected.to validate_presence_of(:unit) }
   it { is_expected.to validate_presence_of(:amount) }
   it { is_expected.to validate_presence_of(:price) }
-  it { is_expected.to have_many :ingredients }
+  it { is_expected.to have_many(:ingredients) }
 end

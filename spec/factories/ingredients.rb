@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :ingredient do
-    name "Ingredient Name"
-    association :product
+    product
+    name 'Ingredient Name'
   end
 end
