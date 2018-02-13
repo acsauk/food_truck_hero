@@ -28,15 +28,8 @@ ActiveRecord::Schema.define(version: 20180211221650) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "product_lists", force: :cascade do |t|
-    t.integer "product_id", null: false
-    t.integer "meal_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["meal_id"], name: "index_product_lists_on_meal_id"
-    t.index ["product_id"], name: "index_product_lists_on_product_id"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_ingredients_on_product_id", unique: true
   end
 
   create_table "products", force: :cascade do |t|
@@ -81,5 +74,6 @@ ActiveRecord::Schema.define(version: 20180211221650) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ingredients", "products"
   add_foreign_key "recipes", "users", on_delete: :cascade
 end

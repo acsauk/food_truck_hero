@@ -1,4 +1,4 @@
-class CreateProductsAndProductLists < ActiveRecord::Migration[5.1]
+class CreateProductsAddRefToIngredients < ActiveRecord::Migration[5.1]
   def change
     create_table :products do |t|
       t.string :name, null: false
@@ -10,11 +10,8 @@ class CreateProductsAndProductLists < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_table :product_lists do |t|
-      t.integer :product_id, null: false, index: true
-      t.integer :meal_id,    null: false, index: true
-
-      t.timestamps
+    change_table :ingredients do |t|
+      t.belongs_to :product, index: { unique: true }, foreign_key: true
     end
   end
 end
