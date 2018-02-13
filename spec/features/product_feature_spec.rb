@@ -18,10 +18,10 @@ feature 'Products' do
     login_user
     visit root_path
     find("#nav_bar > a[href='#{products_path}']").click
-    find("a[href='#{product_path product}'] View").click
-    expect(page).to have_content 'Name: Product Name'
-    expect(page).to have_content 'Brand: Product Brand'
-    expect(page).to have_content 'Price: £20.0'
-    expect(page).to have_content 'Amount: 2000.0 grams'
+    click_on product.name
+    expect(page).to have_content "Name: #{product.name}"
+    expect(page).to have_content "Brand: #{product.brand}"
+    expect(page).to have_content "Price: £#{product.price}"
+    expect(page).to have_content "Amount: #{product.amount} #{product.unit}"
   end
 end
