@@ -5,7 +5,7 @@
   = @product.name
 %p
   %strong Brand:
-  = @product.brand 
+  = @product.brand
 %p
   %strong Amount:
   = "#{@product.amount} #{@product.unit}"
@@ -14,6 +14,6 @@
   = "£#{@product.price}"
 
 = link_to 'Edit', edit_product_path(@product)
-= link_to 'Destroy', @product, method: :delete, data: { confirm: 'Are you sure?' }
+= link_to 'Delete', @product, method: :delete, data: { confirm: 'Are you sure?' }
 \|
 = link_to 'Back', products_path
