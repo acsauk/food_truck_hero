@@ -64,4 +64,26 @@ feature 'Products' do
     expect(page).to have_content "£#{product.price + 1}"
     expect(page).to have_content "#{product.amount + 1} #{product.unit} edit"
   end
+
+  scenario 'deleting products - product show view' do
+    product = FactoryBot.create :product
+    login_user
+    visit root_path
+    find("#nav_bar > a[href='#{products_path}']").click
+    find('tr', text: product.name.to_s).click_link product.name.to_s
+    click_link 'Delete'
+    expect(page).to have_content 'Product was successfully destroyed.'
+  end
+
+  scenario 'deleting products - products view' do
+    product = FactoryBot.create :product
+    login_user
+    visit root_path
+    find("#nav_bar > a[href='#{products_path}']").click
+    find('tr', text: product.name.to_s).click_link product.name.to_s
+    delete_link = find("a[href='#{product_path product}']"){ |el| el['data-method'] == 'delete' }
+    delete_link.click
+    expect(page).not_to have_content delete_link
+    expect(page).to have_content 'Product was successfully destroyed.'
+  end
 end
