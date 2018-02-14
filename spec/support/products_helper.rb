@@ -11,3 +11,12 @@ def create_product(name: 'Product Name',
   fill_in :product_price, with: price
   click_button 'Create Product'
 end
+
+def edit_product(product)
+  fill_in 'Name', with: "#{product.name} edit"
+  fill_in 'Brand', with: "#{product.brand} edit"
+  fill_in 'Unit', with: "#{product.unit} edit"
+  fill_in 'Amount', with: product.amount + 1
+  fill_in 'Price', with: product.price + 1
+  click_button 'Update Product'
+end
