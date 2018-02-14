@@ -35,4 +35,17 @@ feature 'Products' do
     expect(page).to have_content "£#{product.price}"
     expect(page).to have_content "#{product.amount} #{product.unit}"
   end
+
+  scenario 'editing a product - product index' do
+    product = FactoryBot.create :product
+    login_user
+    visit root_path
+    find('tr', text: product.name.to_s).click_link 'Edit'
+    expect(page).to have_current_path(edit_product_path(product))
+    edit_product(product)
+    expect(page).to have_content "#{product.name} edit"
+    expect(page).to have_content "#{product.brand} edit"
+    expect(page).to have_content "£#{product.price + 1}"
+    expect(page).to have_content "#{product.amount + 1} #{product.unit} edit"
+  end
 end
