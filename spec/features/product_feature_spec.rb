@@ -40,6 +40,7 @@ feature 'Products' do
     product = FactoryBot.create :product
     login_user
     visit root_path
+    find("#nav_bar > a[href='#{products_path}']").click
     find('tr', text: product.name.to_s).click_link 'Edit'
     expect(page).to have_current_path(edit_product_path(product))
     edit_product(product)
