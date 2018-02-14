@@ -6,7 +6,7 @@ feature 'User Management' do
 
   scenario 'Shows a welcome page when navigation to /' do
     visit '/'
-    expect(page).to have_content('Welcome to Food Truck Hero!!')
+    expect(page).to have_content('Food Truck Hero')
   end
 
   context 'when not signed in' do
