@@ -1,0 +1,21 @@
+%h1 Listing products
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @products.each do |product|
+      %tr
+        %td= link_to product.name.to_s, product
+        %td= product.brand
+        %td= "#{product.amount} #{product.unit}"
+        %td= "£#{product.price}"
+        %td= link_to 'Edit', edit_product_path(product)
+
+%br
+
+= link_to 'New Product', new_product_path

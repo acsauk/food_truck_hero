@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :ingredientList do
     recipe
     ingredient
-    amount "MyString"
-    unit 1.5
+    amount 20
+    unit 'grams'
   end
 end
