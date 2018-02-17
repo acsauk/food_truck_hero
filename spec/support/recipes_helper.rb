@@ -3,7 +3,8 @@ def create_recipe(title: 'Recipe title',
                   ingredients_count: 2,
                   ingredient_name: 'Ingredient name',
                   ingredient_amount: 20,
-                  ingredient_unit: 'Ingredient unit')
+                  ingredient_unit: 'Ingredient unit',
+                  product_name: 'Product name')
   click_link 'New Recipe'
   fill_in 'Title', with: title
   fill_in 'Instructions', with: instructions
@@ -12,6 +13,7 @@ def create_recipe(title: 'Recipe title',
     fill_in "name-#{count}", with: "#{ingredient_name} #{count.next}"
     fill_in "amount-#{count}", with: ingredient_amount + count
     fill_in "unit-#{count}", with: "#{ingredient_unit} #{count.next}"
+    select("#{product_name}", from: "product-name-#{count}").select_option
     count += 1
   end
   click_button 'Create Recipe'
