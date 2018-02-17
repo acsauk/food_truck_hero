@@ -21,6 +21,10 @@
       .field
         = i.label :name
         = i.text_field :name, id: "name-#{il.index}"
+      .field
+        = i.label :product_name
+        -# = i.select :product, id: "product-name-#{il.index}"
+        = i.collection_select(:product_id, Product.all, :id, :name, {}, id: "product-name-#{il.index}")
     .field
       = il.label :amount
       = il.text_field :amount, id: "amount-#{il.index}"

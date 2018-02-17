@@ -77,6 +77,6 @@ class RecipesController < ApplicationController
       params.require(:recipe).permit(:title, :instructions, :id,
                                      ingredientLists_attributes:
                                        [%i[amount unit id _destroy],
-                                        ingredient_attributes: %i[name id]])
+                                        ingredient_attributes: %i[name product_id id]])
     end
 end

@@ -6,8 +6,10 @@ feature 'Recipes' do
     sign_up
   }
 
+  let(:product) { FactoryBot.create :product }
+
   scenario 'adding recipes - multiple ingredients' do
-    create_recipe(ingredients_count: 2)
+    create_recipe(ingredients_count: 2, product_name: product.name)
     expect(page).to have_content 'Recipe was successfully created'
     expect(page).to have_content 'Title: Recipe title'
     expect(page).to have_content 'Instructions: Recipe instructions'
@@ -16,13 +18,13 @@ feature 'Recipes' do
   end
 
   scenario 'deleting recipes - recipe show view' do
-    create_recipe
+    create_recipe(product_name: product.name)
     click_link 'Delete'
     expect(page).to have_content 'Recipe was successfully destroyed.'
   end
 
   scenario 'deleting recipes - recipes view' do
-    create_recipe
+    create_recipe(product_name: product.name)
     recipe = Recipe.last
     visit recipes_path
     delete_link = find("a[href='#{recipe_path recipe}']"){ |el| el['data-method'] == 'delete' }
@@ -32,7 +34,7 @@ feature 'Recipes' do
   end
 
   scenario 'viewing recipes' do
-    create_recipe(ingredients_count: 2)
+    create_recipe(ingredients_count: 2, product_name: product.name)
     visit recipe_path Recipe.last
     expect(page).to have_content 'Title: Recipe title'
     expect(page).to have_content 'Instructions: Recipe instructions'
@@ -41,7 +43,7 @@ feature 'Recipes' do
   end
 
   scenario 'editing recipe - via recipe#show' do
-    create_recipe(ingredients_count: 2)
+    create_recipe(ingredients_count: 2, product_name: product.name)
     recipe = Recipe.last
     visit recipe_path recipe
     click_link 'Edit'
@@ -54,7 +56,7 @@ feature 'Recipes' do
   end
 
   scenario 'editing recipe - via recipes#index' do
-    create_recipe(ingredients_count: 2)
+    create_recipe(ingredients_count: 2, product_name: product.name)
     recipe = Recipe.last
     visit recipes_path
     find('tr', text: recipe.title.to_s).click_link 'Edit'

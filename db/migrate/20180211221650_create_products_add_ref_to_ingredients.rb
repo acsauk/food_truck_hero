@@ -11,7 +11,7 @@ class CreateProductsAddRefToIngredients < ActiveRecord::Migration[5.1]
     end
 
     change_table :ingredients do |t|
-      t.belongs_to :product, index: { unique: true }, foreign_key: true
+      t.belongs_to :product, index: true, foreign_key: true
     end
   end
 end
