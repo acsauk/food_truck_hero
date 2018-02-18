@@ -9,6 +9,11 @@
 %p
   %b Price per portion:
   = @meal.price_per_portion
+%p
+  %b Ingredients:
+  - @meal.recipes.each do |r|
+    - r.ingredients.each do |i|
+      = i.name
 
 = link_to 'Edit', edit_meal_path(@meal)
 \|

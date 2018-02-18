@@ -13,6 +13,7 @@ feature 'Meals' do
     click_link 'New Meal'
     fill_in 'Name', with: title
     fill_in 'Portions', with: 6
+    fill_in 'Price per portion', with: 3.5
     select(rwi.title.to_s, from: 'recipe-title').select_option
     click_button 'Create Meal'
     expect(page).to have_content 'Meal was successfully created'
