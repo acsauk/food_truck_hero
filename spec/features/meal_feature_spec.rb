@@ -10,7 +10,7 @@ feature 'Meals' do
     click_link 'New Meal'
     fill_in 'Name', with: title
     fill_in 'Portions', with: 6
-    select(recipe.name.to_s, from: 'recipe-name').select_option
+    select(recipe.title.to_s, from: 'recipe-name').select_option
     click_button 'Create Meal'
     expect(page).to have_content 'Meal was successfully created'
     expect(page).to have_content 'Name: Meal Name'
