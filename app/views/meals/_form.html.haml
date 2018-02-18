@@ -1,0 +1,24 @@
+= form_for @meal do |f|
+  - if @meal.errors.any?
+    #error-explanation
+      %h2= "#{pluralize(@meal.errors.count, "error")} prohibited this meal from being saved:"
+      %ul
+        - @meal.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :portions
+    = f.number_field :portions
+  .field
+    = f.label :price_per_portion
+    = f.text_field :price_per_portion
+  = f.fields_for :recipeLists do |rl|
+    .field
+      = rl.label :recipe
+      = rl.collection_select(:recipe_id, Recipe.all, :id, :title, {},
+                              id: 'recipe-title')
+  .actions
+    = f.submit 'Create Meal'

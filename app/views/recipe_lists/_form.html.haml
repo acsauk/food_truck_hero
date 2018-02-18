@@ -1,0 +1,16 @@
+= form_for @recipe_list do |f|
+  - if @recipe_list.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@recipe_list.errors.count, "error")} prohibited this recipe_list from being saved:"
+      %ul
+        - @recipe_list.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :recipe_id
+    = f.number_field :recipe_id
+  .field
+    = f.label :meal_id
+    = f.number_field :meal_id
+  .actions
+    = f.submit 'Save'
