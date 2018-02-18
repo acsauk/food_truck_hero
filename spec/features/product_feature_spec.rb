@@ -4,7 +4,7 @@ feature 'Products' do
   scenario 'adding a Product' do
     login_user
     visit root_path
-    find("#nav_bar > a[href='#{products_path}']").click
+    find("#nav-bar > a[href='#{products_path}']").click
     create_product
     expect(page).to have_content 'Product was successfully created'
     expect(page).to have_content 'Name: Product Name'
@@ -17,7 +17,7 @@ feature 'Products' do
     product = FactoryBot.create :product
     login_user
     visit root_path
-    find("#nav_bar > a[href='#{products_path}']").click
+    find("#nav-bar > a[href='#{products_path}']").click
     click_on product.name
     expect(page).to have_content "Name: #{product.name}"
     expect(page).to have_content "Brand: #{product.brand}"
@@ -29,7 +29,7 @@ feature 'Products' do
     product = FactoryBot.create :product
     login_user
     visit root_path
-    find("#nav_bar > a[href='#{products_path}']").click
+    find("#nav-bar > a[href='#{products_path}']").click
     expect(page).to have_content "#{product.name}"
     expect(page).to have_content "#{product.brand}"
     expect(page).to have_content "£#{product.price}"
@@ -40,7 +40,7 @@ feature 'Products' do
     product = FactoryBot.create :product
     login_user
     visit root_path
-    find("#nav_bar > a[href='#{products_path}']").click
+    find("#nav-bar > a[href='#{products_path}']").click
     find('tr', text: product.name.to_s).click_link 'Edit'
     expect(page).to have_current_path(edit_product_path(product))
     edit_product(product)
@@ -54,7 +54,7 @@ feature 'Products' do
     product = FactoryBot.create :product
     login_user
     visit root_path
-    find("#nav_bar > a[href='#{products_path}']").click
+    find("#nav-bar > a[href='#{products_path}']").click
     find('tr', text: product.name.to_s).click_link product.name.to_s
     expect(page).to have_current_path(product_path(product))
     click_link 'Edit'
@@ -69,7 +69,7 @@ feature 'Products' do
     product = FactoryBot.create :product
     login_user
     visit root_path
-    find("#nav_bar > a[href='#{products_path}']").click
+    find("#nav-bar > a[href='#{products_path}']").click
     find('tr', text: product.name.to_s).click_link product.name.to_s
     click_link 'Delete'
     expect(page).to have_content 'Product was successfully destroyed.'
@@ -79,7 +79,7 @@ feature 'Products' do
     product = FactoryBot.create :product
     login_user
     visit root_path
-    find("#nav_bar > a[href='#{products_path}']").click
+    find("#nav-bar > a[href='#{products_path}']").click
     find('tr', text: product.name.to_s).click_link product.name.to_s
     delete_link = find("a[href='#{product_path product}']"){ |el| el['data-method'] == 'delete' }
     delete_link.click

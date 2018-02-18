@@ -1,14 +1,15 @@
-%header#main_navigation
-  %nav#nav_bar
+%header#main-navigation
+  %nav#nav-bar
     - if user_signed_in?
       = link_to 'Recipes', recipes_path
       \|
-      = link_to "Sign out", destroy_user_session_path, method: :delete
+      = link_to 'Sign out', destroy_user_session_path, method: :delete
       \|
-      = link_to "#{current_user.first_name} #{current_user.last_name}", user_path(current_user)
+      = link_to "#{current_user.first_name} #{current_user.last_name}",
+        user_path(current_user)
       \|
       = link_to 'Products', products_path
 
     - else
-      = link_to "Sign in", new_user_session_path
-      = link_to "Sign up", new_user_registration_path
+      = link_to 'Sign in', new_user_session_path
+      = link_to 'Sign up', new_user_registration_path
