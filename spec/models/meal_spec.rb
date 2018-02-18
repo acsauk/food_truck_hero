@@ -7,5 +7,6 @@ RSpec.describe Meal, type: :model do
   end
 
   it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_presence_of(:yield) }
+  it { is_expected.to validate_presence_of(:portions) }
+  it { is_expected.to validate_presence_of(:price_per_portion) }
 end
