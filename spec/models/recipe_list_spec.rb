@@ -6,7 +6,7 @@ RSpec.describe RecipeList, type: :model do
   let(:meal) { FactoryBot.build(:meal) }
 
   it 'has a valid factory' do
-    expect(ingredientList).to be_valid
+    expect(recipeList).to be_valid
   end
 
   it { is_expected.to belong_to(:recipe) }
