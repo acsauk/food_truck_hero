@@ -3,7 +3,7 @@ RSpec.describe Meal, type: :model do
   let(:meal) { FactoryBot.create(:meal) }
 
   it 'has a valid factory' do
-    expect(recipe).to be_valid
+    expect(meal).to be_valid
   end
 
   it { is_expected.to validate_presence_of(:name) }
