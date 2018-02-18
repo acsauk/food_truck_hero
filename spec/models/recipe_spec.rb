@@ -12,10 +12,16 @@ RSpec.describe Recipe, type: :model do
 
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:instructions) }
-  it { is_expected.to have_many(:ingredients).through(:ingredientLists) }
+
   it { is_expected.to have_many(:ingredientLists) }
-  it { is_expected.to accept_nested_attributes_for(:ingredientLists) }
+  it { is_expected.to have_many(:ingredients).through(:ingredientLists) }
+
+  it { is_expected.to have_many(:recipeLists) }
+  it { is_expected.to have_many(:meals).through(:recipeLists) }
+
   it { is_expected.to belong_to(:user) }
+
+  it { is_expected.to accept_nested_attributes_for(:ingredientLists) }
 
 it 'can have multiple ingredients associated with a recipe' do
   ingredients_count = 4

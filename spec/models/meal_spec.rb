@@ -6,6 +6,9 @@ RSpec.describe Meal, type: :model do
     expect(meal).to be_valid
   end
 
+  it { is_expected.to have_many(:recipeLists) }
+  it { is_expected.to have_many(:recipes).through(:recipeLists) }
+
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:portions) }
   it { is_expected.to validate_presence_of(:price_per_portion) }
