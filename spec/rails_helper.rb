@@ -9,6 +9,7 @@ require 'capybara/poltergeist'
 require 'support/recipes_helper'
 require 'support/users_helper'
 require 'support/products_helper'
+require 'support/meals_helper'
 require 'spec_helper'
 
 Capybara.javascript_driver = :poltergeist
