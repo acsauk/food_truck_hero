@@ -10,3 +10,11 @@ def create_meal(name: 'Meal name',
   select(recipe_title, from: 'recipe-title').select_option
   click_button 'Create Meal'
 end
+
+def edit_meal(meal, recipe_with_ingredients)
+  fill_in 'Name', with: "#{meal.name} edit"
+  fill_in 'Portions', with: "#{meal.portions} edit"
+  fill_in 'Price per portion', with: "#{meal.price_per_portion} edit"
+  select(recipe_with_ingredients.title, from: 'recipe-title').select_option
+  click_button 'Update Meal'
+end
