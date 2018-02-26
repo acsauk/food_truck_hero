@@ -34,7 +34,8 @@ feature 'Meals' do
     create_meal(recipe_title: rwi.title.to_s)
     rwi2 = FactoryBot.create :recipe_with_ingredients
     meal = Meal.last
-    visit meal_path meal
+    visit meals_path
+    find('tr', text: meal.name.to_s).click_link meal.name.to_s
     click_link 'Edit'
     expect(page).to have_current_path(edit_meal_path(meal))
     edit_meal(meal, rwi2)
@@ -62,7 +63,7 @@ feature 'Meals' do
     end
   end
 
-  scenario 'editing recipe updates ingredients displayed' do
+  scenario 'editing recipe updates a meals ingredients displayed' do
     create_meal(recipe_title: rwi.title.to_s)
     visit recipe_path rwi
     click_link 'Edit'
@@ -71,5 +72,23 @@ feature 'Meals' do
     rwi.ingredients.each do |i|
       expect(page).to have_content i.name.to_s
     end
+  end
+
+  scenario 'deleting a meal via meal#show' do
+    create_meal(recipe_title: rwi.title.to_s)
+    visit meal_path Meal.last
+    click_link 'Delete'
+    expect(page).to have_content 'Meal was successfully destroyed.'
+  end
+
+  scenario 'deleting a meal via meals#index' do
+    create_meal(recipe_title: rwi.title.to_s)
+    meal = Meal.last
+    visit meals_path
+    expect(page).to have_link 'Delete'
+    delete_link = find("a[href='#{meal_path meal}']"){ |el| el['data-method'] == 'delete' }
+    delete_link.click
+    expect(page).not_to have_content delete_link
+    expect(page).to have_content 'Meal was successfully destroyed.'
   end
 end

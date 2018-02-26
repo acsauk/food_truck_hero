@@ -8,9 +8,8 @@
   %tbody
     - @recipes.each do |recipe|
       %tr
-        %td= recipe.title
+        %td= link_to recipe.title.to_s, recipe
         %td= recipe.instructions
-        %td= link_to 'Show', recipe
         %td= link_to 'Edit', edit_recipe_path(recipe)
         %td= link_to 'Delete', recipe, method: :delete,
                                         data: { confirm: 'Are you sure?' }
