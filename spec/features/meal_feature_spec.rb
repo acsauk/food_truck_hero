@@ -72,4 +72,11 @@ feature 'Meals' do
       expect(page).to have_content i.name.to_s
     end
   end
+
+  scenario 'deleting a meal' do
+    create_meal(recipe_title: rwi.title.to_s)
+    visit meal_path Meal.last
+    click_link 'Delete'
+    expect(page).to have_content 'Meal was successfully destroyed.'
+  end
 end
