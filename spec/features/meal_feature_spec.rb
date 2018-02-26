@@ -73,10 +73,21 @@ feature 'Meals' do
     end
   end
 
-  scenario 'deleting a meal' do
+  scenario 'deleting a meal via meal#show' do
     create_meal(recipe_title: rwi.title.to_s)
     visit meal_path Meal.last
     click_link 'Delete'
+    expect(page).to have_content 'Meal was successfully destroyed.'
+  end
+
+  scenario 'deleting a meal via meals#index' do
+    create_meal(recipe_title: rwi.title.to_s)
+    meal = Meal.last
+    visit meals_path
+    expect(page).to have_link 'Delete'
+    delete_link = find("a[href='#{meal_path meal}']"){ |el| el['data-method'] == 'delete' }
+    delete_link.click
+    expect(page).not_to have_content delete_link
     expect(page).to have_content 'Meal was successfully destroyed.'
   end
 end
