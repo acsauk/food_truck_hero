@@ -16,6 +16,10 @@
       = il.ingredient.name
       = il.amount
       = il.unit
+  %p
+    %b Ingredients cost:
+    £#{@meal.ingredients_cost}
+
 
 = link_to 'Edit', edit_meal_path(@meal)
 \|
