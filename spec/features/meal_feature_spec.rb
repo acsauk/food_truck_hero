@@ -91,4 +91,12 @@ feature 'Meals' do
     expect(page).not_to have_content delete_link
     expect(page).to have_content 'Meal was successfully destroyed.'
   end
+
+  scenario 'viewing the cost of all ingredients for a meal' do
+    create_meal(recipe_title: rwi.title.to_s)
+    meal = Meal.last
+    visit meal_path meal
+    ingredients_price = meal.recipes.first.ingredients.first.product.price
+    expect(page).to have_content "Ingredients cost: £#{ingredients_price}"
+  end
 end
