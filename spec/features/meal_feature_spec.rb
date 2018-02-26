@@ -34,7 +34,8 @@ feature 'Meals' do
     create_meal(recipe_title: rwi.title.to_s)
     rwi2 = FactoryBot.create :recipe_with_ingredients
     meal = Meal.last
-    visit meal_path meal
+    visit meals_path
+    find('tr', text: meal.name.to_s).click_link meal.name.to_s
     click_link 'Edit'
     expect(page).to have_current_path(edit_meal_path(meal))
     edit_meal(meal, rwi2)
@@ -62,7 +63,7 @@ feature 'Meals' do
     end
   end
 
-  scenario 'editing recipe updates ingredients displayed' do
+  scenario 'editing recipe updates a meals ingredients displayed' do
     create_meal(recipe_title: rwi.title.to_s)
     visit recipe_path rwi
     click_link 'Edit'

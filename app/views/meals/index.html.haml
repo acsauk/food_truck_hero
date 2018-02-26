@@ -13,10 +13,9 @@
   %tbody
     - @meals.each do |meal|
       %tr
-        %td= meal.name
+        %td= link_to meal.name.to_s, meal
         %td= meal.portions
         %td= meal.price_per_portion
-        %td= link_to 'Show', meal
         %td= link_to 'Edit', edit_meal_path(meal)
         %td= link_to 'Delete', meal, method: :delete, data: { confirm: 'Are you sure?' }
 
