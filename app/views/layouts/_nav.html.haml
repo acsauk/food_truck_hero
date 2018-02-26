@@ -9,6 +9,8 @@
         user_path(current_user)
       \|
       = link_to 'Products', products_path
+      \|
+      = link_to 'Meals', meals_path
 
     - else
       = link_to 'Sign in', new_user_session_path

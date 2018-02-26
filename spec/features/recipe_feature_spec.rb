@@ -45,7 +45,8 @@ feature 'Recipes' do
   scenario 'editing recipe - via recipe#show' do
     create_recipe(ingredients_count: 2, product_name: product.name)
     recipe = Recipe.last
-    visit recipe_path recipe
+    visit recipes_path
+    find('tr', text: recipe.title.to_s).click_link recipe.title.to_s
     click_link 'Edit'
     expect(page).to have_current_path(edit_recipe_path(recipe))
     edit_recipe(recipe)

@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @meal.name
+%p
+  %b Portions:
+  = @meal.portions
+%p
+  %b Price per portion:
+  £#{@meal.price_per_portion}
+%p
+  %b Ingredients:
+  - @meal.recipes.each do |r|
+    - r.ingredientLists.each do |il|
+      = il.ingredient.name
+      = il.amount
+      = il.unit
+
+= link_to 'Edit', edit_meal_path(@meal)
+\|
+= link_to 'Delete', meal_path(@meal), method: :delete
+\|
+= link_to 'Back', meals_path
