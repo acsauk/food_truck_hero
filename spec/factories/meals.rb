@@ -16,18 +16,19 @@ FactoryBot.define do
 
     factory :meal_with_recipes_with_ingredients do
       after(:create) do |meal, evaluator|
+        rwi = FactoryBot.create(:recipe_with_ingredients, user: meal.user)
         (0...evaluator.recipes_count).each do
           case evaluator.title
           when nil
             meal.recipeLists <<
               FactoryBot.build(
-                :recipeList, recipe: FactoryBot.build(:recipe_with_ingredients)
+                :recipeList, recipe: rwi
               )
           else
+            rwi.title = evaluator.title
             meal.recipeLists <<
               FactoryBot.build(
-                :recipeList, recipe:
-                  FactoryBot.build(:recipe_with_ingredients, title: evaluator.title)
+                :recipeList, recipe: rwi
               )
           end
         end

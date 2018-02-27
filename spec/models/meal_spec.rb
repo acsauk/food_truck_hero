@@ -16,8 +16,7 @@ RSpec.describe Meal, type: :model do
   it { is_expected.to validate_presence_of(:price_per_portion) }
 
   it 'has the total cost of all ingredients associated with the meal' do
-    # binding.pry
     ingredients_price = meal_with_recipes_with_ingredients.recipes.first.ingredients.first.product.price
-    it { is_expected.to have_attributes(ingredients_cost: ingredients_price) }
+    expect(meal_with_recipes_with_ingredients).to have_attributes(ingredients_cost: ingredients_price)
   end
 end
