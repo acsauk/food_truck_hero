@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :recipe_list do
+  factory :recipeList do
     recipe
     meal
   end
