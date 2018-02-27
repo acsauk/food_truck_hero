@@ -3,6 +3,8 @@ FactoryBot.define do
     sequence :name do |n|
       "Name text #{n}"
     end
+    association :user
+
     portions 1
     price_per_portion 1.5
 
@@ -12,20 +14,20 @@ FactoryBot.define do
       instructions 'Cook that ham good'
     end
 
-    factory :meal_with_recipes do
+    factory :meal_with_recipes_with_ingredients do
       after(:create) do |meal, evaluator|
         (0...evaluator.recipes_count).each do
           case evaluator.title
           when nil
             meal.recipeLists <<
               FactoryBot.build(
-                :recipeList, recipe: FactoryBot.build(:recipe)
+                :recipeList, recipe: FactoryBot.build(:recipe_with_ingredients)
               )
           else
             meal.recipeLists <<
               FactoryBot.build(
                 :recipeList, recipe:
-                  FactoryBot.build(:recipe, title: evaluator.title)
+                  FactoryBot.build(:recipe_with_ingredients, title: evaluator.title)
               )
           end
         end
