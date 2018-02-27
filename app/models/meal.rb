@@ -1,4 +1,6 @@
 class Meal < ApplicationRecord
+  attribute :ingredients_cost, :integer
+
   has_many :recipeLists
   has_many :recipes, through: :recipeLists
 
@@ -9,8 +11,6 @@ class Meal < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :portions
   validates_presence_of :price_per_portion
-
-  attribute :ingredients_cost, :integer
 
   def ingredients_cost
     total_cost = 0
