@@ -8,6 +8,6 @@ class Product < ApplicationRecord
   has_many :ingredients
 
   def smu_price
-    
+    price / amount
   end
 end
