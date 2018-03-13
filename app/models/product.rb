@@ -6,4 +6,8 @@ class Product < ApplicationRecord
   validates_presence_of :price
 
   has_many :ingredients
+
+  def smu_price
+    
+  end
 end
