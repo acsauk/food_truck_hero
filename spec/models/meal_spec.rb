@@ -20,8 +20,13 @@ RSpec.describe Meal, type: :model do
 
   it 'has the total cost of all ingredients associated with the meal' do
     # Meal has three recipes, each with one ingredient linked to a product that costs 2 pounds
-    ingredients_cost = mwrwi_two_pound_product.ingredients_cost
-    expect(mwrwi_two_pound_product).to have_attributes(ingredients_cost: ingredients_cost)
-    expect(ingredients_cost).to eq 6.0
+    recipes = mwrwi_two_pound_product.recipes
+    ingredients = recipes.collect(&:ingredients)
+
+    expected_cost = ingredients[0].collect(&:product).to_a.sum.price * ingredients.length
+    actual_ingredients_cost = mwrwi_two_pound_product.ingredients_cost
+
+    expect(mwrwi_two_pound_product).to have_attributes(ingredients_cost: actual_ingredients_cost)
+    expect(expected_cost).to eq actual_ingredients_cost
   end
 end
