@@ -1,7 +1,10 @@
 require 'rails_helper'
 RSpec.describe Meal, type: :model do
   let(:meal) { FactoryBot.create(:meal) }
-  let(:meal_with_recipes_with_ingredients) { FactoryBot.create(:meal_with_recipes_with_ingredients) }
+  let(:mwrwi_two_pound_product) { FactoryBot.create(:meal_with_recipes_with_ingredients,
+                                                    :two_pound_product,
+                                                    recipes_count: 3,
+                                                    ingredients_count: 1) }
 
   it 'has a valid factory' do
     expect(meal).to be_valid
@@ -16,7 +19,9 @@ RSpec.describe Meal, type: :model do
   it { is_expected.to validate_presence_of(:price_per_portion) }
 
   it 'has the total cost of all ingredients associated with the meal' do
-    ingredients_cost = meal_with_recipes_with_ingredients.ingredients_cost
-    expect(meal_with_recipes_with_ingredients).to have_attributes(ingredients_cost: ingredients_cost)
+    # Meal has three recipes, each with one ingredient linked to a product that costs 2 pounds
+    ingredients_cost = mwrwi_two_pound_product.ingredients_cost
+    expect(mwrwi_two_pound_product).to have_attributes(ingredients_cost: ingredients_cost)
+    expect(ingredients_cost).to eq 6.0
   end
 end

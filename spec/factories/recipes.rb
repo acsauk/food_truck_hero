@@ -12,25 +12,31 @@ FactoryBot.define do
       ingredients_count 2
       amount 1
       unit 'grams'
-      ingredient_name nil
+      product_price false
+    end
+
+    trait :two_pound_product do
+      product_price :two_pound_product
+    end
+
+    trait :three_pound_product do
+      product_price :three_pound_product
     end
 
     factory :recipe_with_ingredients do
       after(:create) do |recipe, evaluator|
         (0...evaluator.ingredients_count).each do
-          case evaluator.ingredient_name
-          when nil
-            recipe.ingredientLists <<
+          recipe.ingredientLists <<
+            if evaluator.product_price
+              FactoryBot.build(
+                :ingredientList, ingredient: FactoryBot.build(:ingredient,
+                                                              evaluator.product_price)
+              )
+            else
               FactoryBot.build(
                 :ingredientList, ingredient: FactoryBot.build(:ingredient)
               )
-          else
-            recipe.ingredientLists <<
-              FactoryBot.build(
-                :ingredientList, ingredient:
-                  FactoryBot.build(:ingredient, name: evaluator.ingredient_name)
-              )
-          end
+            end
         end
       end
     end
