@@ -13,4 +13,10 @@ RSpec.describe Product, type: :model do
   it { is_expected.to validate_presence_of(:amount) }
   it { is_expected.to validate_presence_of(:price) }
   it { is_expected.to have_many(:ingredients) }
+
+  it 'has a price per smallest measurable unit' do
+    product = FactoryBot.build(:product, amount: 100, price: 2.0)
+    expected_single_measurable_unit_price = product.price / product.amount
+    expect(expected_single_measurable_unit_price).to eq product.smu
+  end
 end
