@@ -11,6 +11,7 @@ require 'support/users_helper'
 require 'support/products_helper'
 require 'support/meals_helper'
 require 'spec_helper'
+require 'money-rails/test_helpers'
 
 Capybara.javascript_driver = :poltergeist
 

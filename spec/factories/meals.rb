@@ -6,7 +6,7 @@ FactoryBot.define do
     association :user
 
     portions 1
-    price_per_portion 1.5
+    price_per_portion_pence 1.5
 
     transient do
       recipes_count 2

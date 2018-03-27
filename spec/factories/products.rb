@@ -8,14 +8,14 @@ FactoryBot.define do
     end
     unit 'Grams'
     amount 100
-    price 1
+    price_pence 1
 
     trait :price_two_pound do
-      price 2
+      price_pence 2
     end
 
     trait :price_three_pound do
-      price 3
+      price_pence 3
     end
   end
 end
