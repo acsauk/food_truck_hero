@@ -18,7 +18,7 @@ RSpec.describe Meal, type: :model do
   it { is_expected.to validate_presence_of(:portions) }
   it { is_expected.to validate_presence_of(:price_per_portion_pence) }
 
-  it { is_expected.to monetize(:price_per_portion_pence) }
+  it { is_expected.to monetize(:price_per_portion) }
 
   it 'has the total cost of all ingredients associated with the meal' do
     # Meal has three recipes, each with one ingredient linked to a product with
