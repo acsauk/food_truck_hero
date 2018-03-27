@@ -16,7 +16,12 @@ class Meal < ApplicationRecord
     total_cost = 0
     recipes.each do |recipe|
       recipe.ingredients.each do |ingredient|
-        total_cost += ingredient.product.price
+        smu = ingredient.product.smu_price
+        amount = ingredient.ingredientLists.find_by_ingredient_id(ingredient.id).amount
+        puts "Smu: #{smu}"
+        puts "amount: #{amount}"
+        total_cost += ingredient.product.smu_price * ingredient.ingredientLists.find_by_ingredient_id(ingredient.id).amount
+        puts total_cost
       end
     end
     total_cost

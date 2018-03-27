@@ -7,7 +7,7 @@ FactoryBot.define do
       "Brand #{n}"
     end
     unit 'Grams'
-    amount 1.5
+    amount 100
     price 1
 
     trait :price_two_pound do

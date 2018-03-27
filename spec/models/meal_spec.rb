@@ -19,14 +19,18 @@ RSpec.describe Meal, type: :model do
   it { is_expected.to validate_presence_of(:price_per_portion) }
 
   it 'has the total cost of all ingredients associated with the meal' do
-    # Meal has three recipes, each with one ingredient linked to a product that costs 2 pounds
+    # Meal has three recipes, each with one ingredient linked to a product with an amount of 100 and price 2 pounds.
+    # Recipe uses amount 20 so needs to be Product.smu_price * Recipe.ingredients.amount
     recipes = mwrwi_two_pound_product.recipes
     ingredients = recipes.collect(&:ingredients)
 
-    expected_cost = ingredients[0].collect(&:product).to_a.sum.price * ingredients.length
+    # binding.pry
+
+    expected_ingredients_cost = (ingredients[0].collect(&:product).to_a.sum.smu_price * ingredients[0][0].ingredientLists.find_by_ingredient_id(ingredients[0][0].id).amount) * ingredients.length
+
     actual_ingredients_cost = mwrwi_two_pound_product.ingredients_cost
 
     expect(mwrwi_two_pound_product).to have_attributes(ingredients_cost: actual_ingredients_cost)
-    expect(expected_cost).to eq actual_ingredients_cost
+    expect(expected_ingredients_cost).to eq actual_ingredients_cost
   end
 end

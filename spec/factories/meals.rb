@@ -21,7 +21,7 @@ FactoryBot.define do
     end
 
     trait :three_pound_product do
-      product_price :two_pound_product
+      product_price :three_pound_product
     end
 
     factory :meal_with_recipes_with_ingredients do
