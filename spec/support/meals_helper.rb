@@ -6,7 +6,7 @@ def create_meal(name: 'Meal name',
   click_link 'New Meal'
   fill_in 'Name', with: name
   fill_in 'Portions', with: portions
-  fill_in 'Price per portion', with: price_per_portion
+  fill_in :meal_price_per_portion, with: price_per_portion
   select(recipe_title, from: 'recipe-title').select_option
   click_button 'Create Meal'
 end
@@ -14,7 +14,7 @@ end
 def edit_meal(meal, recipe_with_ingredients)
   fill_in 'Name', with: "#{meal.name} edit"
   fill_in 'Portions', with: "#{meal.portions} edit"
-  fill_in 'Price per portion', with: "#{meal.price_per_portion} edit"
+  fill_in :meal_price_per_portion, with: meal.price_per_portion
   select(recipe_with_ingredients.title, from: 'recipe-title').select_option
   click_button 'Update Meal'
 end

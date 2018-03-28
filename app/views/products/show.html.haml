@@ -11,7 +11,7 @@
   #{@product.amount} #{@product.unit}
 %p
   %strong Price:
-  £#{@product.price}
+  = humanized_money_with_symbol @product.price
 
 = link_to 'Edit', edit_product_path(@product)
 \|

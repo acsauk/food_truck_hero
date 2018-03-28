@@ -9,7 +9,7 @@ feature 'Products' do
     expect(page).to have_content 'Product was successfully created'
     expect(page).to have_content 'Name: Product Name'
     expect(page).to have_content 'Brand: Product Brand'
-    expect(page).to have_content 'Price: £20.0'
+    expect(page).to have_content 'Price: £20'
     expect(page).to have_content 'Amount: 2000.0 grams'
   end
 
@@ -46,7 +46,7 @@ feature 'Products' do
     edit_product(product)
     expect(page).to have_content "#{product.name} edit"
     expect(page).to have_content "#{product.brand} edit"
-    expect(page).to have_content "£#{product.price + 1}"
+    expect(page).to have_content "£#{product.price.to_i + 1}"
     expect(page).to have_content "#{product.amount + 1} #{product.unit} edit"
   end
 
@@ -61,7 +61,7 @@ feature 'Products' do
     edit_product(product)
     expect(page).to have_content "#{product.name} edit"
     expect(page).to have_content "#{product.brand} edit"
-    expect(page).to have_content "£#{product.price + 1}"
+    expect(page).to have_content "£#{product.price.to_i + 1}"
     expect(page).to have_content "#{product.amount + 1} #{product.unit} edit"
   end
 

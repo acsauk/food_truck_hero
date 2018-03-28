@@ -10,7 +10,9 @@ class Meal < ApplicationRecord
 
   validates_presence_of :name
   validates_presence_of :portions
-  validates_presence_of :price_per_portion
+  validates_presence_of :price_per_portion_pence
+
+  monetize :price_per_portion_pence
 
   def ingredients_cost
     total_cost = 0
@@ -19,6 +21,6 @@ class Meal < ApplicationRecord
         total_cost += ingredient.product.smu_price * ingredient.amount
       end
     end
-    total_cost
+    Money.new(total_cost)
   end
 end

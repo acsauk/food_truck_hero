@@ -17,6 +17,6 @@ def edit_product(product)
   fill_in 'Brand', with: "#{product.brand} edit"
   fill_in 'Unit', with: "#{product.unit} edit"
   fill_in 'Amount', with: product.amount + 1
-  fill_in 'Price', with: product.price + 1
+  fill_in 'Price', with: product.price.to_i + 1
   click_button 'Update Product'
 end
