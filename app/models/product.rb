@@ -10,6 +10,6 @@ class Product < ApplicationRecord
   monetize :price_pence
 
   def smu_price
-    price_pence / amount
+    Money.new(price_pence / amount)
   end
 end

@@ -21,6 +21,6 @@ class Meal < ApplicationRecord
         total_cost += ingredient.product.smu_price * ingredient.amount
       end
     end
-    total_cost
+    Money.new(total_cost)
   end
 end

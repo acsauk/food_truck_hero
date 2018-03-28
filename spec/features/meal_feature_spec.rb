@@ -14,7 +14,7 @@ feature 'Meals' do
     expect(page).to have_content 'Meal was successfully created'
     expect(page).to have_content "Name: #{meal.name}"
     expect(page).to have_content "Portions: #{meal.portions}"
-    expect(page).to have_content "Price per portion: £#{meal.price_per_portion_pence}"
+    expect(page).to have_content "Price per portion: £#{meal.price_per_portion}"
     rwi.ingredients.each do |i|
       expect(page).to have_content i.name.to_s
     end
@@ -26,7 +26,7 @@ feature 'Meals' do
     visit meal_path meal
     expect(page).to have_content "Name: #{meal.name}"
     expect(page).to have_content "Portions: #{meal.portions}"
-    expect(page).to have_content "Price per portion: £#{meal.price_per_portion_pence}"
+    expect(page).to have_content "Price per portion: £#{meal.price_per_portion}"
     rwi.ingredients.each do |i|
       expect(page).to have_content i.name.to_s
     end
@@ -43,7 +43,7 @@ feature 'Meals' do
     edit_meal(meal, rwi2)
     expect(page).to have_content "Name: #{meal.name}"
     expect(page).to have_content "Portions: #{meal.portions}"
-    expect(page).to have_content "Price per portion: £#{meal.price_per_portion_pence}"
+    expect(page).to have_content "Price per portion: £#{meal.price_per_portion}"
     rwi.ingredients.each do |i|
       expect(page).to have_content i.name.to_s
     end
@@ -59,7 +59,7 @@ feature 'Meals' do
     edit_meal(meal, rwi2)
     expect(page).to have_content "Name: #{meal.name}"
     expect(page).to have_content "Portions: #{meal.portions}"
-    expect(page).to have_content "Price per portion: £#{meal.price_per_portion_pence}"
+    expect(page).to have_content "Price per portion: £#{meal.price_per_portion}"
     rwi.ingredients.each do |i|
       expect(page).to have_content i.name.to_s
     end

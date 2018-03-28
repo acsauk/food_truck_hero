@@ -8,7 +8,7 @@
   = @meal.portions
 %p
   %b Price per portion:
-  £#{@meal.price_per_portion_pence}
+  #{humanized_money_with_symbol @meal.price_per_portion}
 %p
   %b Ingredients:
   - @meal.recipes.each do |r|
