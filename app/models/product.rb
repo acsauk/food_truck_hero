@@ -7,6 +7,8 @@ class Product < ApplicationRecord
 
   has_many :ingredients
 
+  monetize :price_pence
+
   def smu_price
     price_pence / amount
   end

@@ -18,9 +18,21 @@ RSpec.describe Product, type: :model do
   it { is_expected.to monetize(:price) }
 
   it 'has a price per smallest measurable unit' do
-    product = FactoryBot.build(:product, amount: 100, price_pence: 2.0)
-    expected_single_measurable_unit_price = product.price_pence / product.amount
+    product = FactoryBot.build(:product, amount: 100, price: 2)
+    expected_single_measurable_unit_price = product.price_pence / product.amount.to_i
     actual_single_measurable_unit_price = product.smu_price
     expect(actual_single_measurable_unit_price).to eq expected_single_measurable_unit_price
+  end
+
+  it 'can handle string values for price attribute' do
+    product.price = '£2.50'
+    expected_price_value = Money.new(250)
+    expect(expected_price_value).to eq product.price
+  end
+
+  it 'can handle float values for price attribute' do
+    product.price = 2.50
+    expected_price_value = Money.new(250)
+    expect(expected_price_value).to eq product.price
   end
 end
