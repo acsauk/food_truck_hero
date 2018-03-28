@@ -32,4 +32,16 @@ RSpec.describe Meal, type: :model do
     expect(mwrwi_two_pound_product).to have_attributes(ingredients_cost: actual_ingredients_cost)
     expect(expected_ingredients_cost).to eq actual_ingredients_cost
   end
+
+  it 'can handle string values for price_per_portion attribute' do
+    meal.price_per_portion = '£2.50'
+    expected_price_value = Money.new(250)
+    expect(expected_price_value).to eq meal.price_per_portion
+  end
+
+  it 'can handle float values for price_per_portion attribute' do
+    meal.price_per_portion = 2.50
+    expected_price_value = Money.new(250)
+    expect(expected_price_value).to eq meal.price_per_portion
+  end
 end
