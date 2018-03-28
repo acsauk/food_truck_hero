@@ -19,7 +19,7 @@ RSpec.describe Product, type: :model do
 
   it 'has a price per smallest measurable unit' do
     product = FactoryBot.build(:product, amount: 100, price: 2)
-    expected_single_measurable_unit_price = product.price_pence / product.amount.to_i
+    expected_single_measurable_unit_price = product.price / product.amount.to_i
     actual_single_measurable_unit_price = product.smu_price
     expect(actual_single_measurable_unit_price).to eq expected_single_measurable_unit_price
   end
