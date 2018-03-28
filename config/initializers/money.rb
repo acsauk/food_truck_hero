@@ -5,6 +5,9 @@ MoneyRails.configure do |config|
   # To set the default currency
   config.default_currency = :gbp
 
+  # Defines if decimals are shown for whole values
+  config.no_cents_if_whole = false
+
   # Set default bank object
   #
   # Example:
@@ -76,11 +79,11 @@ MoneyRails.configure do |config|
   # Default value is nil meaning "ignore this option".
   # Example:
   #
-  # config.default_format = {
-  #   :no_cents_if_whole => nil,
-  #   :symbol => nil,
-  #   :sign_before_symbol => nil
-  # }
+  config.default_format = {
+    :no_cents_if_whole => false,
+    :symbol => nil,
+    :sign_before_symbol => nil
+  }
 
   # Set default raise_error_on_money_parsing option
   # It will be raise error if assigned different currency
