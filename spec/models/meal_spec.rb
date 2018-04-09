@@ -20,7 +20,7 @@ RSpec.describe Meal, type: :model do
 
   it { is_expected.to monetize(:price_per_portion) }
 
-  it 'has the total cost of all ingredients associated with the meal' do
+  it 'knows its total cost of all associated ingredients' do
     # Meal has three recipes, each with one ingredient linked to a product with
     # an amount of 100 and price of 2 pounds.
     recipes = mwrwi_two_pound_product.recipes
@@ -30,18 +30,24 @@ RSpec.describe Meal, type: :model do
     actual_ingredients_cost = mwrwi_two_pound_product.ingredients_cost
 
     expect(mwrwi_two_pound_product).to have_attributes(ingredients_cost: actual_ingredients_cost)
-    expect(expected_ingredients_cost).to eq actual_ingredients_cost
+    expect(actual_ingredients_cost).to eq expected_ingredients_cost
   end
 
   it 'can handle string values for price_per_portion attribute' do
     meal.price_per_portion = '£2.50'
     expected_price_value = Money.new(250)
-    expect(expected_price_value).to eq meal.price_per_portion
+    expect(meal.price_per_portion).to eq expected_price_value
   end
 
   it 'can handle float values for price_per_portion attribute' do
     meal.price_per_portion = 2.50
     expected_price_value = Money.new(250)
-    expect(expected_price_value).to eq meal.price_per_portion
+    expect(meal.price_per_portion).to eq expected_price_value
+  end
+
+  it 'knows its cost per portion' do
+    expected_cost_per_portion = mwrwi_two_pound_product.ingredients_cost / mwrwi_two_pound_product.portions
+    actual_cost_per_portion = mwrwi_two_pound_product.cost_per_portion
+    expect(actual_cost_per_portion).to eq expected_cost_per_portion
   end
 end

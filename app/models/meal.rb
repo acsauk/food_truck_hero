@@ -23,4 +23,8 @@ class Meal < ApplicationRecord
     end
     Money.new(total_cost)
   end
+
+  def cost_per_portion
+    Money.new(ingredients_cost / portions)
+  end
 end
