@@ -10,6 +10,9 @@
   %b Price per portion:
   #{humanized_money_with_symbol @meal.price_per_portion}
 %p
+  %b Cost per portion:
+  #{humanized_money_with_symbol @meal.cost_per_portion}
+%p
   %b Ingredients:
   - @meal.recipes.each do |r|
     - r.ingredientLists.each do |il|
