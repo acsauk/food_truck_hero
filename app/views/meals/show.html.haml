@@ -13,6 +13,9 @@
   %b Cost per portion:
   #{humanized_money_with_symbol @meal.cost_per_portion}
 %p
+  %b Margin:
+  #{@meal.margin}%
+%p
   %b Ingredients:
   - @meal.recipes.each do |r|
     - r.ingredientLists.each do |il|
