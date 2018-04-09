@@ -100,4 +100,11 @@ feature 'Meals' do
     visit meal_path meal
     expect(page).to have_content "Ingredients cost: £#{meal.ingredients_cost}"
   end
+
+  scenario 'viewing the cost per portion for a meal' do
+    create_meal(recipe_title: rwi.title.to_s)
+    meal = Meal.last
+    visit meal_path meal
+    expect(page).to have_content "Cost per portion: £#{meal.cost_per_portion}"
+  end
 end
