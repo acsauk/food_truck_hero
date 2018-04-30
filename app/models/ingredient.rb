@@ -5,4 +5,8 @@ class Ingredient < ApplicationRecord
 
   validates_presence_of :name, presence: true
   validates_presence_of :product_id, presence: true
+
+  def amount
+    ingredientLists.find_by_ingredient_id(id).amount
+  end
 end

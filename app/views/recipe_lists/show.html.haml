@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Recipe:
+  = @recipe_list.recipe_id
+%p
+  %b Meal:
+  = @recipe_list.meal_id
+
+= link_to 'Edit', edit_recipe_list_path(@recipe_list)
+\|
+= link_to 'Back', recipe_lists_path
