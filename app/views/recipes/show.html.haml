@@ -1,17 +1,24 @@
-%p
-  %strong Title:
-  = @recipe.title
-%p
-  %strong Instructions:
-  = @recipe.instructions
-%p
-  %strong Ingredients:
-  - @recipe.ingredientLists.each do |ils|
-    = ils.ingredient.name
-    = ils.amount
-    = ils.unit
-= link_to 'Edit', edit_recipe_path(@recipe)
-\|
-= link_to 'Delete', recipe_path(@recipe), method: :delete
-|
-= link_to 'Back', recipes_path
+.ui.grid.container
+  .row.title
+    %h1
+      = @recipe.title
+  .row.instructions
+    = @recipe.instructions
+  .row.ingredients
+    .ui.bulleted.list
+      - @recipe.ingredientLists.each do |ils|
+        .item
+          = ils.ingredient.name
+          = ils.amount
+          = ils.unit
+
+  .row.actions
+    .ui.two.column.divided.grid
+      .row
+        .two.wide.center.aligned.column
+          = link_to 'Edit', edit_recipe_path(@recipe)
+        .two.wide.center.aligned.column
+          = link_to 'Delete',
+            @recipe,
+            method: :delete,
+            data: { confirm: 'Are you sure?' }

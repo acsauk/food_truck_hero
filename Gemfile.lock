@@ -210,6 +210,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    semantic-ui-sass (2.3.1.2)
+      sass (>= 3.2)
     sexp_processor (4.10.1)
     shipyard-framework (0.9.0)
       actionview (~> 5.0)
@@ -279,6 +281,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   sass-rails (~> 5.0)
+  semantic-ui-sass
   shipyard-framework (~> 0.9.0)
   shoulda-matchers
   spring
