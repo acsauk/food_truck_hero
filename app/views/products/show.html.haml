@@ -1,21 +1,54 @@
-%p#notice= notice
+.ui.grid.container
+  .row
+    .ui.card
+      .content
+        .header
+          = @product.name
+        .description
+          .ui.two.column.grid
+            .row
+              .five.wide.column
+                Brand
+              .nine.wide.column
+                #{@product.brand}
+            .row
+              .five.wide.column
+                Pack Size
+              .nine.wide.column
+                #{@product.amount} #{@product.unit}
+            .row
+              .five.wide.column
+                Price
+              .nine.wide.column
+                #{humanized_money_with_symbol @product.price}
+      .extra.content
+        .ui.two.column.grid
+          .row
+            .two.wide.center.aligned.column
+              = link_to 'Edit', edit_product_path(@product)
+            .two.wide.center.aligned.column
+              = link_to 'Delete',
+                @product,
+                method: :delete,
+                data: { confirm: 'Are you sure?' }
 
-%p
-  %strong Name:
-  = @product.name
-%p
-  %strong Brand:
-  = @product.brand
-%p
-  %strong Amount:
-  #{@product.amount} #{@product.unit}
-%p
-  %strong Price:
-  = humanized_money_with_symbol @product.price
-
-= link_to 'Edit', edit_product_path(@product)
-\|
-= link_to 'Delete', @product, method: :delete,
-                                data: { confirm: 'Are you sure?' }
-\|
-= link_to 'Back', products_path
+  -# .row.name
+  -#   .column
+  -#     %h1 #{@product.name}
+  -# .three.column.row
+  -#   .four.wide.column.brand
+  -#     = @product.brand
+  -#   .four.wide.column.amount
+  -#     #{@product.amount} #{@product.unit}
+  -#   .four.wide.column.price
+  -#     = humanized_money_with_symbol @product.price
+  -# .row.actions
+  -#   .ui.two.column.divided.grid
+  -#     .row
+  -#       .two.wide.center.aligned.column
+  -#         = link_to 'Edit', edit_product_path(@product)
+  -#       .two.wide.center.aligned.column
+  -#         = link_to 'Delete',
+  -#           @product,
+  -#           method: :delete,
+  -#           data: { confirm: 'Are you sure?' }
