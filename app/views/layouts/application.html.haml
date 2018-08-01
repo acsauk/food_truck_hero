@@ -9,9 +9,8 @@
                                 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %p.notice= notice
-    %p.alert= alert
-    = link_to 'Food Truck Hero', root_path
-    .ui.menu
+    .container
+      %p.notice= notice
+      %p.alert= alert
       = render 'layouts/nav'
-    = yield
+      = yield

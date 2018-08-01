@@ -37,7 +37,7 @@ gem 'devise'
 gem 'haml-rails'
 gem 'money-rails', '~> 1'
 gem 'shipyard-framework', '~> 0.9.0'
-gem 'semantic-ui-sass'
+gem "bulma-rails", "~> 0.7.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

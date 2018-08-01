@@ -13,4 +13,3 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-//= require semantic-ui

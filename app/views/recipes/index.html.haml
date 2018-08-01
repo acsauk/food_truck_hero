@@ -1,19 +1,16 @@
-.ui.grid.container
+.container
   %%h1 Recipes
-
-  .three.column.row
+  .columns.is-centered.is-multiline.has-text-justified.has-text-left
     - @recipes.each do |recipe|
-      .three.wide.column.title
+      .column.is-4.title
         = link_to recipe.title.to_s, recipe
-      .ten.wide.column.instructions
+      .column.is-4.instructions
         = recipe.instructions
-      .three.wide.column.actions
-        .ui.two.column.divided.grid
-          .center.aligned.column
-            = link_to 'Edit', edit_recipe_path(recipe)
-          .center.aligned.column
-            = link_to 'Delete',
-              recipe,
-              method: :delete,
-              data: { confirm: 'Are you sure?' }
+      .column.is-4.actions
+        = link_to 'Edit', edit_recipe_path(recipe)
+        |
+        = link_to 'Delete',
+          recipe,
+          method: :delete,
+          data: { confirm: 'Are you sure?' }
   = link_to 'New Recipe', new_recipe_path

@@ -1,17 +1,28 @@
-%header#main-navigation
-  %nav#nav-bar
-    - if user_signed_in?
-      = link_to 'Recipes', recipes_path
-      \|
-      = link_to 'Sign out', destroy_user_session_path, method: :delete
-      \|
-      = link_to "#{current_user.first_name} #{current_user.last_name}",
-        user_path(current_user)
-      \|
-      = link_to 'Products', products_path
-      \|
-      = link_to 'Meals', meals_path
+%nav.navbar
+  .navbar-brand
+    .navbar-item
+      =link_to 'Food Truck Hero', root_path
+  .navbar-menu.is-active
+    -if user_signed_in?
+      .navbar-start
+        .navbar-item
+          = link_to 'Recipes', recipes_path, class: 'active item'
+        .navbar-item
+          = link_to 'Products', products_path, class: 'item'
+        .navbar-item
+          = link_to 'Meals', meals_path, class: 'item'
+      .navbar-end
+        .navbar-item
+          = link_to "#{current_user.first_name} #{current_user.last_name}",
+            user_path(current_user), class: 'item'
+        .navbar-item
+          = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'item'
 
     - else
-      = link_to 'Sign in', new_user_session_path
-      = link_to 'Sign up', new_user_registration_path
+      .navbar-start
+      .navbar-end
+        .navbar-item
+          = link_to 'Sign in', new_user_session_path, class: 'item'
+        .navbar-item
+          = link_to 'Sign up', new_user_registration_path, class: 'item'
+

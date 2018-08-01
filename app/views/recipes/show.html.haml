@@ -1,24 +1,25 @@
-.ui.grid.container
-  .row.title
+.container
+  .title
     %h1
       = @recipe.title
-  .row.instructions
+  .instructions
+    %h2 Instructions
     = @recipe.instructions
-  .row.ingredients
-    .ui.bulleted.list
+  .ingredients
+    %h2 Ingredients
+    %ul
       - @recipe.ingredientLists.each do |ils|
-        .item
+        %li
           = ils.ingredient.name
           = ils.amount
           = ils.unit
 
-  .row.actions
-    .ui.two.column.divided.grid
-      .row
-        .two.wide.center.aligned.column
-          = link_to 'Edit', edit_recipe_path(@recipe)
-        .two.wide.center.aligned.column
-          = link_to 'Delete',
+  .columns
+    .column.is-1
+      = link_to 'Edit', edit_recipe_path(@recipe)
+    .column.is-1
+      = link_to 'Delete',
             @recipe,
             method: :delete,
             data: { confirm: 'Are you sure?' }
+
