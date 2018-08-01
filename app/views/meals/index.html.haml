@@ -1,24 +1,27 @@
-%h1 Listing meals
-
-%table
-  %thead
-    %tr
-      %th Name
-      %th Portions
-      %th Price per portion
-      %th
-      %th
-      %th
-
-  %tbody
+.container
+  %h1 Listing meals
+  .columns
+    .column.is-4.name
+      %h2 Name
+    .column.is-3.portions
+      %h2 Portions
+    .column.is-2.price-per-portion
+      %h2 Price per-portion
+    .column.is-2.actions
+      %h2 Actions
+  .columns.is-multiline
     - @meals.each do |meal|
-      %tr
-        %td= link_to meal.name.to_s, meal
-        %td= meal.portions
-        %td #{humanized_money_with_symbol meal.price_per_portion}
-        %td= link_to 'Edit', edit_meal_path(meal)
-        %td= link_to 'Delete', meal, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Meal', new_meal_path
+      .column.is-4.name
+        = link_to meal.name.to_s, meal
+      .column.is-3.portions
+        = meal.portions
+      .column.is-2.price-per-portion
+        #{humanized_money_with_symbol meal.price_per_portion}
+      .column.is-2.actions
+        = link_to 'Edit', edit_product_path(meal)
+        |
+        = link_to 'Delete',
+          meal,
+          method: :delete,
+          data: { confirm: 'Are you sure?' }
+  = link_to 'New Meal', new_meal_path

@@ -1,34 +1,33 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @meal.name
-%p
-  %b Portions:
-  = @meal.portions
-%p
-  %b Price per portion:
-  #{humanized_money_with_symbol @meal.price_per_portion}
-%p
-  %b Cost per portion:
-  #{humanized_money_with_symbol @meal.cost_per_portion}
-%p
-  %b Margin:
-  #{@meal.margin}%
-%p
-  %b Ingredients:
-  - @meal.recipes.each do |r|
-    - r.ingredientLists.each do |il|
-      = il.ingredient.name
-      = il.amount
-      = il.unit
-  %p
-    %b Ingredients cost:
+.container
+  .name
+    %h1 #{@meal.name}
+  .portions
+    Portions: #{@meal.portions}
+  .price-per-portion
+    rice per portion:
+    #{humanized_money_with_symbol @meal.price_per_portion}
+  .cost-per-portion
+    Cost per portion:
+    #{humanized_money_with_symbol @meal.cost_per_portion}
+  .margin
+    Margin:
+    #{@meal.margin}
+  .ingredients
+    Ingredients:
+    - @meal.recipes.each do |r|
+      - r.ingredientLists.each do |il|
+        = il.ingredient.name
+        = il.amount
+        = il.unit
+  .ingredients-cost
+    Ingredients cost:
     £#{@meal.ingredients_cost}
-
-
-= link_to 'Edit', edit_meal_path(@meal)
-\|
-= link_to 'Delete', meal_path(@meal), method: :delete
-\|
-= link_to 'Back', meals_path
+  .actions
+    .columns
+      .column.is-1
+        = link_to 'Edit', edit_meal_path(@meal)
+      .column.is-1
+        = link_to 'Delete',
+              @meal,
+              method: :delete,
+              data: { confirm: 'Are you sure?' }
