@@ -1,54 +1,20 @@
-.ui.grid.container
-  .row
-    .ui.card
-      .content
-        .header
-          = @product.name
-        .description
-          .ui.two.column.grid
-            .row
-              .five.wide.column
-                Brand
-              .nine.wide.column
-                #{@product.brand}
-            .row
-              .five.wide.column
-                Pack Size
-              .nine.wide.column
-                #{@product.amount} #{@product.unit}
-            .row
-              .five.wide.column
-                Price
-              .nine.wide.column
-                #{humanized_money_with_symbol @product.price}
-      .extra.content
-        .ui.two.column.grid
-          .row
-            .two.wide.center.aligned.column
-              = link_to 'Edit', edit_product_path(@product)
-            .two.wide.center.aligned.column
-              = link_to 'Delete',
-                @product,
-                method: :delete,
-                data: { confirm: 'Are you sure?' }
-
-  -# .row.name
-  -#   .column
-  -#     %h1 #{@product.name}
-  -# .three.column.row
-  -#   .four.wide.column.brand
-  -#     = @product.brand
-  -#   .four.wide.column.amount
-  -#     #{@product.amount} #{@product.unit}
-  -#   .four.wide.column.price
-  -#     = humanized_money_with_symbol @product.price
-  -# .row.actions
-  -#   .ui.two.column.divided.grid
-  -#     .row
-  -#       .two.wide.center.aligned.column
-  -#         = link_to 'Edit', edit_product_path(@product)
-  -#       .two.wide.center.aligned.column
-  -#         = link_to 'Delete',
-  -#           @product,
-  -#           method: :delete,
-  -#           data: { confirm: 'Are you sure?' }
+.container
+  .title
+    %h1
+      = @product.name
+  .brand
+    %h2.has-text-weight-semibold Brand
+    = @product.brand
+  .amount
+    %h2.has-text-weight-semibold Pack Size
+    #{@product.amount} #{@product.unit}
+  .price
+    %h2.has-text-weight-semibold Price
+    = humanized_money_with_symbol @product.price
+  .actions
+    = link_to 'Edit', edit_product_path(@product)
+    |
+    = link_to 'Delete',
+      @product,
+      method: :delete,
+      data: { confirm: 'Are you sure?' }
