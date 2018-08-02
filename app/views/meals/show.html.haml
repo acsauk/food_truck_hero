@@ -21,7 +21,7 @@
         = il.unit
   .ingredients-cost
     Ingredients cost:
-    £#{@meal.ingredients_cost}
+    #{humanized_money_with_symbol @meal.ingredients_cost}
   .actions
     .columns
       .column.is-1

@@ -7,36 +7,44 @@
       %ul
         - @recipe.errors.full_messages.each do |message|
           %li= message
-  .two.column.row
-    .column.overview
-      .field.title
-        = f.label :title
-        = f.text_field :title, id: :recipe_title
 
-      .field.instructions
-        = f.label :instructions
-        = f.text_area :instructions, id: :recipe_instructions
+  .field.title
+    = f.label :title
+    .control
+      = f.text_field :title, id: :recipe_title, class: 'input'
 
-    .column.details
-      = f.fields_for :ingredientLists do |il|
-        = il.fields_for :ingredient do |i|
-          .field.ingredient-name
-            = i.label :name
-            = i.text_field :name, id: "name-#{il.index}"
-          .field.product-name
-            = i.label :product
+  .field.instructions
+    = f.label :instructions
+    .control
+      = f.text_area :instructions, id: :recipe_instructions, class: 'input'
+
+
+  = f.fields_for :ingredientLists do |il|
+    = il.fields_for :ingredient do |i|
+      .field.ingredient-name
+        = i.label :name
+        .control
+          = i.text_field :name, id: "name-#{il.index}", class: 'input'
+      .field.product-name
+        = i.label :product
+        .control
+          .select
             = i.collection_select(:product_id, Product.all, :id, :name, {},
-                                    id: "product-name-#{il.index}", class: 'ui fluid dropdown')
-        .ui.grid
-          .two.column.row
-            .field.eight.wide.column.amount
-              = il.label :amount
-              = il.text_field :amount, id: "amount-#{il.index}"
+                                    id: "product-name-#{il.index}")
 
-            .field.eight.wide.column.unit
-              = il.label :unit
-              = il.text_field :unit, id: "unit-#{il.index}"
-        .ui.horizontal.divider
+        .field.amount-unit
+          .columns
+            .column
+              .field.amount-unit
+                = il.label :amount
+                .control
+                  = il.text_field :amount, id: "amount-#{il.index}", class: 'input'
 
-    .actions
-      = f.submit class: 'ui button'
+            .column
+              .field.amount-unit
+                = il.label :unit
+                .control
+                  = il.text_field :unit, id: "unit-#{il.index}", class: 'input'
+
+  .actions
+    = f.submit class: 'button is-link'

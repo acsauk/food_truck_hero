@@ -8,17 +8,23 @@
 
   .field
     = f.label :name
-    = f.text_field :name
+    .control
+      = f.text_field :name, class: 'input'
   .field
     = f.label :portions
-    = f.number_field :portions
+    .control
+      = f.number_field :portions, class: 'input'
   .field
     = f.label :price_per_portion
-    = f.text_field :price_per_portion
+    .control
+      = f.text_field :price_per_portion, class: 'input'
   = f.fields_for :recipeLists do |rl|
     .field
       = rl.label :recipe
-      = rl.collection_select(:recipe_id, Recipe.all, :id, :title, {},
+      .control
+        .select
+          = rl.collection_select(:recipe_id, Recipe.all, :id, :title, {},
                               id: 'recipe-title')
-  .actions
-    = f.submit
+  .field
+    .control
+      = f.submit class: 'button is-link'
