@@ -19,7 +19,7 @@
       .column.is-3.price-per-portion
         #{humanized_money_with_symbol meal.price_per_portion}
       .column.is-2.actions
-        = link_to 'Edit', edit_product_path(meal)
+        = link_to 'Edit', edit_meal_path(meal)
         |
         = link_to 'Delete',
           meal,
