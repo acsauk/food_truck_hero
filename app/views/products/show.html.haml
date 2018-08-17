@@ -1,20 +1,27 @@
 .container
-  .title
-    %h1
-      = @product.name
-  .brand
-    %h2.has-text-weight-semibold Brand
-    = @product.brand
-  .amount
-    %h2.has-text-weight-semibold Pack Size
-    #{@product.amount} #{@product.unit}
-  .price
-    %h2.has-text-weight-semibold Price
-    = humanized_money_with_symbol @product.price
-  .actions
-    = link_to 'Edit', edit_product_path(@product)
-    |
-    = link_to 'Delete',
-      @product,
-      method: :delete,
-      data: { confirm: 'Are you sure?' }
+  .card
+    %header.card-header
+      %p.card-header-title.name.is-size-3.is-centered
+        =@product.name
+      %a.card-header-icon{"aria-label" => "more options", :href => "#"}
+        %span.icon
+          %i.fas.fa-angle-down{"aria-hidden" => "true"}
+    .card-content
+      .content
+        .columns
+          .column.brand
+            %p.title.title.is-4 Brand
+            = @product.brand
+          .column.pack-size
+            %p.title.title.is-4 Pack Size
+            #{@product.amount} #{@product.unit}
+          .column.price
+            %p.title.title.is-4 Price
+            = humanized_money_with_symbol @product.price
+    %footer.card-footer
+      = link_to 'Edit', edit_product_path(@product), class: 'card-footer-item'
+      = link_to 'Delete',
+        @product,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        class: 'card-footer-item'

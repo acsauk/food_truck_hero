@@ -1,6 +1,18 @@
 .container
-  %h1 Listing products
-  .columns.is-multiline
+  .is-size-3
+    Products
+  .columns
+    .column.is-4.is-size-5.name
+      Name
+    .column.is-3.is-size-5.brand
+      Brand
+    .column.is-2.is-size-5.amount-unit
+      Size
+    .column.is-1.is-size-5.price
+      Price
+    .column.is-2.is-size-5.actions
+      Actions
+  .columns.is-centered.is-multiline.has-text-justified.has-text-left
     - @products.each do |product|
       .column.is-4.name
         = link_to product.name.to_s, product

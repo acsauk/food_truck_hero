@@ -1,21 +1,22 @@
 .container
-  %h1 Listing meals
+  .is-size-3
+    Meals
   .columns
-    .column.is-4.name
-      %h2 Name
-    .column.is-3.portions
-      %h2 Portions
-    .column.is-2.price-per-portion
-      %h2 Price per-portion
-    .column.is-2.actions
-      %h2 Actions
+    .column.is-4.is-size-5.name
+      Name
+    .column.is-2.is-size-5.portions
+      Portions
+    .column.is-3.is-size-5.price-per-portion
+      Price per-portion
+    .column.is-2.is-size-5.actions
+      Actions
   .columns.is-multiline
     - @meals.each do |meal|
       .column.is-4.name
         = link_to meal.name.to_s, meal
-      .column.is-3.portions
+      .column.is-2.portions
         = meal.portions
-      .column.is-2.price-per-portion
+      .column.is-3.price-per-portion
         #{humanized_money_with_symbol meal.price_per_portion}
       .column.is-2.actions
         = link_to 'Edit', edit_product_path(meal)

@@ -1,25 +1,27 @@
 .container
-  .title
-    %h1
-      = @recipe.title
-  .instructions
-    %h2 Instructions
-    = @recipe.instructions
-  .ingredients
-    %h2 Ingredients
-    %ul
-      - @recipe.ingredientLists.each do |ils|
-        %li
-          = ils.ingredient.name
-          = ils.amount
-          = ils.unit
-
-  .columns
-    .column.is-1
-      = link_to 'Edit', edit_recipe_path(@recipe)
-    .column.is-1
+  .card
+    %header.card-header
+      %p.card-header-title.name.is-size-3.is-centered
+        = @recipe.title
+      %a.card-header-icon{"aria-label" => "more options", :href => "#"}
+        %span.icon
+          %i.fas.fa-angle-down{"aria-hidden" => "true"}
+    .card-content
+      .content
+        .column.ingredients
+          %p.title.title.is-4 Ingredients
+          - @recipe.ingredientLists.each do |ils|
+            .ingredient
+              = ils.ingredient.name
+              = ils.amount
+              = ils.unit
+        .column.instructions
+          %p.title.title.is-4 Instructions
+          = @recipe.instructions
+    %footer.card-footer
+      = link_to 'Edit', edit_recipe_path(@recipe), class: 'card-footer-item'
       = link_to 'Delete',
-            @recipe,
-            method: :delete,
-            data: { confirm: 'Are you sure?' }
-
+        @recipe,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        class: 'card-footer-item'
