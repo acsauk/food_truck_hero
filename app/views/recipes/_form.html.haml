@@ -18,33 +18,10 @@
     .control
       = f.text_area :instructions, id: :recipe_instructions, class: 'input'
 
-
+  .ingredients#ingredients
   = f.fields_for :ingredientLists do |il|
-    = il.fields_for :ingredient do |i|
-      .field.ingredient-name
-        = i.label :name
-        .control
-          = i.text_field :name, id: "name-#{il.index}", class: 'input'
-      .field.product-name
-        = i.label :product
-        .control
-          .select
-            = i.collection_select(:product_id, Product.all, :id, :name, {},
-                                    id: "product-name-#{il.index}")
-
-        .field.amount-unit
-          .columns
-            .column
-              .field.amount-unit
-                = il.label :amount
-                .control
-                  = il.text_field :amount, id: "amount-#{il.index}", class: 'input'
-
-            .column
-              .field.amount-unit
-                = il.label :unit
-                .control
-                  = il.text_field :unit, id: "unit-#{il.index}", class: 'input'
+    = render 'ingredientList_fields', f: il
+  = link_to_add_association 'Add Ingredient', f, :ingredientLists, 'data-association-insertion-node' => '#ingredients', 'data-association-insertion-method' => 'append', :wrap_object => Proc.new { |il| il.build_ingredient; il }
 
   .actions
     = f.submit class: 'button is-link'

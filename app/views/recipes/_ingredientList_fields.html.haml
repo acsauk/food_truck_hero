@@ -1,0 +1,28 @@
+.ingredients#ingredients
+  = f.fields_for :ingredient do |i|
+    .field.ingredient-name
+      = i.label :name
+      .control
+        = i.text_field :name, id: "name-#{f.index}", class: 'input'
+    .field.product-name
+      = i.label :product
+      .control
+        .select
+          = i.collection_select(:product_id, Product.all, :id, :name, {},
+                                  id: "product-name-#{f.index}")
+
+      .field.amount-unit
+        .columns
+          .column
+            .field.amount-unit
+              = f.label :amount
+              .control
+                = f.text_field :amount, id: "amount-#{f.index}", class: 'input'
+
+          .column
+            .field.amount-unit
+              = f.label :unit
+              .control
+                = f.text_field :unit, id: "unit-#{f.index}", class: 'input'
+
+    = link_to_remove_association 'Remove Ingredient', f, { wrapper_class: 'ingredients' }
