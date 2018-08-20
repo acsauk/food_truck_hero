@@ -1,0 +1,7 @@
+.field
+  = f.label :recipe
+  .control
+    .select
+      = f.collection_select(:recipe_id, Recipe.all, :id, :title, {},
+                          id: 'recipe-title')
+

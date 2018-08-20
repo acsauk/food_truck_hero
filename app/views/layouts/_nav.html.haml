@@ -1,28 +1,21 @@
-%nav.navbar
-  .navbar-brand
-    .navbar-item
-      =link_to 'Food Truck Hero', root_path
-  .navbar-menu.is-active
-    -if user_signed_in?
-      .navbar-start
-        .navbar-item
-          = link_to 'Recipes', recipes_path, class: 'active item'
-        .navbar-item
-          = link_to 'Products', products_path, class: 'item'
-        .navbar-item
-          = link_to 'Meals', meals_path, class: 'item'
-      .navbar-end
-        .navbar-item
+.div
+  %nav.navbar.is-success
+    .navbar-brand
+      =link_to 'Food Truck Hero', root_path, class: 'navbar-item'
+    .navbar-menu
+      -if user_signed_in?
+        .navbar-start
+          = link_to 'Recipes', recipes_path, class: 'active item navbar-item'
+          = link_to 'Products', products_path, class: 'item navbar-item'
+          = link_to 'Meals', meals_path, class: 'item navbar-item'
+        .navbar-end
           = link_to "#{current_user.first_name} #{current_user.last_name}",
-            user_path(current_user), class: 'item'
-        .navbar-item
-          = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'item'
+            user_path(current_user), class: 'item navbar-item'
+          = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'item navbar-item'
 
-    - else
-      .navbar-start
-      .navbar-end
-        .navbar-item
-          = link_to 'Sign in', new_user_session_path, class: 'item'
-        .navbar-item
-          = link_to 'Sign up', new_user_registration_path, class: 'item'
+      - else
+        .navbar-start
+        .navbar-end
+          = link_to 'Sign in', new_user_session_path, class: 'item navbar-item'
+          = link_to 'Sign up', new_user_registration_path, class: 'item navbar-item'
 

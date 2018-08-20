@@ -18,10 +18,15 @@
     .control
       = f.text_area :instructions, id: :recipe_instructions, class: 'input'
 
-  .ingredients#ingredients
-  = f.fields_for :ingredientLists do |il|
-    = render 'ingredientList_fields', f: il
-  = link_to_add_association 'Add Ingredient', f, :ingredientLists, 'data-association-insertion-node' => '#ingredients', 'data-association-insertion-method' => 'append', :wrap_object => Proc.new { |il| il.build_ingredient; il }
+  #ingredients
+    = f.fields_for :ingredientLists do |il|
+      = render 'ingredientList_fields', f: il
 
   .actions
     = f.submit class: 'button is-link'
+    = link_to_add_association 'Add Ingredient',
+      f,
+      :ingredientLists,
+      'data-association-insertion-method' => 'before',
+      :wrap_object => Proc.new { |il| il.build_ingredient; il },
+      class: 'button is-link'
