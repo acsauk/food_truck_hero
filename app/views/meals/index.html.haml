@@ -1,28 +1,29 @@
 .container
   .is-size-3
     Meals
-  .columns
-    .column.is-4.is-size-5.name
-      Name
-    .column.is-2.is-size-5.portions
-      Portions
-    .column.is-3.is-size-5.price-per-portion
-      Price per-portion
-    .column.is-2.is-size-5.actions
-      Actions
-  .columns.is-multiline
+
+  %table.table.is-fullwidth
+    %thead
+      %tr
+        %th Name
+        %th Portions
+        %th Price per-portion
+        %th Actions
+    %tbody
     - @meals.each do |meal|
-      .column.is-4.name
-        = link_to meal.name.to_s, meal
-      .column.is-2.portions
-        = meal.portions
-      .column.is-3.price-per-portion
-        #{humanized_money_with_symbol meal.price_per_portion}
-      .column.is-2.actions
-        = link_to 'Edit', edit_meal_path(meal)
-        |
-        = link_to 'Delete',
-          meal,
-          method: :delete,
-          data: { confirm: 'Are you sure?' }
-  = link_to 'New Meal', new_meal_path
+      %tr
+        %th
+          = link_to meal.name.to_s, meal
+        %td
+          = meal.portions
+        %td
+          #{humanized_money_with_symbol meal.price_per_portion}
+        %td
+          = link_to 'Edit', edit_meal_path(meal)
+          |
+          = link_to 'Delete',
+            meal,
+            method: :delete,
+            data: { confirm: 'Are you sure?' }
+
+  = link_to 'New Meal', new_meal_path, class: 'button is-link'

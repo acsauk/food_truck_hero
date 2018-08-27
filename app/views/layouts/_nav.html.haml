@@ -1,6 +1,11 @@
 %nav.navbar.is-success
   .navbar-brand
     =link_to 'Food Truck Hero', root_path, class: 'navbar-item'
+    .navbar-burger{ "aria-expanded" => "false", "aria-label" => "menu", :role => "button", "data-target" => "navMenu" }
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+
   .navbar-menu
     -if user_signed_in?
       .navbar-start

@@ -1,24 +1,26 @@
 .container
   .is-size-3
     Recipes
-  .columns
-    .column.is-4.is-size-5.name
-      Name
-    .column.is-6.is-size-5.instructions
-      Instructions
-    .column.is-2.is-size-5.actions
-      Actions
-  .columns.is-centered.is-multiline.has-text-justified.has-text-left
+
+  %table.table.is-fullwidth
+    %thead
+      %tr
+        %th Name
+        %th Instructions
+        %th Actions
+    %tbody
     - @recipes.each do |recipe|
-      .column.is-4.name
-        = link_to recipe.title.to_s, recipe
-      .column.is-6.instructions
-        = recipe.instructions
-      .column.is-2.actions
-        = link_to 'Edit', edit_recipe_path(recipe)
-        |
-        = link_to 'Delete',
-          recipe,
-          method: :delete,
-          data: { confirm: 'Are you sure?' }
-  = link_to 'New Recipe', new_recipe_path
+      %tr
+        %th
+          = link_to recipe.title.to_s, recipe
+        %td
+          = recipe.instructions
+        %td
+          = link_to 'Edit', edit_recipe_path(recipe)
+          |
+          = link_to 'Delete',
+            recipe,
+            method: :delete,
+            data: { confirm: 'Are you sure?' }
+
+  = link_to 'New Recipe', new_recipe_path, class: 'button is-link'
