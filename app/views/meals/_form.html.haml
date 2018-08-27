@@ -1,34 +1,38 @@
-= form_for @meal do |f|
-  - if @meal.errors.any?
-    #error-explanation
-      %h2= "#{pluralize(@meal.errors.count, "error")} prohibited this meal from being saved:"
-      %ul
-        - @meal.errors.full_messages.each do |message|
-          %li= message
+.section
+  .container
+    = form_for @meal do |f|
+      - if @meal.errors.any?
+        #error-explanation
+          %h2= "#{pluralize(@meal.errors.count, "error")} prohibited this meal from being saved:"
+          %ul
+            - @meal.errors.full_messages.each do |message|
+              %li= message
 
-  .field
-    = f.label :name
-    .control
-      = f.text_field :name, class: 'input'
-  .field
-    = f.label :portions
-    .control
-      = f.number_field :portions, class: 'input'
-  .field
-    = f.label :price_per_portion
-    .control
-      = f.text_field :price_per_portion, class: 'input'
+      .columns
+        .column.field
+          = f.label :name
+          .control
+            = f.text_field :name, class: 'input'
+      .columns
+        .column.field
+          = f.label :portions
+          .control
+            = f.number_field :portions, class: 'input'
+        .column.field
+          = f.label :price_per_portion
+          .control
+            = f.text_field :price_per_portion, class: 'input'
 
-  .recipes#recipes
-  = f.fields_for :recipeLists do |rl|
-    = render 'recipeList_fields', f: rl
-  = link_to_add_association 'Add recipe',
-    f,
-    :recipeLists,
-    'data-association-insertion-node' => '#recipes',
-    'data-association-insertion-method' => 'append',
-    :wrap_object => Proc.new { |rl| rl.build_recipe; rl }
-
-  .field
-    .control
-      = f.submit class: 'button is-link'
+      .recipes#recipes
+        = f.fields_for :recipeLists do |rl|
+          = render 'recipeList_fields', f: rl
+      .field
+        .control
+          = f.submit class: 'button is-link'
+          = link_to_add_association 'Add recipe',
+            f,
+            :recipeLists,
+            'data-association-insertion-node' => '#recipes',
+            'data-association-insertion-method' => 'append',
+            :wrap_object => Proc.new { |rl| rl.build_recipe; rl },
+            class: 'button is-link'

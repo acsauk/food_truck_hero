@@ -1,39 +1,41 @@
-= form_for @product, html: {class: 'ui form grid container'} do |f|
-  - if @product.errors.any?
-    #error-explanation
-      %h2
-        = pluralize(@product.errors.count, 'error')
-        prohibited this product from being saved:
-      %ul
-        - @product.errors.full_messages.each do |message|
-          %li= message
+.section
+  .container
+    = form_for @product, html: {class: 'ui form grid container'} do |f|
+      - if @product.errors.any?
+        #error-explanation
+          %h2
+            = pluralize(@product.errors.count, 'error')
+            prohibited this product from being saved:
+          %ul
+            - @product.errors.full_messages.each do |message|
+              %li= message
 
-  .field.name
-    = f.label :name
-    .control
-      = f.text_field :name, id: :product_name, class: 'input'
+      .field.name
+        = f.label :name
+        .control
+          = f.text_field :name, id: :product_name, class: 'input'
 
-  .field.brand
-    = f.label :brand
-    .control
-      = f.text_field :brand, id: :product_brand, class: 'input'
+      .field.brand
+        = f.label :brand
+        .control
+          = f.text_field :brand, id: :product_brand, class: 'input'
 
-  .field.amount-unit
-    .columns
-      .column
-        .field.amount
-          = f.label :amount
-          .control
-            = f.text_field :amount, id: :product_amount, class: 'input'
-      .column
-        .field.unit
-          = f.label :unit
-          .control
-            = f.text_field :unit, id: :product_unit, class: 'input'
+      .field.amount-unit
+        .columns
+          .column
+            .field.amount
+              = f.label :amount
+              .control
+                = f.text_field :amount, id: :product_amount, class: 'input'
+          .column
+            .field.unit
+              = f.label :unit
+              .control
+                = f.text_field :unit, id: :product_unit, class: 'input'
 
-  .field.price
-    = f.label :price
-    .control
-      = f.text_field :price, id: :product_price, class: 'input'
-  .actions
-    = f.submit class: 'button is-link'
+      .field.price
+        = f.label :price
+        .control
+          = f.text_field :price, id: :product_price, class: 'input'
+      .actions
+        = f.submit class: 'button is-link'

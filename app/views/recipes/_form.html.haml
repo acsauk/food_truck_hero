@@ -1,32 +1,37 @@
-= form_for @recipe, html: {class: 'ui form grid container'} do |f|
-  - if @recipe.errors.any?
-    #error-explanation
-      %h2
-        = pluralize(@recipe.errors.count, 'error')
-        prohibited this recipe from being saved:
-      %ul
-        - @recipe.errors.full_messages.each do |message|
-          %li= message
+.section
+  .container
+    = form_for @recipe, html: {class: 'ui form grid container'} do |f|
+      - if @recipe.errors.any?
+        #error-explanation
+          %h2
+            = pluralize(@recipe.errors.count, 'error')
+            prohibited this recipe from being saved:
+          %ul
+            - @recipe.errors.full_messages.each do |message|
+              %li= message
 
-  .field.title
-    = f.label :title
-    .control
-      = f.text_field :title, id: :recipe_title, class: 'input'
+      .field.title
+        = f.label :title
+        .control
+          = f.text_field :title, id: :recipe_title, class: 'input'
 
-  .field.instructions
-    = f.label :instructions
-    .control
-      = f.text_area :instructions, id: :recipe_instructions, class: 'input'
+      .field.instructions
+        = f.label :instructions
+        .control
+          = f.text_area :instructions,
+            id: :recipe_instructions,
+            class: 'textarea',
+            rows: 5,
+            cols: 40
 
-  #ingredients
-    = f.fields_for :ingredientLists do |il|
-      = render 'ingredientList_fields', f: il
+      = f.fields_for :ingredientLists do |il|
+        = render 'ingredientList_fields', f: il
 
-  .actions
-    = f.submit class: 'button is-link'
-    = link_to_add_association 'Add Ingredient',
-      f,
-      :ingredientLists,
-      'data-association-insertion-method' => 'before',
-      :wrap_object => Proc.new { |il| il.build_ingredient; il },
-      class: 'button is-link'
+      .actions
+        = f.submit class: 'button is-link'
+        = link_to_add_association 'Add Ingredient',
+          f,
+          :ingredientLists,
+          'data-association-insertion-method' => 'before',
+          :wrap_object => Proc.new { |il| il.build_ingredient; il },
+          class: 'button is-link'
