@@ -1,37 +1,37 @@
-= form_for @recipe do |f|
-  - if @recipe.errors.any?
-    #error-explanation
-      %h2
-        = pluralize(@recipe.errors.count, 'error')
-        prohibited this recipe from being saved:
-      %ul
-        - @recipe.errors.full_messages.each do |message|
-          %li= message
+.section
+  .container
+    = form_for @recipe, html: {class: 'ui form grid container'} do |f|
+      - if @recipe.errors.any?
+        #error-explanation
+          %h2
+            = pluralize(@recipe.errors.count, 'error')
+            prohibited this recipe from being saved:
+          %ul
+            - @recipe.errors.full_messages.each do |message|
+              %li= message
 
-  .field
-    = f.label :title
-    = f.text_field :title, id: :recipe_title
+      .field.title
+        = f.label :title
+        .control
+          = f.text_field :title, id: :recipe_title, class: 'input'
 
-  .field
-    = f.label :instructions
-    = f.text_area :instructions, id: :recipe_instructions
+      .field.instructions
+        = f.label :instructions
+        .control
+          = f.text_area :instructions,
+            id: :recipe_instructions,
+            class: 'textarea',
+            rows: 5,
+            cols: 40
 
-  = f.fields_for :ingredientLists do |il|
-    = il.fields_for :ingredient do |i|
-      .field
-        = i.label :name
-        = i.text_field :name, id: "name-#{il.index}"
-      .field
-        = i.label :product_name
-        = i.collection_select(:product_id, Product.all, :id, :name, {},
-                                id: "product-name-#{il.index}")
-    .field
-      = il.label :amount
-      = il.text_field :amount, id: "amount-#{il.index}"
+      = f.fields_for :ingredientLists do |il|
+        = render 'ingredientList_fields', f: il
 
-    .field
-      = il.label :unit
-      = il.text_field :unit, id: "unit-#{il.index}"
-
-  .actions
-    = f.submit
+      .actions
+        = f.submit class: 'button is-link'
+        = link_to_add_association 'Add Ingredient',
+          f,
+          :ingredientLists,
+          'data-association-insertion-method' => 'before',
+          :wrap_object => Proc.new { |il| il.build_ingredient; il },
+          class: 'button is-link'

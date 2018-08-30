@@ -15,7 +15,7 @@ class MealsController < ApplicationController
   # GET /meals/new
   def new
     @meal = Meal.new
-    @meal.recipeLists.build
+    @meal.recipeLists.build.build_recipe
   end
 
   # GET /meals/1/edit

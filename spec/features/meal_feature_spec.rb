@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Meals' do
+xfeature 'Meals' do
   let(:rwi) { FactoryBot.create :recipe_with_ingredients }
 
   before do

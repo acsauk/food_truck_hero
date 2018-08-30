@@ -1,0 +1,13 @@
+.wrapper#wrapper
+  .field
+    = f.label :recipe
+    .control.columns
+      .column
+        .select
+          = f.collection_select(:recipe_id, Recipe.all, :id, :title, {},
+                            id: 'recipe-title')
+
+      .column.is-8.has-vertically-aligned-content
+        = link_to_remove_association 'X',
+          f,
+          { wrapper_class: 'wrapper', class: 'delete' }
