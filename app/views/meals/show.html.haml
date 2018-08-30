@@ -1,34 +1,39 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @meal.name
-%p
-  %b Portions:
-  = @meal.portions
-%p
-  %b Price per portion:
-  #{humanized_money_with_symbol @meal.price_per_portion}
-%p
-  %b Cost per portion:
-  #{humanized_money_with_symbol @meal.cost_per_portion}
-%p
-  %b Margin:
-  #{@meal.margin}%
-%p
-  %b Ingredients:
-  - @meal.recipes.each do |r|
-    - r.ingredientLists.each do |il|
-      = il.ingredient.name
-      = il.amount
-      = il.unit
-  %p
-    %b Ingredients cost:
-    £#{@meal.ingredients_cost}
-
-
-= link_to 'Edit', edit_meal_path(@meal)
-\|
-= link_to 'Delete', meal_path(@meal), method: :delete
-\|
-= link_to 'Back', meals_path
+.container
+  .card
+    %header.card-header
+      %p.card-header-title.name.is-size-3.is-centered
+        #{@meal.name}
+      %a.card-header-icon{"aria-label" => "more options", :href => "#"}
+        %span.icon
+          %i.fas.fa-angle-down{"aria-hidden" => "true"}
+    .card-content
+      .content
+        .columns
+          .column.portions
+            %p.title.title.is-4 Portions
+            #{@meal.portions}
+          .column.margin
+            %p.title.title.is-4 Margin
+            #{@meal.margin} %
+        .columns
+          .column.ingredients
+            %p.title.title.is-4 Ingredients
+            - @meal.recipes.each do |r|
+              - r.ingredientLists.each do |il|
+                .ingredient
+                  = il.ingredient.name
+                  = il.amount
+                  = il.unit
+        .columns
+          .column.price-per-portion
+            %p.title.title.is-5 Price per portion
+            #{humanized_money_with_symbol @meal.price_per_portion}
+          .column.cost-per-portion
+            %p.title.title.is-5 Cost per portion
+            #{humanized_money_with_symbol @meal.cost_per_portion}
+          .column.ingredients-cost
+            %p.title.title.is-5 Ingredients cost
+            #{humanized_money_with_symbol @meal.ingredients_cost}
+    %footer.card-footer
+      = link_to 'Edit', edit_meal_path(@meal), class: 'card-footer-item'
+      = link_to 'Delete', @meal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-footer-item'

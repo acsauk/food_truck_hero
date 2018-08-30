@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bulma";
+
+.column.has-vertically-aligned-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

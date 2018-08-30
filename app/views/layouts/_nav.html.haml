@@ -1,17 +1,24 @@
-%header#main-navigation
-  %nav#nav-bar
-    - if user_signed_in?
-      = link_to 'Recipes', recipes_path
-      \|
-      = link_to 'Sign out', destroy_user_session_path, method: :delete
-      \|
-      = link_to "#{current_user.first_name} #{current_user.last_name}",
-        user_path(current_user)
-      \|
-      = link_to 'Products', products_path
-      \|
-      = link_to 'Meals', meals_path
+%nav.navbar.is-success
+  .navbar-brand
+    =link_to 'Food Truck Hero', root_path, class: 'navbar-item'
+    .navbar-burger{ "aria-expanded" => "false", "aria-label" => "menu", :role => "button", "data-target" => "navMenu" }
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+
+  .navbar-menu
+    -if user_signed_in?
+      .navbar-start
+        = link_to 'Recipes', recipes_path, class: 'active item navbar-item'
+        = link_to 'Products', products_path, class: 'item navbar-item'
+        = link_to 'Meals', meals_path, class: 'item navbar-item'
+      .navbar-end
+        = link_to "#{current_user.first_name} #{current_user.last_name}",
+          user_path(current_user), class: 'item navbar-item'
+        = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'item navbar-item'
 
     - else
-      = link_to 'Sign in', new_user_session_path
-      = link_to 'Sign up', new_user_registration_path
+      .navbar-start
+      .navbar-end
+        = link_to 'Sign in', new_user_session_path, class: 'item navbar-item'
+        = link_to 'Sign up', new_user_registration_path, class: 'item navbar-item'

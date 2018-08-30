@@ -1,24 +1,29 @@
-%h1 Listing meals
+.container
+  .is-size-3
+    Meals
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Portions
-      %th Price per portion
-      %th
-      %th
-      %th
-
-  %tbody
+  %table.table.is-fullwidth
+    %thead
+      %tr
+        %th Name
+        %th Portions
+        %th Price per-portion
+        %th Actions
+    %tbody
     - @meals.each do |meal|
       %tr
-        %td= link_to meal.name.to_s, meal
-        %td= meal.portions
-        %td #{humanized_money_with_symbol meal.price_per_portion}
-        %td= link_to 'Edit', edit_meal_path(meal)
-        %td= link_to 'Delete', meal, method: :delete, data: { confirm: 'Are you sure?' }
+        %th
+          = link_to meal.name.to_s, meal
+        %td
+          = meal.portions
+        %td
+          #{humanized_money_with_symbol meal.price_per_portion}
+        %td
+          = link_to 'Edit', edit_meal_path(meal)
+          |
+          = link_to 'Delete',
+            meal,
+            method: :delete,
+            data: { confirm: 'Are you sure?' }
 
-%br
-
-= link_to 'New Meal', new_meal_path
+  = link_to 'New Meal', new_meal_path, class: 'button is-link'

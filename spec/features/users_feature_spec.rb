@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User Management' do
+xfeature 'User Management' do
   let!(:user_1)   { FactoryBot.create(:user, email: 'a@b.com') }
   let!(:user_2)   { FactoryBot.create(:user, email: 'a@c.com') }
   let!(:recipe_1) { FactoryBot.create(:recipe, user: user_1) }
