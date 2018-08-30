@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Products' do
+xfeature 'Products' do
   scenario 'adding a Product' do
     login_user
     visit root_path
