@@ -19,4 +19,11 @@ RSpec.describe Ingredient, type: :model do
     actual_ingredient_amount = recipe_ingredient.amount
     expect(expected_ingredient_amount).to eq actual_ingredient_amount
   end
+
+  it 'has a method to return the unit of ingredient stored in IngredientLists' do
+    recipe_ingredient = rwi.ingredients.first
+    expected_ingredient_unit = recipe_ingredient.ingredientLists.find_by_ingredient_id(recipe_ingredient.id).unit
+    actual_ingredient_unit = recipe_ingredient.unit
+    expect(expected_ingredient_unit).to eq actual_ingredient_unit
+  end
 end

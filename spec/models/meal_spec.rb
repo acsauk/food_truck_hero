@@ -1,10 +1,14 @@
 require 'rails_helper'
 RSpec.describe Meal, type: :model do
   let(:meal) { FactoryBot.create(:meal) }
-  let(:mwrwi_two_pound_product) { FactoryBot.create(:meal_with_recipes_with_ingredients,
-                                                    :two_pound_product,
-                                                    recipes_count: 3,
-                                                    ingredients_count: 1) }
+  let(:mwrwi_two_pound_product) {
+    FactoryBot.create(
+      :meal_with_recipes_with_ingredients,
+      :two_pound_product,
+      recipes_count: 3,
+      ingredients_count: 1
+    )
+  }
 
   it 'has a valid factory' do
     expect(meal).to be_valid
@@ -55,5 +59,16 @@ RSpec.describe Meal, type: :model do
     expected_meal_margin = (mwrwi_two_pound_product.cost_per_portion / mwrwi_two_pound_product.price_per_portion * 100)
     actual_meal_margin = mwrwi_two_pound_product.margin
     expect(actual_meal_margin).to eq expected_meal_margin
+  end
+
+  it 'knows its ingredients' do
+    expected_ingredients = [
+      mwrwi_two_pound_product.recipes.first.ingredients.first,
+      mwrwi_two_pound_product.recipes.second.ingredients.first,
+      mwrwi_two_pound_product.recipes.third.ingredients.first
+    ]
+
+    actual_ingredients = mwrwi_two_pound_product.ingredients
+    expect(actual_ingredients).to eq expected_ingredients
   end
 end

@@ -16,10 +16,8 @@ class Meal < ApplicationRecord
 
   def ingredients_cost
     total_cost = 0
-    recipes.each do |recipe|
-      recipe.ingredients.each do |ingredient|
-        total_cost += ingredient.product.smu_price * ingredient.amount
-      end
+    ingredients.each do |ingredient|
+      total_cost += ingredient.product.smu_price * ingredient.amount
     end
     Money.new(total_cost)
   end
@@ -30,5 +28,15 @@ class Meal < ApplicationRecord
 
   def margin
     cost_per_portion / price_per_portion * 100
+  end
+
+  def ingredients
+    ingredients_array = []
+    recipes.each do |recipe|
+      recipe.ingredients.each do |ingredient|
+        ingredients_array << ingredient
+      end
+    end
+    ingredients_array
   end
 end

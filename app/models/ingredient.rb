@@ -9,4 +9,8 @@ class Ingredient < ApplicationRecord
   def amount
     ingredientLists.find_by_ingredient_id(id).amount
   end
+
+  def unit
+    ingredientLists.find_by_ingredient_id(id).unit
+  end
 end
