@@ -3,6 +3,8 @@ class Meal < ApplicationRecord
 
   has_many :recipeLists
   has_many :recipes, through: :recipeLists
+  has_many :mealLists
+  has_many :shoppingLists, through: :mealLists
 
   belongs_to :user, optional: true
 

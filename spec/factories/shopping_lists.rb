@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :shoppingList do
-    association :meal
+  factory :shopping_list do
 
     transient do
       meals_count 2

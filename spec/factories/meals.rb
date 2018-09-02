@@ -27,14 +27,18 @@ FactoryBot.define do
     factory :meal_with_recipes_with_ingredients do
       after(:create) do |meal, evaluator|
         rwi = if evaluator.product_price
-                FactoryBot.create(:recipe_with_ingredients,
-                                  evaluator.product_price,
-                                  user: meal.user,
-                                  ingredients_count: evaluator.ingredients_count)
+                FactoryBot.create(
+                  :recipe_with_ingredients,
+                  evaluator.product_price,
+                  user: meal.user,
+                  ingredients_count: evaluator.ingredients_count
+                )
               else
-                FactoryBot.create(:recipe_with_ingredients,
-                                  user: meal.user,
-                                  ingredients_count: evaluator.ingredients_count)
+                FactoryBot.create(
+                  :recipe_with_ingredients,
+                  user: meal.user,
+                  ingredients_count: evaluator.ingredients_count
+                )
               end
         (0...evaluator.recipes_count).each do
           rwi.title = evaluator.recipe_title unless evaluator.recipe_title.empty?

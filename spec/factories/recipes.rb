@@ -29,12 +29,12 @@ FactoryBot.define do
           recipe.ingredientLists <<
             if evaluator.product_price
               FactoryBot.build(
-                :ingredientList, ingredient: FactoryBot.build(:ingredient,
+                :ingredient_list, ingredient: FactoryBot.build(:ingredient,
                                                               evaluator.product_price)
               )
             else
               FactoryBot.build(
-                :ingredientList, ingredient: FactoryBot.build(:ingredient)
+                :ingredient_list, ingredient: FactoryBot.build(:ingredient)
               )
             end
         end
