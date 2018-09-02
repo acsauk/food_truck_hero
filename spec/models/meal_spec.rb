@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe Meal, type: :model do
   let(:meal) { FactoryBot.create(:meal) }
   let(:mwrwi_two_pound_product) {

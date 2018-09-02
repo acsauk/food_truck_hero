@@ -45,7 +45,7 @@ FactoryBot.define do
           rwi.instructions = evaluator.recipe_instructions unless evaluator.recipe_instructions.empty?
           meal.recipeLists <<
             FactoryBot.build(
-              :recipeList, recipe: rwi
+              :recipe_list, recipe: rwi
             )
         end
       end
