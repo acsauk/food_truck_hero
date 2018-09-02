@@ -1,4 +1,4 @@
-class AddShoppingListAndMealRefToMealLists < ActiveRecord::Migration[5.1]
+class CreateMealListsWithShoppingListAndMealRefs < ActiveRecord::Migration[5.1]
   def change
     create_table :meal_lists do |t|
       t.belongs_to :meal, index: true, foreign_key: true
