@@ -37,3 +37,4 @@
     %footer.card-footer
       = link_to 'Edit', edit_meal_path(@meal), class: 'card-footer-item'
       = link_to 'Delete', @meal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-footer-item'
+      = link_to 'Add to shopping List', meal_add_to_shopping_list_path(@meal, id: @meal.id), class: 'card-footer-item' 

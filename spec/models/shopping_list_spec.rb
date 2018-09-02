@@ -11,4 +11,6 @@ RSpec.describe ShoppingList, type: :model do
   it { is_expected.to have_many(:meals).through(:meal_lists) }
 
   it { is_expected.to have_many(:shopping_list_items) }
+
+  it { is_expected.to belong_to(:user) }
 end
