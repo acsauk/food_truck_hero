@@ -1,5 +1,12 @@
-%p#notice= notice
+- @shopping_list.meals.each do |m|
+  = m.name
 
+- @shopping_list.meals.each do |m|
+  - m.ingredients.each do |i|
+    %p
+      = i.name
+      = i.amount
+      = i.unit
 
 = link_to 'Edit', edit_shopping_list_path(@shopping_list)
 \|

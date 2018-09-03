@@ -2,21 +2,27 @@ require 'rails_helper'
 
 feature 'Shopping Lists' do
   let(:shopping_list) { FactoryBot.create :shopping_list }
-  let(:mwrwi) { FactoryBot.create :shopping_list }
-  let(:rwi) { FactoryBot.create :recipe_with_ingredients }
+  let(:mwrwi) { FactoryBot.create :meal_with_recipes_with_ingredients }
 
-  scenario 'adding a meal to shopping list' do
-    # visit the path of a meal
-    create_meal(recipe_title: rwi.title.to_s)
-    meal = Meal.last
-    visit meal_path meal
-    # click add to shopping list
+  before do
+    sign_in(email: mwrwi.user.email, password: mwrwi.user.password)
+    visit root_path
+  end
+
+  scenario 'adding a meal to shopping list from meal#show' do
+    visit meal_path mwrwi
     click_link 'Add to shopping list'
-    # visit shopping_list
+    expect(page).to have_content "#{mwrwi.name} added to shopping list"
     click_link 'Shopping List'
-    # expect page to have the ingredients associated with meal
-    meal.ingredients.each do |ingredient|
-      expect(page).to have_content ingredient.name
+    mwrwi.ingredients.each do |ingredient|
+      expect(page).to have_content "#{ingredient.name} #{ingredient.amount}"
     end
+  end
+
+  scenario 'see the meals that are on the shopping list' do
+    visit meal_path mwrwi
+    click_link 'Add to shopping list'
+    click_link 'Shopping List'
+    expect(page).to have_content mwrwi.name
   end
 end

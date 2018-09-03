@@ -66,8 +66,9 @@ class MealsController < ApplicationController
 
   def add_to_shopping_list
     @meal = Meal.find(params[:meal_id])
-    shopping_list = current_user.shopping_list
-    shopping_list.meals << @meal
+    current_user.shopping_list.meals << @meal
+    flash.now[:notice] = "#{@meal.name} added to shopping list"
+    render action: 'show'
   end
 
   private
