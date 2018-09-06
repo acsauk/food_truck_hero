@@ -65,9 +65,17 @@ class MealsController < ApplicationController
   end
 
   def add_to_shopping_list
-    @meal = Meal.find(params[:meal_id])
-    current_user.shopping_list.meals << @meal
-    flash.now[:notice] = "#{@meal.name} added to shopping list"
+    @meal = Meal.find(params[:id])
+    current_user.shopping_list.add_meal @meal
+
+    if current_user.shopping_list.valid?
+      flash.now[:notice] = "#{@meal.name} added to shopping list"
+    else
+      # Not removing duplicate - need to implement here
+      # current_user.shopping_list.meals.delete(current_user.shopping_list.meals.last)
+      flash.now[:error] = current_user.shopping_list.errors.first[1]
+    end
+
     render action: 'show'
   end
 
