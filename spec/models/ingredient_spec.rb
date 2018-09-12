@@ -12,6 +12,7 @@ RSpec.describe Ingredient, type: :model do
   it { is_expected.to have_many(:recipes).through(:ingredientLists) }
   it { is_expected.to have_many(:ingredientLists) }
   it { is_expected.to belong_to(:product) }
+  it { is_expected.to belong_to(:shopping_list_item) }
 
   it 'has a method to return the amount of ingredient stored in IngredientLists' do
     recipe_ingredient = rwi.ingredients.first

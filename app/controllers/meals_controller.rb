@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: [:show, :edit, :update, :destroy]
+  before_action :set_meal, only: [:show, :edit, :update, :destroy, :add_to_shopping_list]
 
   # GET /meals
   # GET /meals.json
@@ -65,18 +65,14 @@ class MealsController < ApplicationController
   end
 
   def add_to_shopping_list
-    @meal = Meal.find(params[:id])
-    current_user.shopping_list.add_meal @meal
-
-    if current_user.shopping_list.valid?
-      flash.now[:notice] = "#{@meal.name} added to shopping list"
+    if current_user.shopping_list.meals.include?(@meal)
+      flash[:error] = "#{@meal.name} is already on the shopping list"
     else
-      # Not removing duplicate - need to implement here
-      # current_user.shopping_list.meals.delete(current_user.shopping_list.meals.last)
-      flash.now[:error] = current_user.shopping_list.errors.first[1]
+      current_user.shopping_list.add_meal @meal
+      flash[:notice] = "#{@meal.name} added to shopping list"
     end
 
-    render action: 'show'
+    redirect_to @meal
   end
 
   private

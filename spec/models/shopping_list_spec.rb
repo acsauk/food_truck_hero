@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ShoppingList, type: :model do
   let(:shopping_list) { FactoryBot.build(:shopping_list) }
-  let(:meal) { FactoryBot.build(:meal) }
+  let(:mwrwi) { FactoryBot.build(:meal_with_recipes_with_ingredients) }
+  let(:slwmwrwi) { FactoryBot.build(:shoppingList_with_meals_with_recipes_with_ingredients) }
 
   it 'has a valid factory' do
     expect(shopping_list).to be_valid
@@ -16,12 +17,16 @@ RSpec.describe ShoppingList, type: :model do
   it { is_expected.to belong_to(:user) }
 
   it 'can add meals' do
-    shopping_list.add_meal meal
-    expect(shopping_list.meals.last).to eq meal
+    shopping_list.add_meal mwrwi
+    expect(shopping_list.meals.last).to eq mwrwi
   end
 
-  it 'is not valid with two of the same meal' do
-    2.times { shopping_list.add_meal(meal) }
-    expect(shopping_list).to_not be_valid
+  it 'creates shopping_list_items when adding a meal' do
+    shopping_list.meals << mwrwi
+    shopping_list.create_items_from_ingredients mwrwi
+    binding.irb
+    ingredients = shopping_list.meals.ingredients.pluck(:id)
+    items = shopping_list.shopping_list_items.pluck(:ingredient_id)
+    expect(ingredients).to eq items
   end
 end
