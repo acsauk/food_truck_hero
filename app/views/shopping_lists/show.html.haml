@@ -1,11 +1,20 @@
-- @shopping_list.meals.each do |m|
-  = m.name
+.container
+  - @shopping_list.meals.each do |m|
+    = m.name
+    .panel
+      %p.panel-heading
+        Shopping List
+      - @shopping_list.shopping_list_items.each do |sli|
+        %label.panel-block
+          %input{:type => "checkbox"}
+            = sli.name
+            = sli.amount
+            = sli.unit
 
-- @shopping_list.meals.each do |m|
-  - m.ingredients.each do |i|
-    %p
-      = i.name
-      = i.amount
-      = i.unit
 
-= link_to 'Edit', edit_shopping_list_path(@shopping_list)
+
+
+
+
+
+  = link_to 'Edit', edit_shopping_list_path(@shopping_list)
