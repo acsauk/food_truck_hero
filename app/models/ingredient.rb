@@ -1,16 +1,20 @@
 class Ingredient < ApplicationRecord
-  has_many :ingredientLists
-  has_many :recipes, through: :ingredientLists
+  has_many :ingredient_lists
+  has_many :recipes, through: :ingredient_lists
+
   belongs_to :product, optional: true
 
-  validates_presence_of :name, presence: true
   validates_presence_of :product_id, presence: true
 
   def amount
-    ingredientLists.find_by_ingredient_id(id).amount
+    ingredient_lists.find_by_ingredient_id(id).amount
   end
 
   def unit
-    ingredientLists.find_by_ingredient_id(id).unit
+    ingredient_lists.find_by_ingredient_id(id).unit
+  end
+
+  def name
+    product.name
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ShoppingList, type: :model do
   let(:shopping_list) { FactoryBot.create(:shopping_list) }
   let(:mwrwi) { FactoryBot.create(:meal_with_recipes_with_ingredients) }
-  let(:slwmwrwi) { FactoryBot.create(:shoppingList_with_meals_with_recipes_with_ingredients) }
+  let(:slwmwrwi) { FactoryBot.create(:shopping_list_with_meals_with_recipes_with_ingredients) }
 
   it 'has a valid factory' do
     expect(shopping_list).to be_valid

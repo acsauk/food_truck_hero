@@ -8,7 +8,7 @@ FactoryBot.define do
       meal_price_per_portion_pence 250
     end
 
-    factory :shoppingList_with_meals_with_recipes_with_ingredients do
+    factory :shopping_list_with_meals_with_recipes_with_ingredients do
       after(:create) do |shopping_list, evaluator|
         mwrwi = FactoryBot.create(
           :meal_with_recipes_with_ingredients,
@@ -20,9 +20,9 @@ FactoryBot.define do
         (0...evaluator.meals_count).each do
           mwrwi.name = evaluator.meal_name unless evaluator.recipe_title.empty?
           mwrwi.meal_portions = evaluator.meal_portions unless evaluator.meal_portions.empty?
-          shopping_list.mealLists <<
+          shopping_list.meal_lists <<
             FactoryBot.build(
-              :mealLists, meal: mwrwi
+              :meal_lists, meal: mwrwi
             )
         end
       end

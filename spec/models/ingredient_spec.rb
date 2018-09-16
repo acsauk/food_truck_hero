@@ -8,22 +8,25 @@ RSpec.describe Ingredient, type: :model do
     expect(ingredient).to be_valid
   end
 
-  it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to have_many(:recipes).through(:ingredientLists) }
-  it { is_expected.to have_many(:ingredientLists) }
+  it { is_expected.to have_many(:recipes).through(:ingredient_lists) }
+  it { is_expected.to have_many(:ingredient_lists) }
   it { is_expected.to belong_to(:product) }
 
-  it 'has a method to return the amount of ingredient stored in IngredientLists' do
+  it 'has a method to return the amount of ingredient stored in ingredient_list' do
     recipe_ingredient = rwi.ingredients.first
-    expected_ingredient_amount = recipe_ingredient.ingredientLists.find_by_ingredient_id(recipe_ingredient.id).amount
+    expected_ingredient_amount = recipe_ingredient.ingredient_lists.find_by_ingredient_id(recipe_ingredient.id).amount
     actual_ingredient_amount = recipe_ingredient.amount
     expect(expected_ingredient_amount).to eq actual_ingredient_amount
   end
 
-  it 'has a method to return the unit of ingredient stored in IngredientLists' do
+  it 'has a method to return the unit of ingredient stored in ingredient_list' do
     recipe_ingredient = rwi.ingredients.first
-    expected_ingredient_unit = recipe_ingredient.ingredientLists.find_by_ingredient_id(recipe_ingredient.id).unit
+    expected_ingredient_unit = recipe_ingredient.ingredient_lists.find_by_ingredient_id(recipe_ingredient.id).unit
     actual_ingredient_unit = recipe_ingredient.unit
     expect(expected_ingredient_unit).to eq actual_ingredient_unit
+  end
+
+  it 'knows the name of the product associated with it' do
+    expect(ingredient.name).to eq ingredient.product.name
   end
 end

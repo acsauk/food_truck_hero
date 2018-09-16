@@ -19,7 +19,7 @@
           .column.ingredients
             %p.title.title.is-4 Ingredients
             - @meal.recipes.each do |r|
-              - r.ingredientLists.each do |il|
+              - r.ingredient_lists.each do |il|
                 .ingredient
                   = il.ingredient.name
                   = il.amount
@@ -37,4 +37,4 @@
     %footer.card-footer
       = link_to 'Edit', edit_meal_path(@meal), class: 'card-footer-item'
       = link_to 'Delete', @meal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-footer-item'
-      = link_to 'Add to shopping list', meal_add_to_shopping_list_path(@meal, id: @meal.id), method: :post, class: 'card-footer-item' 
+      = link_to 'Add to shopping list', meal_add_to_shopping_list_path(@meal, id: @meal.id), method: :post, class: 'card-footer-item'

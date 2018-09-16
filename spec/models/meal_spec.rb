@@ -15,8 +15,8 @@ RSpec.describe Meal, type: :model do
     expect(meal).to be_valid
   end
 
-  it { is_expected.to have_many(:recipeLists) }
-  it { is_expected.to have_many(:recipes).through(:recipeLists) }
+  it { is_expected.to have_many(:recipe_lists) }
+  it { is_expected.to have_many(:recipes).through(:recipe_lists) }
   it { is_expected.to belong_to(:user) }
 
   it { is_expected.to validate_presence_of(:name) }

@@ -1,14 +1,15 @@
 class Meal < ApplicationRecord
   attribute :ingredients_cost, :integer
 
-  has_many :recipeLists
-  has_many :recipes, through: :recipeLists
+  has_many :recipe_lists, inverse_of: :meal, dependent: :destroy
+  has_many :recipes, through: :recipe_lists
+
   has_many :meal_lists
   has_many :shopping_lists, through: :meal_lists
 
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :recipeLists
+  accepts_nested_attributes_for :recipe_lists
 
   validates_presence_of :name
   validates_presence_of :portions

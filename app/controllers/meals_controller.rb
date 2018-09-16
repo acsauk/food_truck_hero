@@ -15,7 +15,7 @@ class MealsController < ApplicationController
   # GET /meals/new
   def new
     @meal = Meal.new
-    @meal.recipeLists.build.build_recipe
+    @meal.recipe_lists.build.build_recipe
   end
 
   # GET /meals/1/edit
@@ -84,6 +84,6 @@ class MealsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def meal_params
       params.require(:meal).permit(:name, :portions, :price_per_portion_pence, :price_per_portion,
-                                   recipeLists_attributes: %i[recipe_id id meal_id])
+                                   recipe_lists_attributes: %i[recipe_id id meal_id])
     end
 end
