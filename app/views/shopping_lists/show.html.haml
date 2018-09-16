@@ -4,17 +4,11 @@
     .panel
       %p.panel-heading
         Shopping List
-      - @shopping_list.shopping_list_items.each do |sli|
+      - @shopping_list.ingredients.each do |i|
         %label.panel-block
           %input{:type => "checkbox"}
-            = sli.name
-            = sli.amount
-            = sli.unit
-
-
-
-
-
-
+            = i.name
+            = i.amount
+            = i.unit
 
   = link_to 'Edit', edit_shopping_list_path(@shopping_list)
