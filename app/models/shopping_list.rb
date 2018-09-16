@@ -3,8 +3,6 @@ class ShoppingList < ApplicationRecord
   has_many :meals, through: :meal_lists
   belongs_to :user, optional: true
 
-  # REMOVE ASSOCIATION BETWEEN ITEM AND INGREDIENT
-
   def add_meal(meal)
     meals << meal
   end
