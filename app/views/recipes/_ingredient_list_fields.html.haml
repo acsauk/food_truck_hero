@@ -1,10 +1,6 @@
 .ingredient#ingredient
   = f.fields_for :ingredient do |i|
     .columns
-      .column.field.ingredient-name
-        = i.label :name
-        .control
-          = i.text_field :name, id: "name-#{f.index}", class: 'input'
       .column.field.product-name
         = i.label :product
         .control

@@ -26,15 +26,15 @@ FactoryBot.define do
     factory :recipe_with_ingredients do
       after(:create) do |recipe, evaluator|
         (0...evaluator.ingredients_count).each do
-          recipe.ingredientLists <<
+          recipe.ingredient_lists <<
             if evaluator.product_price
               FactoryBot.build(
-                :ingredientList, ingredient: FactoryBot.build(:ingredient,
+                :ingredient_list, ingredient: FactoryBot.build(:ingredient,
                                                               evaluator.product_price)
               )
             else
               FactoryBot.build(
-                :ingredientList, ingredient: FactoryBot.build(:ingredient)
+                :ingredient_list, ingredient: FactoryBot.build(:ingredient)
               )
             end
         end

@@ -24,14 +24,14 @@
             = f.text_field :price_per_portion, class: 'input'
 
       .recipes#recipes
-        = f.fields_for :recipeLists do |rl|
-          = render 'recipeList_fields', f: rl
+        = f.fields_for :recipe_lists do |rl|
+          = render 'recipe_list_fields', f: rl
       .field
         .control
           = f.submit class: 'button is-link'
           = link_to_add_association 'Add recipe',
             f,
-            :recipeLists,
+            :recipe_lists,
             'data-association-insertion-node' => '#recipes',
             'data-association-insertion-method' => 'append',
             :wrap_object => Proc.new { |rl| rl.build_recipe; rl },

@@ -1,12 +1,15 @@
 class Meal < ApplicationRecord
   attribute :ingredients_cost, :integer
 
-  has_many :recipeLists
-  has_many :recipes, through: :recipeLists
+  has_many :recipe_lists, inverse_of: :meal, dependent: :destroy
+  has_many :recipes, through: :recipe_lists
+
+  has_many :meal_lists
+  has_many :shopping_lists, through: :meal_lists
 
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :recipeLists
+  accepts_nested_attributes_for :recipe_lists
 
   validates_presence_of :name
   validates_presence_of :portions
@@ -16,10 +19,8 @@ class Meal < ApplicationRecord
 
   def ingredients_cost
     total_cost = 0
-    recipes.each do |recipe|
-      recipe.ingredients.each do |ingredient|
-        total_cost += ingredient.product.smu_price * ingredient.amount
-      end
+    ingredients.each do |ingredient|
+      total_cost += ingredient.product.smu_price * ingredient.amount
     end
     Money.new(total_cost)
   end
@@ -30,5 +31,15 @@ class Meal < ApplicationRecord
 
   def margin
     cost_per_portion / price_per_portion * 100
+  end
+
+  def ingredients
+    ingredients_array = []
+    recipes.each do |recipe|
+      recipe.ingredients.each do |ingredient|
+        ingredients_array << ingredient
+      end
+    end
+    ingredients_array
   end
 end

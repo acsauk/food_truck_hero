@@ -25,7 +25,7 @@ def edit_recipe(recipe)
   count = 0
   until count == recipe.ingredients.size
     fill_in "name-#{count}", with: "name edit #{count.next}"
-    fill_in "amount-#{count}", with: recipe.ingredientLists[count].amount * 2
+    fill_in "amount-#{count}", with: recipe.ingredient_lists[count].amount * 2
     fill_in "unit-#{count}", with: "unit edit #{count.next}"
     count += 1
   end
