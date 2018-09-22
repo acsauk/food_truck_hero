@@ -7,6 +7,14 @@ class ShoppingList < ApplicationRecord
     meals << meal
   end
 
+  def remove_meal(meal)
+    index = meals.find_index(meal)
+    meals_array = meals.to_ary
+    meals_array.delete_at(index)
+    meals.delete_all
+    meals << meals_array
+  end
+
   def ingredients
     ingredients_array = []
     meals.each do |meal|
@@ -48,5 +56,7 @@ class ShoppingList < ApplicationRecord
     shopping_list_item
   end
 
-
+  def count_duplicate_meals(meal)
+    meals.count { |m| m.id == meal.id }
+  end
 end

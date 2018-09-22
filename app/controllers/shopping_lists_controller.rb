@@ -1,5 +1,5 @@
 class ShoppingListsController < ApplicationController
-  before_action :set_shopping_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_shopping_list, only: [:show, :edit, :update, :destroy, :add_meal, :remove_meal]
 
   # GET /shopping_lists
   # GET /shopping_lists.json
@@ -19,6 +19,18 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists/1/edit
   def edit
+  end
+
+  def add_meal
+    meal = Meal.find(params[:meal_id])
+    @shopping_list.add_meal meal
+    redirect_to @shopping_list
+  end
+
+  def remove_meal
+    meal = Meal.find(params[:meal_id])
+    @shopping_list.remove_meal meal
+    redirect_to @shopping_list
   end
 
   # POST /shopping_lists

@@ -1,15 +1,24 @@
 .container
-  Meals on shopping list:
-  - @shopping_list.meals.each do |m|
-    %p= m.name
-  .panel
-    %p.panel-heading
-      Shopping List
-    - @shopping_list.shopping_list_items.each do |sli|
-      %label.panel-block
-        %input{:type => "checkbox"}
-          = sli.name
-          = sli.amount
-          = sli.unit
+  .columns
+    .column.is-two-thirds
+      .panel
+        %p.panel-heading
+          Shopping List
+        - @shopping_list.shopping_list_items.each do |sli|
+          %label.panel-block
+            %input{:type => "checkbox"}
+              = sli.name
+              = sli.amount
+              = sli.unit
+    .column
+      .panel
+        %p.panel-heading
+          Meals on shopping list
+        - @shopping_list.meals.uniq.each do |m|
+          %label.panel-block
+            = link_to '-', shopping_list_remove_meal_path(@shopping_list, id: @shopping_list.id, meal_id: m.id), method: :post
+            = m.name
+            x
+            = @shopping_list.count_duplicate_meals(m)
+            = link_to '+', shopping_list_add_meal_path(@shopping_list, id: @shopping_list.id, meal_id: m.id), method: :post
 
-  = link_to 'Edit', edit_shopping_list_path(@shopping_list)
