@@ -58,7 +58,6 @@ RSpec.describe ShoppingList, type: :model do
       name: ingredients.first.name,
       amount: ingredients.first.amount * split_ingredients.values.first.length,
       unit: ingredients.first.unit
-      # purchased: false
     )
     
     actual_shopping_list_item = shopping_list.convert_identical_ingredients_to_shopping_list_item(split_ingredients.values.first)
