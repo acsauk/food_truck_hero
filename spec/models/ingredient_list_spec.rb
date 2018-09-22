@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe IngredientList, type: :model do
   let(:recipe) { FactoryBot.build(:recipe) }
-  let(:ingredientList) { FactoryBot.build(:ingredientList) }
+  let(:ingredient_list) { FactoryBot.build(:ingredient_list) }
   let(:ingredient) { FactoryBot.build(:ingredient) }
 
   # let(:valid_attributes) {
@@ -17,7 +17,7 @@ RSpec.describe IngredientList, type: :model do
   # }
 
   it 'has a valid factory' do
-    expect(ingredientList).to be_valid
+    expect(ingredient_list).to be_valid
   end
 
   it { is_expected.to belong_to(:recipe) }

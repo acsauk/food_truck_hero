@@ -1,17 +1,22 @@
 require 'rails_helper'
+
 RSpec.describe Meal, type: :model do
   let(:meal) { FactoryBot.create(:meal) }
-  let(:mwrwi_two_pound_product) { FactoryBot.create(:meal_with_recipes_with_ingredients,
-                                                    :two_pound_product,
-                                                    recipes_count: 3,
-                                                    ingredients_count: 1) }
+  let(:mwrwi_two_pound_product) {
+    FactoryBot.create(
+      :meal_with_recipes_with_ingredients,
+      :two_pound_product,
+      recipes_count: 3,
+      ingredients_count: 1
+    )
+  }
 
   it 'has a valid factory' do
     expect(meal).to be_valid
   end
 
-  it { is_expected.to have_many(:recipeLists) }
-  it { is_expected.to have_many(:recipes).through(:recipeLists) }
+  it { is_expected.to have_many(:recipe_lists) }
+  it { is_expected.to have_many(:recipes).through(:recipe_lists) }
   it { is_expected.to belong_to(:user) }
 
   it { is_expected.to validate_presence_of(:name) }
@@ -46,14 +51,30 @@ RSpec.describe Meal, type: :model do
   end
 
   it 'knows its cost per portion' do
-    expected_cost_per_portion = mwrwi_two_pound_product.ingredients_cost / mwrwi_two_pound_product.portions
+    expected_cost_per_portion =
+      mwrwi_two_pound_product.ingredients_cost / mwrwi_two_pound_product.portions
+
     actual_cost_per_portion = mwrwi_two_pound_product.cost_per_portion
     expect(actual_cost_per_portion).to eq expected_cost_per_portion
   end
 
   it 'knows its margin' do
-    expected_meal_margin = (mwrwi_two_pound_product.cost_per_portion / mwrwi_two_pound_product.price_per_portion * 100)
+    expected_meal_margin = (
+        mwrwi_two_pound_product.cost_per_portion / mwrwi_two_pound_product.price_per_portion * 100
+    )
+
     actual_meal_margin = mwrwi_two_pound_product.margin
     expect(actual_meal_margin).to eq expected_meal_margin
+  end
+
+  it 'knows its ingredients' do
+    expected_ingredients = [
+      mwrwi_two_pound_product.recipes.first.ingredients.first,
+      mwrwi_two_pound_product.recipes.second.ingredients.first,
+      mwrwi_two_pound_product.recipes.third.ingredients.first
+    ]
+
+    actual_ingredients = mwrwi_two_pound_product.ingredients
+    expect(actual_ingredients).to eq expected_ingredients
   end
 end

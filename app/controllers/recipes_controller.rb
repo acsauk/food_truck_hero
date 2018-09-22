@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
-    @recipe.ingredientLists.build.build_ingredient
+    @recipe.ingredient_lists.build.build_ingredient
   end
 
   # GET /recipes/1/edit
@@ -28,6 +28,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
+    # binding.irb
     @recipe.save
 
     respond_to do |format|
@@ -35,7 +36,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
       else
-        @recipe.ingredientLists.build.build_ingredient
+        @recipe.ingredient_lists.build.build_ingredient
         format.html { render :new }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
@@ -74,9 +75,13 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:title, :instructions, :id,
-                                     ingredientLists_attributes:
-                                       [%i[amount unit id _destroy],
-                                        ingredient_attributes: %i[name product_id id]])
+      params.require(:recipe).permit(
+        :title, :instructions, :id, ingredient_lists_attributes:
+        [
+          %i[amount unit id _destroy], ingredient_attributes:
+            %i[name product_id id]
+        ]
+      )
+
     end
 end

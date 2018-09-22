@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   validates_presence_of :amount
   validates_presence_of :price_pence
 
-  has_many :ingredients
+  has_one :ingredient
 
   monetize :price_pence
 

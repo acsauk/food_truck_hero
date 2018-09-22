@@ -10,7 +10,7 @@
       .content
         .column.ingredients
           %p.title.title.is-4 Ingredients
-          - @recipe.ingredientLists.each do |ils|
+          - @recipe.ingredient_lists.each do |ils|
             .ingredient
               = ils.ingredient.name
               = ils.amount

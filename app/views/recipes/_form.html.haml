@@ -24,14 +24,14 @@
             rows: 5,
             cols: 40
 
-      = f.fields_for :ingredientLists do |il|
-        = render 'ingredientList_fields', f: il
+      = f.fields_for :ingredient_lists do |il|
+        = render 'ingredient_list_fields', f: il
 
       .actions
         = f.submit class: 'button is-link'
         = link_to_add_association 'Add Ingredient',
           f,
-          :ingredientLists,
+          :ingredient_lists,
           'data-association-insertion-method' => 'before',
           :wrap_object => Proc.new { |il| il.build_ingredient; il },
           class: 'button is-link'

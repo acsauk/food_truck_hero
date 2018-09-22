@@ -3,6 +3,8 @@ RSpec.describe RecipesController, type: :controller do
 
   let(:product) { FactoryBot.create :product }
   let!(:user) { FactoryBot.create :user }
+  let(:ingredient) { FactoryBot.create :ingredient }
+
   # This should return the minimal set of attributes required to create a valid
   # Recipe. As you add validations to Recipe, be sure to
   # adjust the attributes here as well.
@@ -10,13 +12,13 @@ RSpec.describe RecipesController, type: :controller do
     {
       'title' => 'Ham',
       'instructions' => 'Some ham cooked',
-      'ingredientLists_attributes' =>
-        { '0' =>
-          { 'ingredient_attributes' =>
-            { 'name' => 'Pig',
-              'product_id' => product.id },
-            'amount' => '2000',
-            'unit' => 'grams' } }
+      'ingredient_lists_attributes' => {
+        '0' => {
+          'ingredient_attributes' => { 'product_id' => product.id },
+          'amount' => '2000',
+          'unit' => 'grams'
+        }
+      }
     }
   end
 
@@ -24,13 +26,13 @@ RSpec.describe RecipesController, type: :controller do
     {
       'title' => '',
       'instructions' => '',
-      'ingredientLists_attributes' =>
-        { '0' =>
-          { 'ingredient_attributes' =>
-            { 'name' => '',
-              'product_id' =>  '' },
-            'amount' => '',
-            'unit' => '' } }
+      'ingredient_lists_attributes' => {
+        '0' => {
+          'ingredient_attributes' => { 'product_id' => product.id },
+          'amount' => '',
+          'unit' => ''
+        }
+      }
     }
   end
 
@@ -45,6 +47,7 @@ RSpec.describe RecipesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
+      # binding.irb
       recipe = Recipe.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
@@ -102,11 +105,10 @@ RSpec.describe RecipesController, type: :controller do
         {
           'title' => 'Well cooked ham',
           'instructions' => 'Some ham cooked for a bit longer',
-          'ingredientLists_attributes' =>
+          'ingredient_lists_attributes' =>
             { '0' =>
               { 'ingredient_attributes' =>
-                { 'name' => 'Pig',
-                  'product_id' => product.id },
+                { 'product_id' => product.id },
                 'amount' => '1000',
                 'unit' => 'grams' } }
         }

@@ -30,19 +30,19 @@ def login_user
 end
 
 def click_sign_up_link_nav
-  find("#nav-bar > a[href='#{new_user_registration_path}']").click
+  find("a[href='#{new_user_registration_path}']").click
 end
 
 def click_sign_in_link_nav
-  find("#nav-bar > a[href='#{new_user_session_path}']").click
+  find("a[href='#{new_user_session_path}']").click
 end
 
 def click_sign_out_link_nav
-  find("#nav-bar > a[href='#{destroy_user_session_path}']").click
+  find("a[href='#{destroy_user_session_path}']").click
 end
 
 def click_user_account_link_nav(user)
-  find("#nav-bar > a[href='#{user_path(user.id)}']").click
+  find("a[href='#{user_path(user.id)}']").click
 end
 
 def click_edit_user_link
