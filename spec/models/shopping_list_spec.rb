@@ -17,7 +17,6 @@ RSpec.describe ShoppingList, type: :model do
   it { is_expected.to have_many(:meal_lists) }
   it { is_expected.to have_many(:meals).through(:meal_lists) }
 
-
   it { is_expected.to belong_to(:user) }
 
   it 'can add meals' do
@@ -35,10 +34,10 @@ RSpec.describe ShoppingList, type: :model do
     shopping_list = mwrwi.user.shopping_list
     shopping_list.meals << mwrwi
 
+    expected_ingredient_ids = shopping_list.ingredients.uniq.collect { |i| i.id }
+
     actual_ingredients = shopping_list.split_ingredients_by_id
     expect(actual_ingredients.length).to eq 2
-
-    expected_ingredient_ids = shopping_list.ingredients.uniq.collect { |i| i.id }
 
     actual_ingredient_ids = []
 

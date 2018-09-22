@@ -29,7 +29,14 @@ class ShoppingList < ApplicationRecord
     ingredients.group_by { |ingredient| ingredient.id }
   end
 
-  def accumulate_ingredient_amounts(ingredients)
-    # Iterate over each array and add the amounts together
+  def accumulate_amount_and_reduce_to_single(ingredients)
+    amount = 0
+    ingredients.each do |ingredient|
+      binding.irb
+      amount += ingredient.amount
+    end
+    ingredients.first.amount = amount
+    ingredients.first
   end
+
 end
