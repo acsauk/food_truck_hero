@@ -17,12 +17,15 @@ class ShoppingList < ApplicationRecord
     ingredients_array
   end
 
-  def combine_identical_ingredients
-    # Receive an array of ingredient objects
-    # split into seperate arrays based on ingredient id
-    # Iterate over each array and add the amounts together
-    # Reduce each array to single ingredient
-    # Put the ingredients back together in an array and return
+  def shopping_list_items
+    grouped_ingredients = split_ingredients_by_id
+
+    shopping_list_items = []
+    grouped_ingredients.values.each do |ingredients|
+      shopping_list_items << convert_identical_ingredients_to_shopping_list_item(ingredients)
+    end
+    
+    shopping_list_items
   end
 
   def split_ingredients_by_id

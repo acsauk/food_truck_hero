@@ -67,4 +67,36 @@ RSpec.describe ShoppingList, type: :model do
     expect(actual_shopping_list_item.unit).to eq expected_shopping_list_item.unit
     expect(actual_shopping_list_item.purchased).to eq expected_shopping_list_item.purchased
   end
+
+  it 'provides associated ingredients as ShoppingListItems with duplicate ingredients reduced and accumulated' do
+    shopping_list = mwrwi.user.shopping_list
+    shopping_list.meals << mwrwi
+    ingredients = shopping_list.ingredients
+    split_ingredients = shopping_list.split_ingredients_by_id
+
+    expected_shopping_list_item_1 = ShoppingListItem.new(
+      name: split_ingredients.values.first.first.name,
+      amount: split_ingredients.values.first.first.amount * split_ingredients.values.first.length,
+      unit: split_ingredients.values.first.first.unit
+    )
+
+    expected_shopping_list_item_2 = ShoppingListItem.new(
+      name: split_ingredients.values.second.first.name,
+      amount: split_ingredients.values.second.first.amount * split_ingredients.values.second.length,
+      unit: split_ingredients.values.second.first.unit
+    )
+    
+    actual_shopping_list_items = shopping_list.shopping_list_items  
+
+    expect(actual_shopping_list_items.first.name).to eq expected_shopping_list_item_1.name
+    expect(actual_shopping_list_items.first.amount).to eq expected_shopping_list_item_1.amount
+    expect(actual_shopping_list_items.first.unit).to eq expected_shopping_list_item_1.unit
+    expect(actual_shopping_list_items.first.purchased).to eq expected_shopping_list_item_1.purchased
+
+    expect(actual_shopping_list_items.second.name).to eq expected_shopping_list_item_2.name
+    expect(actual_shopping_list_items.second.amount).to eq expected_shopping_list_item_2.amount
+    expect(actual_shopping_list_items.second.unit).to eq expected_shopping_list_item_2.unit
+    expect(actual_shopping_list_items.second.purchased).to eq expected_shopping_list_item_2.purchased
+
+  end
 end
