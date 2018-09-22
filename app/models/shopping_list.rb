@@ -18,7 +18,7 @@ class ShoppingList < ApplicationRecord
   end
 
   def shopping_list_items
-    grouped_ingredients = split_ingredients_by_id
+    grouped_ingredients = split_ingredients_by_name
 
     shopping_list_items = []
     grouped_ingredients.values.each do |ingredients|
@@ -28,8 +28,8 @@ class ShoppingList < ApplicationRecord
     shopping_list_items
   end
 
-  def split_ingredients_by_id
-    ingredients.group_by { |ingredient| ingredient.id }
+  def split_ingredients_by_name
+    ingredients.group_by { |ingredient| ingredient.name }
   end
 
   def convert_identical_ingredients_to_shopping_list_item(ingredients)

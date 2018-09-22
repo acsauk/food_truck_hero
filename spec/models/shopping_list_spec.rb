@@ -36,7 +36,7 @@ RSpec.describe ShoppingList, type: :model do
 
     expected_ingredient_ids = shopping_list.ingredients.uniq.collect { |i| i.id }
 
-    actual_ingredients = shopping_list.split_ingredients_by_id
+    actual_ingredients = shopping_list.split_ingredients_by_name
     expect(actual_ingredients.length).to eq 2
 
     actual_ingredient_ids = []
@@ -52,7 +52,7 @@ RSpec.describe ShoppingList, type: :model do
     shopping_list = mwrwi.user.shopping_list
     shopping_list.meals << mwrwi
     ingredients = shopping_list.ingredients
-    split_ingredients = shopping_list.split_ingredients_by_id
+    split_ingredients = shopping_list.split_ingredients_by_name
         
     expected_shopping_list_item = ShoppingListItem.new(
       name: ingredients.first.name,
@@ -72,7 +72,7 @@ RSpec.describe ShoppingList, type: :model do
     shopping_list = mwrwi.user.shopping_list
     shopping_list.meals << mwrwi
     ingredients = shopping_list.ingredients
-    split_ingredients = shopping_list.split_ingredients_by_id
+    split_ingredients = shopping_list.split_ingredients_by_name
 
     expected_shopping_list_item_1 = ShoppingListItem.new(
       name: split_ingredients.values.first.first.name,
@@ -97,6 +97,13 @@ RSpec.describe ShoppingList, type: :model do
     expect(actual_shopping_list_items.second.amount).to eq expected_shopping_list_item_2.amount
     expect(actual_shopping_list_items.second.unit).to eq expected_shopping_list_item_2.unit
     expect(actual_shopping_list_items.second.purchased).to eq expected_shopping_list_item_2.purchased
+  end
 
+  it 'knows how many of the same meal are on the list' do
+    shopping_list = mwrwi.user.shopping_list
+    shopping_list.meals << mwrwi
+    shopping_list.meals << mwrwi
+
+    expect(shopping_list.count_duplicate_meals mwrwi).to eq 2
   end
 end

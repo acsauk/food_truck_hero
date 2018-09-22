@@ -65,13 +65,15 @@ class MealsController < ApplicationController
   end
 
   def add_to_shopping_list
-    if current_user.shopping_list.meals.include?(@meal)
-      flash[:error] = "#{@meal.name} is already on the shopping list"
-    else
-      current_user.shopping_list.add_meal @meal
-      flash[:notice] = "#{@meal.name} added to shopping list"
-    end
+    # if current_user.shopping_list.meals.include?(@meal)
+    #   flash[:error] = "#{@meal.name} is already on the shopping list"
+    # else
+    #   current_user.shopping_list.add_meal @meal
+    #   flash[:notice] = "#{@meal.name} added to shopping list"
+    # end
 
+    current_user.shopping_list.add_meal @meal
+    flash[:notice] = "#{@meal.name} added to shopping list"
     redirect_to @meal
   end
 
