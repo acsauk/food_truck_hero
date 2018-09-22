@@ -29,14 +29,21 @@ class ShoppingList < ApplicationRecord
     ingredients.group_by { |ingredient| ingredient.id }
   end
 
-  def accumulate_amount_and_reduce_to_single(ingredients)
-    amount = 0
+  def convert_identical_ingredients_to_shopping_list_item(ingredients)
+    shopping_list_item =
+      ShoppingListItem.new(
+        name: ingredients.first.name,
+        amount: 0,
+        unit: ingredients.first.unit,
+        purchased: false
+      )
+
     ingredients.each do |ingredient|
-      binding.irb
-      amount += ingredient.amount
+      shopping_list_item.amount += ingredient.amount
     end
-    ingredients.first.amount = amount
-    ingredients.first
+
+    shopping_list_item
   end
+
 
 end

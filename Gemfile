@@ -21,6 +21,7 @@ gem 'money-rails', '~> 1'
 gem "bulma-rails", "~> 0.7.1"
 gem 'cocoon'
 gem 'jquery-rails'
+gem 'active_model_attributes'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'pry'
 end
 
 group :development do

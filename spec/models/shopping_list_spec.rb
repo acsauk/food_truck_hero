@@ -47,4 +47,25 @@ RSpec.describe ShoppingList, type: :model do
 
     expect(expected_ingredient_ids).to eq actual_ingredient_ids.flatten.uniq
   end
+
+  it 'accumulates duplicate ingredients amounts and converts to single ShoppingListItem' do
+    shopping_list = mwrwi.user.shopping_list
+    shopping_list.meals << mwrwi
+    ingredients = shopping_list.ingredients
+    split_ingredients = shopping_list.split_ingredients_by_id
+        
+    expected_shopping_list_item = ShoppingListItem.new(
+      name: ingredients.first.name,
+      amount: ingredients.first.amount * split_ingredients.values.first.length,
+      unit: ingredients.first.unit
+      # purchased: false
+    )
+    
+    actual_shopping_list_item = shopping_list.convert_identical_ingredients_to_shopping_list_item(split_ingredients.values.first)
+
+    expect(actual_shopping_list_item.name).to eq expected_shopping_list_item.name
+    expect(actual_shopping_list_item.amount).to eq expected_shopping_list_item.amount
+    expect(actual_shopping_list_item.unit).to eq expected_shopping_list_item.unit
+    expect(actual_shopping_list_item.purchased).to eq expected_shopping_list_item.purchased
+  end
 end
