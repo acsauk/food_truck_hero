@@ -22,6 +22,7 @@ gem "bulma-rails", "~> 0.7.1"
 gem 'cocoon'
 gem 'jquery-rails'
 gem 'active_model_attributes'
+gem 'ransack'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

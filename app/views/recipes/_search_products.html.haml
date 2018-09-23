@@ -1,0 +1,4 @@
+= search_form_for @q do |f|
+  -# Search if the product name contains
+  = f.label :name_cont, 'Product'
+  = f.search_field :name_cont

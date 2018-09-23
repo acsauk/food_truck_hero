@@ -2,15 +2,19 @@
   = f.fields_for :ingredient do |i|
     .columns
       .column.field.product-name
-        = i.label :product
-        .control
-          .select
-            = i.collection_select(:product_id,
-              Product.all,
-              :id,
-              :name,
-              {},
-              id: "product-name-#{f.index}")
+        -# = i.label :product
+        -# .control
+        -#   .select
+            -# = i.collection_select(:product_id,
+            -#   Product.all,
+            -#   :id,
+            -#   :name,
+            -#   {},
+            -#   id: "product-name-#{f.index}")
+        = render 'search_products'
+
+
+
 
       .column
         .columns

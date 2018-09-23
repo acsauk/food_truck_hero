@@ -1,27 +1,28 @@
 .container
-  .card
-    %header.card-header
-      %p.card-header-title.name.is-size-3.is-centered
-        = @recipe.title
-      %a.card-header-icon{"aria-label" => "more options", :href => "#"}
-        %span.icon
-          %i.fas.fa-angle-down{"aria-hidden" => "true"}
-    .card-content
-      .content
-        .column.ingredients
-          %p.title.title.is-4 Ingredients
-          - @recipe.ingredient_lists.each do |ils|
-            .ingredient
-              = ils.ingredient.name
-              = ils.amount
-              = ils.unit
-        .column.instructions
-          %p.title.title.is-4 Instructions
-          = @recipe.instructions
-    %footer.card-footer
-      = link_to 'Edit', edit_recipe_path(@recipe), class: 'card-footer-item'
-      = link_to 'Delete',
-        @recipe,
-        method: :delete,
-        data: { confirm: 'Are you sure?' },
-        class: 'card-footer-item'
+  .section
+    .card
+      %header.card-header
+        %p.card-header-title.name.is-size-3.is-centered
+          = @recipe.title
+        %a.card-header-icon{"aria-label" => "more options", :href => "#"}
+          %span.icon
+            %i.fas.fa-angle-down{"aria-hidden" => "true"}
+      .card-content
+        .content
+          .column.ingredients
+            %p.title.title.is-4 Ingredients
+            - @recipe.ingredient_lists.each do |ils|
+              .ingredient
+                = ils.ingredient.name
+                = ils.amount
+                = ils.unit
+          .column.instructions
+            %p.title.title.is-4 Instructions
+            = @recipe.instructions
+      %footer.card-footer
+        = link_to 'Edit', edit_recipe_path(@recipe), class: 'card-footer-item'
+        = link_to 'Delete',
+          @recipe,
+          method: :delete,
+          data: { confirm: 'Are you sure?' },
+          class: 'card-footer-item'

@@ -15,6 +15,9 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
+    
     @recipe = Recipe.new
     @recipe.ingredient_lists.build.build_ingredient
   end
