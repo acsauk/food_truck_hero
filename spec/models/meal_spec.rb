@@ -56,7 +56,7 @@ RSpec.describe Meal, type: :model do
 
   it 'knows its margin' do
     expected_meal_margin = (
-        mwrwi_two_pound_product.cost_per_portion / mwrwi_two_pound_product.price_per_portion * 100
+        mwrwi_two_pound_product.profit_per_portion / Money.new(mwrwi_two_pound_product.price_per_portion) * 100
     )
 
     actual_meal_margin = mwrwi_two_pound_product.margin

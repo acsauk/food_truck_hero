@@ -8,6 +8,8 @@
         %th Name
         %th Portions
         %th Price per-portion
+        %th Profit per-portion
+        %th Margin
         %th Actions
     %tbody
     - @meals.each do |meal|
@@ -18,6 +20,10 @@
           = meal.portions
         %td
           #{humanized_money_with_symbol meal.price_per_portion}
+        %td
+          #{humanized_money_with_symbol meal.profit_per_portion}
+        %td
+          #{meal.margin}%
         %td
           = link_to 'Edit', edit_meal_path(meal)
           |

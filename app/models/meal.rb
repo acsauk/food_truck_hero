@@ -29,8 +29,12 @@ class Meal < ApplicationRecord
     Money.new(ingredients_cost / portions)
   end
 
+  def profit_per_portion
+    Money.new(price_per_portion_pence) - cost_per_portion
+  end
+
   def margin
-    cost_per_portion / price_per_portion * 100
+    profit_per_portion / Money.new(price_per_portion_pence) * 100
   end
 
   def ingredients
