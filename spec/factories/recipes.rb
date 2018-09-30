@@ -9,18 +9,18 @@ FactoryBot.define do
     association :user
 
     transient do
-      ingredients_count 2
-      amount 1
-      unit 'grams'
-      product_price false
+      ingredients_count { 2 }
+      amount { 1 }
+      unit { 'grams' }
+      product_price { false }
     end
 
     trait :two_pound_product do
-      product_price :two_pound_product
+      product_price { :two_pound_product }
     end
 
     trait :three_pound_product do
-      product_price :three_pound_product
+      product_price { :three_pound_product }
     end
 
     factory :recipe_with_ingredients do
