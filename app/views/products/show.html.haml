@@ -19,6 +19,9 @@
             .column.price
               %p.title.title.is-4 Price
               = humanized_money_with_symbol @product.price
+            .column.smu
+              %p.title.title.is-4 SMU Price
+              #{@product.smu_price}p
       %footer.card-footer
         = link_to 'Edit', edit_product_path(@product), class: 'card-footer-item'
         = link_to 'Delete',

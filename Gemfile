@@ -30,6 +30,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'pry'
+  gem 'rubocop-rspec'
 end
 
 group :development do
