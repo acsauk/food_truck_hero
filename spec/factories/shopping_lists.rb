@@ -2,10 +2,10 @@ FactoryBot.define do
   factory :shopping_list do
 
     transient do
-      meals_count 2
-      meal_name 'Spicy chicken wraps'
-      meal_portions 4
-      meal_price_per_portion_pence 250
+      meals_count { 2 }
+      meal_name { 'Spicy chicken wraps' }
+      meal_portions { 4 }
+      meal_price_per_portion_pence { 250 }
     end
 
     factory :shopping_list_with_meals_with_recipes_with_ingredients do

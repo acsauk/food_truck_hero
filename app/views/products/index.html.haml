@@ -9,6 +9,7 @@
         %th Brand
         %th Size
         %th Price
+        %th SMU Price
         %th Actions
     %tbody
     - @products.each do |product|
@@ -21,6 +22,8 @@
           #{product.amount} #{product.unit}
         %td
           = humanized_money_with_symbol product.price
+        %td
+          #{product.smu_price}p
         %td
           = link_to 'Edit', edit_recipe_path(product)
           |

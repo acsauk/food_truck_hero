@@ -28,14 +28,10 @@ RSpec.describe Meal, type: :model do
   it 'knows its total cost of all associated ingredients' do
     # Meal has three recipes, each with one ingredient linked to a product with
     # an amount of 100 and price of 2 pounds.
-    recipes = mwrwi_two_pound_product.recipes
-    ingredients = recipes.collect(&:ingredients)
 
-    expected_ingredients_cost = (ingredients[0].collect(&:product).to_a.sum.smu_price * ingredients[0][0].amount) * ingredients.length
     actual_ingredients_cost = mwrwi_two_pound_product.ingredients_cost
-
     expect(mwrwi_two_pound_product).to have_attributes(ingredients_cost: actual_ingredients_cost)
-    expect(actual_ingredients_cost).to eq expected_ingredients_cost
+    expect(actual_ingredients_cost.fractional).to eq 120
   end
 
   it 'can handle string values for price_per_portion attribute' do
