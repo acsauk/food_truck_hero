@@ -25,6 +25,9 @@
                     = il.ingredient.name
                     = il.amount
                     = il.unit
+            .column.ingredients-cost
+              %p.title.title.is-5 Ingredients cost
+              #{humanized_money_with_symbol @meal.ingredients_cost}
           .columns
             .column.price-per-portion
               %p.title.title.is-5 Price per portion
@@ -32,9 +35,9 @@
             .column.cost-per-portion
               %p.title.title.is-5 Cost per portion
               #{humanized_money_with_symbol @meal.cost_per_portion}
-            .column.ingredients-cost
-              %p.title.title.is-5 Ingredients cost
-              #{humanized_money_with_symbol @meal.ingredients_cost}
+            .column.profit
+              %p.title.title.is-5 Profit per portion
+              #{humanized_money_with_symbol @meal.profit_per_portion}
       %footer.card-footer
         = link_to 'Edit', edit_meal_path(@meal), class: 'card-footer-item'
         = link_to 'Delete', @meal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-footer-item'
