@@ -9,18 +9,20 @@
         %th Instructions
         %th Actions
     %tbody
-    - @recipes.each do |recipe|
-      %tr
-        %th
-          = link_to recipe.title.to_s, recipe
-        %td
-          = recipe.instructions
-        %td
-          = link_to 'Edit', edit_recipe_path(recipe)
-          |
-          = link_to 'Delete',
-            recipe,
-            method: :delete,
-            data: { confirm: 'Are you sure?' }
-
+    - if @recipes.any?
+      - @recipes.each do |recipe|
+        %tr
+          %th
+            = link_to recipe.title.to_s, recipe
+          %td
+            = recipe.instructions
+          %td
+            = link_to 'Edit', edit_recipe_path(recipe)
+            |
+            = link_to 'Delete',
+              recipe,
+              method: :delete,
+              data: { confirm: 'Are you sure?' }
+    - else
+      There are currently no recipes created. Why don't you make one?
   = link_to 'New Recipe', new_recipe_path, class: 'button is-link'
