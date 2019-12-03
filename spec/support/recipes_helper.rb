@@ -31,3 +31,8 @@ def edit_recipe(recipe)
   end
   click_button 'Update Recipe'
 end
+
+def edit_recipe_remove_ingredient()
+  find('div.ingredient', match: :first).click_link 'X'
+  click_button 'Update Recipe'
+end
