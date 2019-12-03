@@ -9,6 +9,6 @@ RSpec.describe MealList, type: :model do
     expect(meal_list).to be_valid
   end
 
-  it { is_expected.to belong_to(:shopping_list) }
-  it { is_expected.to belong_to(:meal) }
+  it { is_expected.to belong_to(:shopping_list).optional }
+  it { is_expected.to belong_to(:meal).optional }
 end
