@@ -4,12 +4,5 @@ class IngredientList < ApplicationRecord
 
   validates_presence_of :unit, :amount
 
-  accepts_nested_attributes_for :ingredient
-
-  # def ingredient_attributes=(attributes)
-  #   if attributes['name']
-  #     new_ingredient = Ingredient.find_or_create_by(name: attributes['name'], product_id: attributes['product_id'])
-  #     self.ingredient = new_ingredient
-  #   end
-  # end
+  accepts_nested_attributes_for :ingredient, allow_destroy: true
 end

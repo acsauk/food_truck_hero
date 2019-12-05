@@ -7,6 +7,7 @@ end
 
 ruby '2.6.5'
 
+gem "apparition", "~> 0.4.0"
 gem 'rails', '~> 5.1.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
@@ -44,7 +45,6 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'poltergeist'
   gem 'rspec_junit_formatter'
 end
 
