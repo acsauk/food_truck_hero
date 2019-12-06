@@ -6,15 +6,15 @@ abort('The Rails env is running in development mode!') if Rails.env.development?
 require 'rspec/rails'
 require 'devise'
 require 'capybara/rspec'
-require 'capybara/poltergeist'
 require 'support/recipes_helper'
 require 'support/users_helper'
 require 'support/products_helper'
 require 'support/meals_helper'
 require 'spec_helper'
 require 'money-rails/test_helpers'
+require 'capybara/apparition'
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :apparition
 
 ActiveRecord::Migration.maintain_test_schema!
 

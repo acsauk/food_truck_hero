@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Ingredient, type: :model do
-  let(:ingredient) { FactoryBot.build(:ingredient) }
+  let(:ingredient) { FactoryBot.create(:ingredient) }
   let(:rwi) { FactoryBot.create(:recipe_with_ingredients) }
 
   it 'has a valid factory' do
@@ -10,7 +10,7 @@ RSpec.describe Ingredient, type: :model do
 
   it { is_expected.to have_many(:recipes).through(:ingredient_lists) }
   it { is_expected.to have_many(:ingredient_lists) }
-  it { is_expected.to belong_to(:product) }
+  it { is_expected.to belong_to(:product).optional }
 
   it 'has a method to return the amount of ingredient stored in ingredient_list' do
     recipe_ingredient = rwi.ingredients.first

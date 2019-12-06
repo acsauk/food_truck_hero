@@ -5,12 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.5.0'
+ruby '2.6.5'
 
+gem "apparition", "~> 0.4.0"
 gem 'rails', '~> 5.1.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
@@ -22,6 +22,8 @@ gem "bulma-rails", "~> 0.7.1"
 gem 'cocoon'
 gem 'jquery-rails'
 gem 'active_model_attributes'
+gem "sassc", "~> 2.2"
+gem "sassc-rails", "~> 2.1"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -43,8 +45,6 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'poltergeist'
-  gem 'pry'
   gem 'rspec_junit_formatter'
 end
 

@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes =  Recipe.all
+    @recipes = Recipe.all
   end
 
   # GET /recipes/1
@@ -28,7 +28,6 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-    # binding.irb
     @recipe.save
 
     respond_to do |format|
@@ -68,20 +67,17 @@ class RecipesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def recipe_params
-      params.require(:recipe).permit(
-        :title, :instructions, :id, ingredient_lists_attributes:
-        [
-          %i[amount unit id _destroy], ingredient_attributes:
-            %i[name product_id id]
-        ]
-      )
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
-    end
+  def recipe_params
+    params.require(:recipe).permit(
+      :title, :instructions, :id, ingredient_lists_attributes: [
+        %i[amount unit id _destroy], ingredient_attributes:
+          %i[name product_id id]
+      ]
+    )
+  end
 end

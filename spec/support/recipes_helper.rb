@@ -8,26 +8,41 @@ def create_recipe(title: 'Recipe title',
   click_link 'New Recipe'
   fill_in 'Title', with: title
   fill_in 'Instructions', with: instructions
-  count = 0
-  until count == ingredients_count
-    fill_in "name-#{count}", with: "#{ingredient_name} #{count.next}"
-    fill_in "amount-#{count}", with: ingredient_amount + count
-    fill_in "unit-#{count}", with: "#{ingredient_unit} #{count.next}"
-    select("#{product_name}", from: "product-name-#{count}").select_option
-    count += 1
-  end
+  ingredients_count - 1.times { click_on 'Add Ingredient' }
+  fill_in_all_product_fields product_name
+  fill_in_in_all_amount_fields ingredient_amount
+  fill_in_all_unit_fields ingredient_unit
   click_button 'Create Recipe'
 end
 
 def edit_recipe(recipe)
   fill_in 'Title', with: "#{recipe.title} edit"
   fill_in 'Instructions', with: "#{recipe.instructions} edit"
-  count = 0
-  until count == recipe.ingredients.size
-    fill_in "name-#{count}", with: "name edit #{count.next}"
-    fill_in "amount-#{count}", with: recipe.ingredient_lists[count].amount * 2
-    fill_in "unit-#{count}", with: "unit edit #{count.next}"
-    count += 1
-  end
+  fill_in_all_product_fields recipe.ingredients.last.product.name
+  fill_in_in_all_amount_fields 200
+  fill_in_all_unit_fields 'Grams'
   click_button 'Update Recipe'
+end
+
+def edit_recipe_remove_ingredient()
+  find('div.ingredient', match: :first).click_link 'X'
+  click_button 'Update Recipe'
+end
+
+def fill_in_all_product_fields(product_name)
+  all('select', id: /recipe_ingredient_lists_attributes_.+_ingredient_attributes_product_id/).each do |f| 
+    f.select(product_name).select_option
+  end
+end
+
+def fill_in_in_all_amount_fields(amount)
+  all('input', id: /recipe_ingredient_lists_attributes_.+_amount/).each do |f|
+    f.set(amount)
+  end
+end
+
+def fill_in_all_unit_fields(unit)
+  all('input', id: /recipe_ingredient_lists_attributes_.+_unit/).each do |f|
+    f.set(unit)
+  end
 end

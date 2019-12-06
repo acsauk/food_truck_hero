@@ -9,27 +9,21 @@
               Product.all,
               :id,
               :name,
-              {},
-              id: "product-name-#{f.index}")
+              {})
 
       .column
         .columns
           .column.amount-unit.field
             = f.label :amount
             .control
-              = f.text_field :amount, id: "amount-#{f.index}", class: 'input'
+              = f.text_field :amount, class: 'input'
 
           .column#unit
             = f.label :unit
             .control
-              = f.text_field :unit, id: "unit-#{f.index}", class: 'input'
+              = f.text_field :unit, class: 'input'
 
       .column.is-1.has-vertically-aligned-content
         = link_to_remove_association 'X',
           f,
           { wrapper_class: 'ingredient', class: 'delete' }
-  -# .remove-ingredient.columns
-  -#   .column
-  -#     = link_to_remove_association 'Remove Ingredient',
-  -#       f,
-  -#       { wrapper_class: 'ingredient' }

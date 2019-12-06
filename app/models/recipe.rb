@@ -7,7 +7,7 @@ class Recipe < ApplicationRecord
 
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :ingredient_lists
+  accepts_nested_attributes_for :ingredient_lists, allow_destroy: true
 
   validates_presence_of :instructions, :title
 end

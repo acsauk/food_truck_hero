@@ -19,7 +19,7 @@ RSpec.describe Recipe, type: :model do
   it { is_expected.to have_many(:recipe_lists) }
   it { is_expected.to have_many(:meals).through(:recipe_lists) }
 
-  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:user).optional }
 
   it { is_expected.to accept_nested_attributes_for(:ingredient_lists) }
 
@@ -27,7 +27,7 @@ it 'can have multiple ingredients associated with a recipe' do
   ingredients_count = 4
   four_ingredient_recipe = FactoryBot.create:recipe_with_ingredients,
                                             ingredients_count: ingredients_count
-  expect(four_ingredient_recipe.ingredients.size).to equal ingredients_count
+  expect(four_ingredient_recipe.ingredients.size).to eq ingredients_count
 end
 
   it 'deletes associated ingredient_lists when destroyed' do

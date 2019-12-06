@@ -110,7 +110,9 @@ RSpec.describe RecipesController, type: :controller do
               { 'ingredient_attributes' =>
                 { 'product_id' => product.id },
                 'amount' => '1000',
-                'unit' => 'grams' } }
+                'unit' => 'grams' 
+              }
+            }
         }
       end
 
