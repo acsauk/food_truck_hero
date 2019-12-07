@@ -19,3 +19,5 @@
 .byebug_history
 .idea/workspace.xml
 .idea
+
+spec/examples.txt
