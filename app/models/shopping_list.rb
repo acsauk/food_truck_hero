@@ -1,4 +1,6 @@
 class ShoppingList < ApplicationRecord
+  attr_accessor :name
+
   has_many :meal_lists, dependent: :destroy
   has_many :meals, through: :meal_lists
   belongs_to :user, optional: true

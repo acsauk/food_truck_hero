@@ -25,4 +25,18 @@ feature 'Shopping Lists' do
     click_link 'Shopping List'
     expect(page).to have_content mwrwi.name
   end
+
+  scenario 'have a created at date displayed' do
+    visit meal_path mwrwi
+    click_link 'Add to shopping list'
+    click_link 'Shopping List'
+    expect(page).to have_content mwrwi.created_at
+  end
+
+  scenario 'has a name displayed (if set)' do
+    visit meal_path mwrwi
+    click_link 'Add to shopping list'
+    click_link 'Shopping List'
+    expect(page).to have_content shopping_list.name
+  end
 end

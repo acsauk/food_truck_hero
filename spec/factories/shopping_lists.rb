@@ -1,6 +1,10 @@
 FactoryBot.define do
   factory :shopping_list do
 
+    sequence :name do |n|
+      "Title text #{n}"
+    end
+
     transient do
       meals_count { 2 }
       meal_name { 'Spicy chicken wraps' }
