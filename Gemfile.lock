@@ -273,7 +273,6 @@ DEPENDENCIES
   active_model_attributes
   apparition (~> 0.4.0)
   bulma-rails (~> 0.7.1)
-  bundler (~> 2.0)
   byebug
   capybara
   cocoon
