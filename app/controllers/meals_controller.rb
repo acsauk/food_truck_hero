@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: [:show, :edit, :update, :destroy, :add_to_shopping_list]
+  before_action :set_meal, only: %i[show edit update destroy add_to_shopping_list]
 
   # GET /meals
   # GET /meals.json
@@ -10,6 +10,7 @@ class MealsController < ApplicationController
   # GET /meals/1
   # GET /meals/1.json
   def show
+    @current_user = current_user
   end
 
   # GET /meals/new
@@ -65,27 +66,28 @@ class MealsController < ApplicationController
   end
 
   def add_to_shopping_list
-    # if current_user.shopping_list.meals.include?(@meal)
-    #   flash[:error] = "#{@meal.name} is already on the shopping list"
-    # else
-    #   current_user.shopping_list.add_meal @meal
-    #   flash[:notice] = "#{@meal.name} added to shopping list"
-    # end
-
-    current_user.shopping_list.add_meal @meal
+    shopping_list = ShoppingList.find_by_id(params[:shopping_list])
+    shopping_list.add_meal @meal
     flash[:notice] = "#{@meal.name} added to shopping list"
     redirect_to @meal
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_meal
-      @meal = Meal.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_meal
+    @meal = Meal.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def meal_params
-      params.require(:meal).permit(:name, :portions, :price_per_portion_pence, :price_per_portion,
-                                   recipe_lists_attributes: %i[recipe_id id meal_id])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def meal_params
+    params.require(:meal).permit(
+      :name,
+      :portions,
+      :price_per_portion_pence,
+      :price_per_portion,
+      :shopping_list,
+      recipe_lists_attributes:
+        %i[recipe_id id meal_id]
+    )
+  end
 end

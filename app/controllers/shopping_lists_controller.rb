@@ -4,12 +4,13 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists
   # GET /shopping_lists.json
   def index
-    @shopping_lists = ShoppingList.all
+    @shopping_lists = current_user.shopping_lists.all
   end
 
   # GET /shopping_lists/1
   # GET /shopping_lists/1.json
   def show
+    @shopping_lists = current_user.shopping_lists.all
   end
 
   # GET /shopping_lists/new
@@ -24,13 +25,13 @@ class ShoppingListsController < ApplicationController
   def add_meal
     meal = Meal.find(params[:meal_id])
     @shopping_list.add_meal meal
-    redirect_to @shopping_list
+    redirect_to shopping_lists_path
   end
 
   def remove_meal
     meal = Meal.find(params[:meal_id])
     @shopping_list.remove_meal meal
-    redirect_to @shopping_list
+    redirect_to shopping_lists_path
   end
 
   # POST /shopping_lists

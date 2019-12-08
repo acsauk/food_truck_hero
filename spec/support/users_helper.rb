@@ -23,7 +23,7 @@ end
 def login_user
   Warden.test_mode!
   user = FactoryBot.create(:user)
-  login_as user, :scope => :user
+  login_as user, scope: :user
   user.confirmed_at = Time.now
   user.save
   user

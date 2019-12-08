@@ -15,7 +15,7 @@ feature 'Shopping Lists' do
     expect(page).to have_content "#{mwrwi.name} added to shopping list"
     click_link 'Shopping List'
     mwrwi.ingredients.each do |ingredient|
-      expect(page).to have_content "#{ingredient.name}"
+      expect(page).to have_content ingredient.name.to_s
     end
   end
 

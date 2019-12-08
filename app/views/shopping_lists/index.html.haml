@@ -1,19 +1,25 @@
-%h1 Listing shopping_lists
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @shopping_lists.each do |shopping_list|
-      %tr
-        %td= link_to 'Show', shopping_list
-        %td= link_to 'Edit', edit_shopping_list_path(shopping_list)
-        %td= link_to 'Destroy', shopping_list, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Shopping list', new_shopping_list_path
+.container
+  .columns
+    .column.is-three-fifths.section
+      .panel
+        %p.panel-heading
+          Shopping List
+        - @shopping_lists.each do |sl|
+          - sl.shopping_list_items.each do |sli|
+            %label.panel-block
+              %input{:type => "checkbox"}
+                = sli.name
+                = sli.amount
+                = sli.unit
+          = "Shopping list created #{sl.created_at}"
+    .column.section
+      .tile.is-ancestor
+      - @shopping_lists.all.each do |sl|
+        - sl.meals.uniq.each do |m|
+          .tile.is-parent
+            .tile.is-child.is-10
+              = m.name
+            .tile.is-child.is-10
+              = link_to '-', shopping_list_remove_meal_path(sl, id: sl.id, meal_id: m.id), method: :post, class: 'button is-small is-danger is-outlined'
+              = sl.count_duplicate_meals(m)
+              = link_to '+', shopping_list_add_meal_path(sl, id: sl.id, meal_id: m.id), method: :post, class: 'button is-small is-primary is-outlined'

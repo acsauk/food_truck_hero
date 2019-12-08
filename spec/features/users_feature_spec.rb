@@ -28,8 +28,6 @@ xfeature 'User Management' do
       fill_in :user_email, with: 'test2@gmail.com'
       fill_in :user_password, with: 'password123'
       click_button 'Log in'
-      # binding.pry
-
       expect(page).to have_content(I18n.t('devise.sessions.signed_in'))
     end
 

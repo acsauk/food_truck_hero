@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :products
   resources :users, only: [:show]
   resources :shopping_lists do
-    post 'add_meal', to: 'shopping_lists#add_meal', as: :add_meal 
-    post 'remove_meal', to: 'shopping_lists#remove_meal', as: :remove_meal  
+    post 'add_meal', to: 'shopping_lists#add_meal', as: :add_meal
+    post 'remove_meal', to: 'shopping_lists#remove_meal', as: :remove_meal
   end
 
 

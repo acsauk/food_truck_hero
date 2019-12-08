@@ -1,8 +1,10 @@
 FactoryBot.define do
   factory :shopping_list do
 
+    association :user
+    
     sequence :name do |n|
-      "Title text #{n}"
+      "Name #{n}"
     end
 
     transient do
