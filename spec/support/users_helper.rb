@@ -30,21 +30,21 @@ def login_user
 end
 
 def click_sign_up_link_nav
-  find("a[href='#{new_user_registration_path}']").click
+  find("a[href='#{new_user_registration_path}']", match: :first).click
 end
 
 def click_sign_in_link_nav
-  find("a[href='#{new_user_session_path}']").click
+  find("a[href='#{new_user_session_path}']", match: :first).click
 end
 
 def click_sign_out_link_nav
-  find("a[href='#{destroy_user_session_path}']").click
+  find("a[href='#{destroy_user_session_path}']", match: :first).click
 end
 
 def click_user_account_link_nav(user)
-  find("a[href='#{user_path(user.id)}']").click
+  find("a[href='#{user_path(user.id)}']", match: :first).click
 end
 
 def click_edit_user_link
-  find("a[href='#{edit_user_registration_path}']").click
+  find("a[href='#{edit_user_registration_path}']", match: :first).click
 end

@@ -10,6 +10,7 @@ require 'support/recipes_helper'
 require 'support/users_helper'
 require 'support/products_helper'
 require 'support/meals_helper'
+require 'support/devise'
 require 'spec_helper'
 require 'money-rails/test_helpers'
 require 'capybara/apparition'
@@ -19,8 +20,6 @@ Capybara.javascript_driver = :apparition
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.include Devise::Test::ControllerHelpers, type: :controller
-
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!

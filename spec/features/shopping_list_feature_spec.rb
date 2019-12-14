@@ -37,6 +37,6 @@ feature 'Shopping Lists' do
     visit meal_path mwrwi
     click_link 'Add to shopping list'
     click_link 'Shopping List'
-    expect(page).to have_content shopping_list.name
+    expect(page).to have_content mwrwi.user.shopping_lists.first.name
   end
 end

@@ -42,7 +42,7 @@ class ShoppingListsController < ApplicationController
 
     respond_to do |format|
       if @shopping_list.save
-        format.html { redirect_to @shopping_list, notice: 'Shopping list was successfully created.' }
+        format.html { redirect_to shopping_lists_path, notice: 'Shopping list was successfully created.' }
         format.json { render :show, status: :created, location: @shopping_list }
       else
         format.html { render :new }
@@ -56,8 +56,8 @@ class ShoppingListsController < ApplicationController
   def update
     respond_to do |format|
       if @shopping_list.update(shopping_list_params)
-        format.html { redirect_to @shopping_list, notice: 'Shopping list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @shopping_list }
+        format.html { redirect_to shopping_lists_path, notice: 'Shopping list was successfully updated.' }
+        format.json { render :index, status: :ok, location: @shopping_list }
       else
         format.html { render :edit }
         format.json { render json: @shopping_list.errors, status: :unprocessable_entity }
@@ -83,6 +83,7 @@ class ShoppingListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shopping_list_params
-      params.fetch(:shopping_list, {})
+      # TODO - switch to params.fetch
+      params.require(:shopping_list).permit(:name)
     end
 end

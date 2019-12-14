@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   has_many :recipes, dependent: :destroy
   has_many :meals, dependent: :destroy
-  has_many :shopping_lists
+  has_many :shopping_lists, dependent: :destroy
 
   private
 

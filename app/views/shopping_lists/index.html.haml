@@ -12,6 +12,21 @@
                 = sli.amount
                 = sli.unit
           = "Shopping list created #{sl.created_at}"
+          = form_for sl do |f|
+            - if sl.errors.any?
+              #error-explanation
+                %h2= "#{pluralize(sl.errors.count, "error")} prohibited this shopping list from being saved:"
+                %ul
+                  - sl.errors.full_messages.each do |message|
+                    %li= message
+
+            .columns.level
+              .column.level-item.field.control.is-four-fifths
+                = f.text_field :name, class: 'input', placeholder: 'Recipe name', value: sl.name
+              .column.level-item.field
+                .control
+                  = f.submit class: 'button is-link'
+          = "Name is #{sl.name}"
     .column.section
       .tile.is-ancestor
       - @shopping_lists.all.each do |sl|

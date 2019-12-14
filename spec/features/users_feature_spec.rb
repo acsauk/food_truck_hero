@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xfeature 'User Management' do
+feature 'User Management' do
   let!(:user_1)   { FactoryBot.create(:user, email: 'a@b.com') }
   let!(:user_2)   { FactoryBot.create(:user, email: 'a@c.com') }
   let!(:recipe_1) { FactoryBot.create(:recipe, user: user_1) }
@@ -60,14 +60,6 @@ xfeature 'User Management' do
       expect(page).to have_link('Sign out')
     end
 
-    scenario 'I can see recipes that belong to me' do
-      expect(page).to have_content(recipe_1.title)
-    end
-
-    scenario 'I cannot see recipes that belong to another user' do
-      expect(page).to have_no_content(recipe_2.title)
-    end
-
     scenario 'I can edit my name' do
       click_link("#{user_1.first_name} #{user_1.last_name}")
       click_edit_user_link
@@ -111,8 +103,11 @@ xfeature 'User Management' do
       click_link("#{user_1.first_name} #{user_1.last_name}")
       click_edit_user_link
       click_button 'Cancel my account'
-      page.accept_confirm
-      sign_in(email: user_1.email, password: user_1.password)
+      visit root_path
+      click_link 'Sign in'
+      fill_in :user_email, with: user_1.email.to_s
+      fill_in :user_password, with: user_1.password.to_s
+      click_button 'Log in'
       expect(page).to have_content('Invalid Email or password')
     end
   end
