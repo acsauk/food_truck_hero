@@ -12,7 +12,7 @@ def sign_up(email:      'test@gmail.com',
   click_button 'Sign up'
 end
 
-def sign_in(email: 'test@gmail.com', password: 'password123')
+def sign_in_as(email: 'test@gmail.com', password: 'password123')
   visit '/'
   click_sign_in_link_nav
   fill_in :user_email, with: email

@@ -4,7 +4,7 @@ feature 'Products' do
   let(:user) { FactoryBot.create :user }
 
   before(:each) do
-    sign_in(email: user.email, password: user.password)
+    sign_in_as(email: user.email, password: user.password)
     visit root_path
   end
 

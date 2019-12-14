@@ -5,7 +5,7 @@ feature 'Shopping Lists' do
   let(:mwrwi) { FactoryBot.create :meal_with_recipes_with_ingredients }
 
   before do
-    sign_in(email: mwrwi.user.email, password: mwrwi.user.password)
+    sign_in_as(email: mwrwi.user.email, password: mwrwi.user.password)
     visit root_path
   end
 

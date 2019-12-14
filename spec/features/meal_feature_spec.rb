@@ -4,7 +4,7 @@ feature 'Meals' do
   let(:rwi) { FactoryBot.create :recipe_with_ingredients }
 
   before do
-    sign_in(email: rwi.user.email, password: rwi.user.password)
+    sign_in_as(email: rwi.user.email, password: rwi.user.password)
     visit root_path
   end
 

@@ -4,7 +4,7 @@ feature 'Recipes', :js => true do
   let(:rwi) { FactoryBot.create :recipe_with_ingredients, ingredients_count: 3 }
 
   before {
-    sign_in(email: rwi.user.email, password: rwi.user.password)
+    sign_in_as(email: rwi.user.email, password: rwi.user.password)
     visit root_path
   }
 
