@@ -4,18 +4,32 @@
       .panel
         %p.panel-heading
           Shopping List
-        - @shopping_lists.each do |sl|
-          - sl.shopping_list_items.each do |sli|
-            %label.panel-block
-              %input{:type => "checkbox"}
-                = sli.name
-                = sli.amount
-                = sli.unit
-          = "Shopping list created #{@sl.created_at}"
+        - @shopping_list.shopping_list_items.each do |sli|
+          %label.panel-block
+            %input{:type => "checkbox"}
+              = sli.name
+              = sli.amount
+              = sli.unit
+        = "Shopping list created #{@shopping_list.created_at}"
+        = form_for @shopping_list do |f|
+          - if @shopping_list.errors.any?
+            #error-explanation
+              %h2= "#{pluralize(@shopping_list.errors.count, "error")} prohibited this shopping list from being saved:"
+              %ul
+                - @shopping_list.errors.full_messages.each do |message|
+                  %li= message
+
+          .columns.level
+            .column.level-item.field.control.is-four-fifths
+              = f.text_field :name, class: 'input', placeholder: 'Shopping list name', value: @shopping_list.name
+            .column.level-item.field
+              .control
+                = f.submit class: 'button is-link'
+        = "Name is #{@shopping_list.name}"
     .column.section
       .tile.is-ancestor
       Meals on shopping list
-      - @shopping_lists.meals.uniq.each do |m|
+      - @shopping_list.meals.uniq.each do |m|
         .tile.is-parent
           .tile.is-child.is-10
             = m.name

@@ -1,32 +1,32 @@
 .container
   .columns
     .column.is-three-fifths.section
-      .panel
-        %p.panel-heading
-          Shopping List
-        - @shopping_lists.each do |sl|
+      - @shopping_lists.each do |sl|
+        = "Name is #{sl.name}"
+        .panel
+          %p.panel-heading
+            Shopping List
           - sl.shopping_list_items.each do |sli|
             %label.panel-block
               %input{:type => "checkbox"}
                 = sli.name
                 = sli.amount
                 = sli.unit
-          = "Shopping list created #{sl.created_at}"
-          = form_for sl do |f|
-            - if sl.errors.any?
-              #error-explanation
-                %h2= "#{pluralize(sl.errors.count, "error")} prohibited this shopping list from being saved:"
-                %ul
-                  - sl.errors.full_messages.each do |message|
-                    %li= message
+        = "Shopping list created #{sl.created_at}"
+        = form_for sl do |f|
+          - if sl.errors.any?
+            #error-explanation
+              %h2= "#{pluralize(sl.errors.count, "error")} prohibited this shopping list from being saved:"
+              %ul
+                - sl.errors.full_messages.each do |message|
+                  %li= message
 
-            .columns.level
-              .column.level-item.field.control.is-four-fifths
-                = f.text_field :name, class: 'input', placeholder: 'Recipe name', value: sl.name
-              .column.level-item.field
-                .control
-                  = f.submit class: 'button is-link'
-          = "Name is #{sl.name}"
+          .columns.level
+            .column.level-item.field.control.is-four-fifths
+              = f.text_field :name, class: 'input', placeholder: 'Recipe name', value: sl.name
+            .column.level-item.field
+              .control
+                = f.submit class: 'button is-link'
     .column.section
       .tile.is-ancestor
       - @shopping_lists.all.each do |sl|

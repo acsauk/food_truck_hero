@@ -10,7 +10,6 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists/1
   # GET /shopping_lists/1.json
   def show
-    @shopping_lists = current_user.shopping_lists.all
   end
 
   # GET /shopping_lists/new
@@ -55,7 +54,7 @@ class ShoppingListsController < ApplicationController
   # PATCH/PUT /shopping_lists/1.json
   def update
     respond_to do |format|
-      if @shopping_list.update(shopping_list_params)
+      if @shopping_list.update!(shopping_list_params)
         format.html { redirect_to shopping_lists_path, notice: 'Shopping list was successfully updated.' }
         format.json { render :index, status: :ok, location: @shopping_list }
       else
@@ -83,7 +82,6 @@ class ShoppingListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shopping_list_params
-      # TODO - switch to params.fetch
-      params.require(:shopping_list).permit(:name)
+      params.require(:shopping_list).permit(:name, :id)
     end
 end
