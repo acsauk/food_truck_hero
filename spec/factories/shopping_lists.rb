@@ -1,5 +1,10 @@
 FactoryBot.define do
   factory :shopping_list do
+    association :user
+
+    sequence :name do |n|
+      "Name #{n}"
+    end
 
     transient do
       meals_count { 2 }
@@ -18,11 +23,11 @@ FactoryBot.define do
         )
 
         (0...evaluator.meals_count).each do
-          mwrwi.name = evaluator.meal_name unless evaluator.recipe_title.empty?
-          mwrwi.meal_portions = evaluator.meal_portions unless evaluator.meal_portions.empty?
+          mwrwi.name = evaluator.meal_name
+          mwrwi.portions = evaluator.meal_portions
           shopping_list.meal_lists <<
             FactoryBot.build(
-              :meal_lists, meal: mwrwi
+              :meal_list, meal: mwrwi
             )
         end
       end

@@ -1,4 +1,5 @@
 class Meal < ApplicationRecord
+  validates_presence_of :name, :portions, :price_per_portion_pence
   attribute :ingredients_cost, :integer
 
   has_many :recipe_lists, inverse_of: :meal, dependent: :destroy
@@ -10,10 +11,6 @@ class Meal < ApplicationRecord
   belongs_to :user, optional: true
 
   accepts_nested_attributes_for :recipe_lists
-
-  validates_presence_of :name
-  validates_presence_of :portions
-  validates_presence_of :price_per_portion_pence
 
   monetize :price_per_portion_pence
 

@@ -1,30 +1,9 @@
 .container
   .columns
-    .column.is-three-fifths.section
-      .panel
-        %p.panel-heading
-          Shopping List
-        - @shopping_list.shopping_list_items.each do |sli|
-          %label.panel-block
-            %input{:type => "checkbox"}
-              = sli.name
-              = sli.amount
-              = sli.unit
-    .column.section
-      .tile.is-ancestor
-      Meals on shopping list
-      - @shopping_list.meals.uniq.each do |m|
-        .tile.is-parent
-          .tile.is-child.is-10
-            = m.name
-          .tile.is-child.is-10
-            = link_to '-', shopping_list_remove_meal_path(@shopping_list, id: @shopping_list.id, meal_id: m.id), method: :post, class: 'button is-small is-danger is-outlined'
-            = @shopping_list.count_duplicate_meals(m)
-            = link_to '+', shopping_list_add_meal_path(@shopping_list, id: @shopping_list.id, meal_id: m.id), method: :post, class: 'button is-small is-primary is-outlined'
-
-
-
-          
-
-              
-
+  -if !@shopping_list.shopping_list_items.empty?
+    .columns
+      .column.is-6.section
+        = render 'shopping_list', sl: @shopping_list
+        = render 'form', sl: @shopping_list
+      .column.is-6.section
+        = render 'meals', sl: @shopping_list

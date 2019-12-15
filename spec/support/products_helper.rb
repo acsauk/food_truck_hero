@@ -4,7 +4,7 @@ def create_product(name: 'Product Name',
                    unit: 'grams',
                    price: 20)
   find("a[href='#{new_product_path}']").click
-  fill_in :product_name, with: name
+  fill_in 'Name', with: name
   fill_in :product_brand, with: brand
   fill_in :product_unit, with: unit
   fill_in :product_amount, with: amount

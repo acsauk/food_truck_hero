@@ -12,7 +12,7 @@
         = link_to 'Recipes', recipes_path, class: 'active item navbar-item'
         = link_to 'Products', products_path, class: 'item navbar-item'
         = link_to 'Meals', meals_path, class: 'item navbar-item'
-        = link_to 'Shopping List', shopping_list_path(current_user.shopping_list), class: 'item navbar-item'
+        = link_to 'Shopping List', shopping_lists_path(), class: 'item navbar-item'
       .navbar-end
         = link_to "#{current_user.first_name} #{current_user.last_name}",
           user_path(current_user), class: 'item navbar-item'
