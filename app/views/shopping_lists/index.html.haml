@@ -1,11 +1,10 @@
 .container
   .columns
-    .column.is-three-fifths.section
-      - @shopping_lists.each do |sl|
-        = render 'shopping_list', sl: sl
-
-    .column.section
-      .tile.is-ancestor
-      Meals on shopping list
-      - @shopping_lists.all.each do |sl|
-        = render 'meals', sl: sl
+  - @shopping_lists.each do |sl|
+    -if !sl.shopping_list_items.empty?
+      .columns
+        .column.is-6.section
+          = render 'shopping_list', sl: sl
+          = render 'form', sl: sl
+        .column.is-6.section
+          = render 'meals', sl: sl

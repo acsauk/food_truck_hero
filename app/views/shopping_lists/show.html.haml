@@ -1,10 +1,9 @@
 .container
   .columns
-    .column.is-three-fifths.section
-      .panel
+  -if !@shopping_list.shopping_list_items.empty?
+    .columns
+      .column.is-6.section
         = render 'shopping_list', sl: @shopping_list
-
-    .column.section
-      .tile.is-ancestor
-      Meals on shopping list
-      = render 'meals', sl: @shopping_list
+        = render 'form', sl: @shopping_list
+      .column.is-6.section
+        = render 'meals', sl: @shopping_list
