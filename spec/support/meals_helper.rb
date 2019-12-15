@@ -9,6 +9,6 @@ def edit_meal(meal, recipe_with_ingredients)
   fill_in 'Name', with: "#{meal.name} edit"
   fill_in 'Portions', with: "#{meal.portions} edit"
   fill_in :meal_price_per_portion, with: meal.price_per_portion
-  select(recipe_with_ingredients.title, from: 'recipe-title').select_option
+  select(recipe_with_ingredients.title, from: 'recipe-title', match: :first).select_option
   click_button 'Update Meal'
 end

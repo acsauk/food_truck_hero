@@ -4,7 +4,7 @@ class ShoppingListsController < ApplicationController
   # GET /shopping_lists
   # GET /shopping_lists.json
   def index
-    @shopping_lists = ShoppingList.all
+    @shopping_lists = current_user.shopping_lists.all
   end
 
   # GET /shopping_lists/1
@@ -24,13 +24,13 @@ class ShoppingListsController < ApplicationController
   def add_meal
     meal = Meal.find(params[:meal_id])
     @shopping_list.add_meal meal
-    redirect_to @shopping_list
+    redirect_to shopping_lists_path
   end
 
   def remove_meal
     meal = Meal.find(params[:meal_id])
     @shopping_list.remove_meal meal
-    redirect_to @shopping_list
+    redirect_to shopping_lists_path
   end
 
   # POST /shopping_lists
@@ -41,7 +41,7 @@ class ShoppingListsController < ApplicationController
 
     respond_to do |format|
       if @shopping_list.save
-        format.html { redirect_to @shopping_list, notice: 'Shopping list was successfully created.' }
+        format.html { redirect_to shopping_lists_path, notice: 'Shopping list was successfully created.' }
         format.json { render :show, status: :created, location: @shopping_list }
       else
         format.html { render :new }
@@ -54,9 +54,9 @@ class ShoppingListsController < ApplicationController
   # PATCH/PUT /shopping_lists/1.json
   def update
     respond_to do |format|
-      if @shopping_list.update(shopping_list_params)
-        format.html { redirect_to @shopping_list, notice: 'Shopping list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @shopping_list }
+      if @shopping_list.update!(shopping_list_params)
+        format.html { redirect_to shopping_lists_path, notice: 'Shopping list was successfully updated.' }
+        format.json { render :index, status: :ok, location: @shopping_list }
       else
         format.html { render :edit }
         format.json { render json: @shopping_list.errors, status: :unprocessable_entity }
@@ -82,6 +82,6 @@ class ShoppingListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shopping_list_params
-      params.fetch(:shopping_list, {})
+      params.require(:shopping_list).permit(:name, :id)
     end
 end

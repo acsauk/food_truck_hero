@@ -32,7 +32,7 @@ class ShoppingList < ApplicationRecord
     grouped_ingredients.values.each do |ingredients|
       shopping_list_items << convert_identical_ingredients_to_shopping_list_item(ingredients)
     end
-    
+
     shopping_list_items
   end
 

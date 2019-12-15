@@ -31,7 +31,7 @@ RSpec.describe ShoppingList, type: :model do
   end
 
   it 'can split ingredients into arrays based on ingredient id' do
-    shopping_list = mwrwi.user.shopping_list
+    shopping_list = mwrwi.user.shopping_lists.first
     shopping_list.meals << mwrwi
 
     expected_ingredient_ids = shopping_list.ingredients.uniq.collect { |i| i.id }
@@ -49,7 +49,7 @@ RSpec.describe ShoppingList, type: :model do
   end
 
   it 'accumulates duplicate ingredients amounts and converts to single ShoppingListItem' do
-    shopping_list = mwrwi.user.shopping_list
+    shopping_list = mwrwi.user.shopping_lists.first
     shopping_list.meals << mwrwi
     ingredients = shopping_list.ingredients
     split_ingredients = shopping_list.split_ingredients_by_name
@@ -69,9 +69,8 @@ RSpec.describe ShoppingList, type: :model do
   end
 
   it 'provides associated ingredients as ShoppingListItems with duplicate ingredients reduced and accumulated' do
-    shopping_list = mwrwi.user.shopping_list
+    shopping_list = mwrwi.user.shopping_lists.first
     shopping_list.meals << mwrwi
-    ingredients = shopping_list.ingredients
     split_ingredients = shopping_list.split_ingredients_by_name
 
     expected_shopping_list_item_1 = ShoppingListItem.new(
@@ -85,8 +84,8 @@ RSpec.describe ShoppingList, type: :model do
       amount: split_ingredients.values.second.first.amount * split_ingredients.values.second.length,
       unit: split_ingredients.values.second.first.unit
     )
-    
-    actual_shopping_list_items = shopping_list.shopping_list_items  
+
+    actual_shopping_list_items = shopping_list.shopping_list_items
 
     expect(actual_shopping_list_items.first.name).to eq expected_shopping_list_item_1.name
     expect(actual_shopping_list_items.first.amount).to eq expected_shopping_list_item_1.amount
@@ -100,7 +99,7 @@ RSpec.describe ShoppingList, type: :model do
   end
 
   it 'knows how many of the same meal are on the list' do
-    shopping_list = mwrwi.user.shopping_list
+    shopping_list = mwrwi.user.shopping_lists.first
     shopping_list.meals << mwrwi
     shopping_list.meals << mwrwi
 

@@ -1,0 +1,10 @@
+-if !sl.shopping_list_items.empty?
+  %p.panel-heading
+    Shopping List
+    -if sl.name
+      = "- #{sl.name}"
+  - sl.shopping_list_items.each do |sli|
+    %label.panel-block
+      = render 'shopping_list_items', sli: sli
+  .column
+    = "Shopping list created #{sl.created_at.strftime("%m %B %Y")}"

@@ -40,11 +40,12 @@ FactoryBot.define do
                   ingredients_count: evaluator.ingredients_count
                 )
               end
+
         (0...evaluator.recipes_count).each do
           rwi.title = evaluator.recipe_title unless evaluator.recipe_title.empty?
           rwi.instructions = evaluator.recipe_instructions unless evaluator.recipe_instructions.empty?
           meal.recipe_lists <<
-            FactoryBot.build(
+            FactoryBot.create(
               :recipe_list, recipe: rwi
             )
         end

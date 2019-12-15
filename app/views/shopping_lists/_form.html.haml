@@ -1,10 +1,14 @@
-= form_for @shopping_list do |f|
-  - if @shopping_list.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@shopping_list.errors.count, "error")} prohibited this shopping_list from being saved:"
+= form_for sl do |f|
+  - if sl.errors.any?
+    #error-explanation
+      %h2= "#{pluralize(sl.errors.count, "error")} prohibited this shopping list from being saved:"
       %ul
-        - @shopping_list.errors.full_messages.each do |message|
+        - sl.errors.full_messages.each do |message|
           %li= message
 
-  .actions
-    = f.submit 'Save'
+  .columns.level
+    .column.level-item.field.control
+      = f.text_field :name, class: 'input', placeholder: 'Shopping list name'
+    .column.level-item.field
+      .control
+        = f.submit "Update Shopping List Name", class: 'button is-link'

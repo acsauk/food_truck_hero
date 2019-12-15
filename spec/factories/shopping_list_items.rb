@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :shopping_list_item do
 
     sequence :name do |n|
-        "Item #{n}"
+      "Item #{n}"
     end
 
     unit { 'Grams' }

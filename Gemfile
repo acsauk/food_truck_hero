@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
-gem 'haml-rails'
+gem 'haml-rails', "~> 2.0"
 gem 'money-rails', '~> 1'
 gem "bulma-rails", "~> 0.7.1"
 gem 'cocoon'
@@ -38,6 +38,7 @@ end
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'solargraph'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

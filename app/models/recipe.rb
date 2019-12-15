@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  validates_presence_of :instructions, :title
+
   has_many :recipe_lists
   has_many :meals, through: :recipe_lists
 
@@ -8,6 +10,4 @@ class Recipe < ApplicationRecord
   belongs_to :user, optional: true
 
   accepts_nested_attributes_for :ingredient_lists, allow_destroy: true
-
-  validates_presence_of :instructions, :title
 end
