@@ -2,45 +2,9 @@
   .columns
     .column.is-three-fifths.section
       .panel
-        %p.panel-heading
-          Shopping List
-        - @shopping_list.shopping_list_items.each do |sli|
-          %label.panel-block
-            %input{:type => "checkbox"}
-              = sli.name
-              = sli.amount
-              = sli.unit
-        = "Shopping list created #{@shopping_list.created_at}"
-        = form_for @shopping_list do |f|
-          - if @shopping_list.errors.any?
-            #error-explanation
-              %h2= "#{pluralize(@shopping_list.errors.count, "error")} prohibited this shopping list from being saved:"
-              %ul
-                - @shopping_list.errors.full_messages.each do |message|
-                  %li= message
+        = render 'shopping_list', sl: @shopping_list
 
-          .columns.level
-            .column.level-item.field.control.is-four-fifths
-              = f.text_field :name, class: 'input', placeholder: 'Shopping list name', value: @shopping_list.name
-            .column.level-item.field
-              .control
-                = f.submit class: 'button is-link'
-        = "Name is #{@shopping_list.name}"
     .column.section
       .tile.is-ancestor
       Meals on shopping list
-      - @shopping_list.meals.uniq.each do |m|
-        .tile.is-parent
-          .tile.is-child.is-10
-            = m.name
-          .tile.is-child.is-10
-            = link_to '-', shopping_list_remove_meal_path(@shopping_list, id: @shopping_list.id, meal_id: m.id), method: :post, class: 'button is-small is-danger is-outlined'
-            = @shopping_list.count_duplicate_meals(m)
-            = link_to '+', shopping_list_add_meal_path(@shopping_list, id: @shopping_list.id, meal_id: m.id), method: :post, class: 'button is-small is-primary is-outlined'
-
-
-
-          
-
-              
-
+      = render 'meals', sl: @shopping_list

@@ -12,7 +12,5 @@ Rails.application.routes.draw do
     post 'add_meal', to: 'shopping_lists#add_meal', as: :add_meal
     post 'remove_meal', to: 'shopping_lists#remove_meal', as: :remove_meal
   end
-
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
