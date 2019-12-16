@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    @pagy, @records = pagy(Product.all)
     @products = Product.all
   end
 
