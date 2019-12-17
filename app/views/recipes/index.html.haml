@@ -1,28 +1,33 @@
-.container
-  .is-size-3
-    Recipes
+.section
+  .container
+    .is-size-3
+      Recipes
 
-  %table.table.is-fullwidth
-    %thead
-      %tr
-        %th Name
-        %th Instructions
-        %th Actions
-    %tbody
-    - if @recipes.any?
-      - @recipes.each do |recipe|
+    %table.table.is-fullwidth
+      %thead
         %tr
-          %th
-            = link_to recipe.title.to_s, recipe
-          %td
-            = recipe.instructions
-          %td
-            = link_to 'Edit', edit_recipe_path(recipe)
-            |
-            = link_to 'Delete',
-              recipe,
-              method: :delete,
-              data: { confirm: 'Are you sure?' }
-    - else
-      There are currently no recipes created. Why don't you make one?
-  = link_to 'New Recipe', new_recipe_path, class: 'button is-link'
+          %th Name
+          %th Instructions
+          %th Actions
+      %tbody
+      - if @records.any?
+        - @records.each do |recipe|
+          %tr
+            %th
+              = link_to recipe.title.to_s, recipe
+            %td
+              = recipe.instructions
+            %td
+              = link_to 'Edit', edit_recipe_path(recipe)
+              |
+              = link_to 'Delete',
+                recipe,
+                method: :delete,
+                data: { confirm: 'Are you sure?' }
+      - else
+        There are currently no recipes created. Why don't you make one?
+    
+    = pagy_bulma_nav(@pagy).html_safe
+.section
+  .container
+    = link_to 'New Recipe', new_recipe_path, class: 'button is-link'

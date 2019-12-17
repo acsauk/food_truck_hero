@@ -1,35 +1,39 @@
-.container
-  .is-size-3
-    Meals
+.section
+  .container
+    .is-size-3
+      Meals
 
-  %table.table.is-fullwidth
-    %thead
-      %tr
-        %th Name
-        %th Portions
-        %th Price per-portion
-        %th Profit per-portion
-        %th Margin
-        %th Actions
-    %tbody
-    - @meals.each do |meal|
-      %tr
-        %th
-          = link_to meal.name.to_s, meal
-        %td
-          = meal.portions
-        %td
-          #{humanized_money_with_symbol meal.price_per_portion}
-        %td
-          #{humanized_money_with_symbol meal.profit_per_portion}
-        %td
-          #{meal.margin}%
-        %td
-          = link_to 'Edit', edit_meal_path(meal)
-          |
-          = link_to 'Delete',
-            meal,
-            method: :delete,
-            data: { confirm: 'Are you sure?' }
+    %table.table.is-fullwidth
+      %thead
+        %tr
+          %th Name
+          %th Portions
+          %th Price per-portion
+          %th Profit per-portion
+          %th Margin
+          %th Actions
+      %tbody#meals
+        - @records.each do |meal|
+          %tr
+            %th
+              = link_to meal.name.to_s, meal
+            %td
+              = meal.portions
+            %td
+              #{humanized_money_with_symbol meal.price_per_portion}
+            %td
+              #{humanized_money_with_symbol meal.profit_per_portion}
+            %td
+              #{meal.margin}%
+            %td
+              = link_to 'Edit', edit_meal_path(meal)
+              |
+              = link_to 'Delete',
+                meal,
+                method: :delete,
+                data: { confirm: 'Are you sure?' }
 
-  = link_to 'New Meal', new_meal_path, class: 'button is-link'
+    = pagy_bulma_nav(@pagy).html_safe
+.section
+  .container
+    = link_to 'New Meal', new_meal_path, class: 'button is-link'

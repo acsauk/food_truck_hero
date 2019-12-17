@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem 'active_model_attributes'
 gem "sassc", "~> 2.2"
 gem "sassc-rails", "~> 2.1"
+gem 'pagy', '~> 3.5'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
