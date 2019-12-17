@@ -1,35 +1,39 @@
-.container
-  .is-size-3
-    Products
+.section
+  .container
+    .is-size-3
+      Products
 
-  %table.table.is-fullwidth
-    %thead
-      %tr
-        %th Name
-        %th Brand
-        %th Size
-        %th Price
-        %th SMU Price
-        %th Actions
-    %tbody
-    - @products.each do |product|
-      %tr
-        %th
-          = link_to product.name.to_s, product
-        %td
-          = product.brand
-        %td
-          #{product.amount} #{product.unit}
-        %td
-          = humanized_money_with_symbol product.price
-        %td
-          #{product.smu_price}p
-        %td
-          = link_to 'Edit', edit_product_path(product)
-          |
-          = link_to 'Delete',
-            product,
-            method: :delete,
-            data: { confirm: 'Are you sure?' }
+    %table.table.is-fullwidth
+      %thead
+        %tr
+          %th Name
+          %th Brand
+          %th Size
+          %th Price
+          %th SMU Price
+          %th Actions
+      %tbody#products
+        - @records.each do |product|
+          %tr
+            %th
+              = link_to product.name.to_s, product
+            %td
+              = product.brand
+            %td
+              #{product.amount} #{product.unit}
+            %td
+              = humanized_money_with_symbol product.price
+            %td
+              #{product.smu_price}p
+            %td
+              = link_to 'Edit', edit_product_path(product)
+              |
+              = link_to 'Delete',
+                product,
+                method: :delete,
+                data: { confirm: 'Are you sure?' }
 
-  = link_to 'New Product', new_product_path, class: 'button is-link'
+    = pagy_bulma_nav(@pagy).html_safe
+.section
+  .container
+    = link_to 'New Product', new_product_path, class: 'button is-link'

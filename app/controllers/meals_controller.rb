@@ -4,7 +4,7 @@ class MealsController < ApplicationController
   # GET /meals
   # GET /meals.json
   def index
-    @meals = Meal.all
+    @pagy, @records = pagy(Meal.all)
   end
 
   # GET /meals/1
