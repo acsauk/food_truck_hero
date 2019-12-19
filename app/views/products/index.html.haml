@@ -39,7 +39,7 @@
   = search_form_for @q, url: search_products_path, html: { method: :post } do |f|
     .field.has-addons
       .control
-        = f.search_field :name_cont, class: 'input'
+        = f.search_field :name_cont, class: 'input', id: 'search'
       .actions
         = f.submit 'Search', class: 'button is-link'
 

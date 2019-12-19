@@ -85,7 +85,7 @@ feature 'Products' do
     product2 = FactoryBot.create :product
     click_link 'Products'
     expect(page).to have_content product2.name.to_s
-    fill_in 'Search', with: product.name.to_s
+    fill_in 'search', with: product.name.to_s
     click_button 'Search'
     expect(page).to have_content product.name.to_s
     expect(page).to have_no_content product2.name.to_s
