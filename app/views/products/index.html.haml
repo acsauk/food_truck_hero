@@ -34,6 +34,15 @@
                 data: { confirm: 'Are you sure?' }
 
     = pagy_bulma_nav(@pagy).html_safe
+
+.container
+  = search_form_for @q, url: search_products_path, html: { method: :post } do |f|
+    .field.has-addons
+      .control
+        = f.search_field :name_cont, class: 'input'
+      .actions
+        = f.submit 'Search', class: 'button is-link'
+
 .section
   .container
     = link_to 'New Product', new_product_path, class: 'button is-link'
