@@ -8,7 +8,7 @@ end
 ruby '2.6.5'
 
 gem "apparition", "~> 0.4.0"
-gem 'rails', '~> 5.1.1'
+gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 4.3'
 gem 'uglifier', '>= 1.3.0'
@@ -25,6 +25,7 @@ gem 'active_model_attributes'
 gem "sassc", "~> 2.2"
 gem "sassc-rails", "~> 2.1"
 gem 'pagy', '~> 3.5'
+gem 'ransack', '~> 2.3.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -33,7 +34,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'pry'
-  gem 'rubocop-rspec'
+  gem 'rubocop'
 end
 
 group :development do

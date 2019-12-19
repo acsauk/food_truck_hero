@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @pagy, @records = pagy(Product.all)
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
+    @pagy, @records = pagy(@products)
   end
 
   # GET /products/1
@@ -59,6 +61,11 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    index
+    render :index
   end
 
   private

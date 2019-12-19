@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   devise_for :users
   root 'recipes#index'
   resources :recipes
-  resources :products
+  resources :products do
+    collection do
+      match 'search' => 'products#search', via: [:get, :post], as: :search
+    end
+  end
   resources :users, only: [:show]
   resources :shopping_lists do
     post 'add_meal', to: 'shopping_lists#add_meal', as: :add_meal
