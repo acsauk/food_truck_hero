@@ -80,14 +80,25 @@ feature 'Products' do
     expect(page).to have_content 'Product was successfully destroyed.'
   end
 
-  scenario 'searching products' do
-    product = FactoryBot.create :product
-    product2 = FactoryBot.create :product
-    click_link 'Products'
-    expect(page).to have_content product2.name.to_s
-    fill_in 'search', with: product.name.to_s
-    click_button 'Search'
-    expect(page).to have_content product.name.to_s
-    expect(page).to have_no_content product2.name.to_s
+  context 'searching' do
+    scenario 'form' do
+      product = FactoryBot.create :product
+      product2 = FactoryBot.create :product
+      click_link 'Products'
+      expect(page).to have_content product2.name.to_s
+      fill_in 'search', with: product.name.to_s
+      click_button 'Search'
+      expect(page).to have_content product.name.to_s
+      expect(page).to have_no_content product2.name.to_s
+    end
+
+    scenario 'inline', js: true do
+      product = FactoryBot.create :product
+      click_link 'Products'
+      fill_in 'search', with: product.name.to_s[0...2]
+      search_results = find('#search-results')
+      expect(search_results).to have_content product.name.to_s
+    end
   end
+
 end
