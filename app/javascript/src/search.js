@@ -6,13 +6,13 @@ class Search {
 
     static init(inputId) {
         let inputElement = document.getElementById(inputId)
+        
         inputElement.addEventListener('input', this.handleUpdateValue);
         this.searchEndpoint = inputElement.dataset.url
     }
 
     static async handleUpdateValue(event) {
-        const value = event.target.value
-        this.searchResults = await this.searchProducts(value)
+        this.searchResults = await this.searchProducts(event.target.value)
     }
 
     static async searchProducts(searchString) {
