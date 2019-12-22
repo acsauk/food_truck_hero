@@ -1,9 +1,9 @@
-import search from '../../app/javascript/src/search';
+import Search from '../../app/javascript/src/Search';
 
 let setDocumentBody = () => {
   document.body.innerHTML = `
       <div>
-        <input id="search" type="search" data-url="/search">
+        <input id="search" type="search" data-url="/search" value="test">
       </div>
   `
 };
@@ -12,57 +12,67 @@ let failTest = err => {
   fail(err)
 }
 
+beforeEach(() => {
+  fetch.resetMocks();
+  setDocumentBody();
+  fetch.mockResponseOnce(JSON.stringify({products: ["Ham", "Eggs", "Chips"]}))
+});
+
 describe('search', () => {
   describe('init', () => {
     it('adds required eventListeners to search element', () => {
-      setDocumentBody();
-
       const spy = jest.spyOn(document.getElementById('search'), 'addEventListener');
 
-      search.init();
+      Search.init('search');
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith('keyup', expect.any(Function));
+      expect(spy).toHaveBeenCalledWith('input', Search.handleUpdateValue);
     });
+
+    it('sets search endpoint from value of data-url on input element', () => {
+      Search.init('search');
+      expect(Search.searchEndpoint).toEqual('/search')
+    })
   });
 
   describe('searchProducts', () => {
-    beforeEach(() => {
-      fetch.resetMocks();
-      setDocumentBody();
-      fetch.mockResponseOnce(JSON.stringify({products: ["Ham", "Eggs", "Chips"]}))
-    });
-
     it('calls out to an endpoint with a search string', () => {
       const spy = jest.spyOn(global, 'fetch');
 
       const searchString = 'abc'
-      search.searchProducts(searchString)
+      Search.searchProducts(searchString)
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(`/search?q=${searchString}`);
     })
 
-    it('uses value of data-url on element #search to construct URL', () => {
-      const path = '/newPath'
-      
-      document.body.innerHTML = `
-        <div>
-          <input id="search" type="search" data-url="${path}">
-        </div>
-      `
+    it('returns a list of product strings in an array from json fetch results', async () => {
+      const res = await Search.searchProducts('abc').catch(failTest)
+      expect(res).toEqual(["Ham", "Eggs", "Chips"])
+    })
+  })
 
-      const spy = jest.spyOn(global, 'fetch');
+  describe('handleUpdateValue', () => {
+    it('calls searchProduct with the element value of event target', async () => {
+      const spy = jest.spyOn(Search, 'searchProducts')
 
-      search.searchProducts('abc')
+      const event = new Event('input')
+      const searchInput = document.getElementById('search')
+      searchInput.dispatchEvent(event)
+
+      await Search.handleUpdateValue(event).catch(failTest)
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith('/newPath?q=abc');
+      expect(spy).toHaveBeenCalledWith('test');
     })
 
-    it('returns a list of product strings in an array from json fetch results', async () => {
-      const res = await search.searchProducts('abc').catch(failTest)
-      expect(res).toEqual(["Ham", "Eggs", "Chips"])
+    it('adds search results to search.searchResults', async () => {
+      const event = new Event('input')
+      const searchInput = document.getElementById('search')
+      searchInput.dispatchEvent(event)
+
+      await Search.handleUpdateValue(event).catch(failTest)
+      expect(Search.searchResults).toEqual(["Ham", "Eggs", "Chips"])
     })
   })
 });
