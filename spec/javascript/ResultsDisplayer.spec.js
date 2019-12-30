@@ -42,4 +42,12 @@ describe('generateResultsHTML', () => {
 
       expect(resultsHTMLString.querySelector('.results-list').childElementCount).toEqual(2)
     })
+
+    it('return empty div when searchResults is not an array', () => {
+      const searchResults = ""
+
+      const resultsHTMLString = ResultsDisplayer.generateResultsHTML(searchResults)
+
+      expect(resultsHTMLString.querySelector('.results-list').childElementCount).toEqual(0)
+    })
 })

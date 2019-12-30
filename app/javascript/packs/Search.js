@@ -9,6 +9,7 @@ class Search {
 
     static init(inputId) {
         Search.inputId = inputId
+        Search.searchResults = []
         let inputElement = document.getElementById(inputId)
         
         inputElement.addEventListener('input', Search.handleUpdateValue);
@@ -16,9 +17,13 @@ class Search {
     }
 
     static async handleUpdateValue(event) {
-        Search.searchResults = await Search.searchProducts(event.target.value)
-        const results = ResultsDisplayer.generateResultsHTML(Search.searchResults)
-        ResultsDisplayer.appendResultsTo(Search.inputId, results)
+        const results = await Search.searchProducts(event.target.value)
+
+        if (!Search.resultsAreEqual(results)) {
+            Search.searchResults = results
+            const resultsHTML = ResultsDisplayer.generateResultsHTML(Search.searchResults)
+            ResultsDisplayer.appendResultsTo(Search.inputId, resultsHTML)
+        }
     }
 
     static async searchProducts(searchString) {
@@ -26,6 +31,12 @@ class Search {
         const data = await response.json()
 
         return data
+    }
+
+    static resultsAreEqual(newResults) {
+        return (newResults.length == Search.searchResults.length) && newResults.every(function(element, index) {
+            return element.name === Search.searchResults[index].name; 
+        });
     }
 }
 

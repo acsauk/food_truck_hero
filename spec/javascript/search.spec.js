@@ -16,7 +16,7 @@ let failTest = err => {
 beforeEach(() => {
   fetch.resetMocks()
   setDocumentBody()
-  fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+  Search.searchResults = []
 });
 
 describe('search', () => {
@@ -48,6 +48,8 @@ describe('search', () => {
     })
 
     it('returns a list of product strings in an array from json fetch results', async () => {
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+
       const res = await Search.searchProducts('abc').catch(failTest)
       expect(res).toEqual([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}])
     })
@@ -55,6 +57,8 @@ describe('search', () => {
 
   describe('handleUpdateValue', () => {
     it('calls searchProduct with the element value of event target', async () => {
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+
       const spy = jest.spyOn(Search, 'searchProducts')
 
       const event = new Event('input')
@@ -68,6 +72,8 @@ describe('search', () => {
     })
 
     it('adds search results to search.searchResults', async () => {
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+
       const event = new Event('input')
       const searchInput = document.getElementById('search')
       searchInput.dispatchEvent(event)
@@ -77,6 +83,8 @@ describe('search', () => {
     })
 
     it('appends search results below search input', async () => {
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+
       const event = new Event('input')
       const searchInput = document.getElementById('search')
       searchInput.dispatchEvent(event)
@@ -87,5 +95,45 @@ describe('search', () => {
       expect(searchInput.parentElement.innerHTML).toMatch(/Eggs/)
       expect(searchInput.parentElement.innerHTML).toMatch(/Chips/)
     })
+
+    it('only updates results if they change', async () => {
+      const spy = jest.spyOn(ResultsDisplayer, 'generateResultsHTML');
+
+      const event = new Event('input')
+      const searchInput = document.getElementById('search')
+      searchInput.dispatchEvent(event)
+
+      Search.init('search')
+      fetch.resetMocks()
+
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+      await Search.handleUpdateValue(event).catch(failTest)
+
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+      await Search.handleUpdateValue(event).catch(failTest)
+
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}]))
+      await Search.handleUpdateValue(event).catch(failTest)
+
+      expect(spy).toHaveBeenCalledTimes(2)
+    })
   })
-});
+
+  describe('resultsAreEqual', () => {
+    it('returns true when Search.searchResults and input are equal', () => {
+      const results = [{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]
+      Search.searchResults = results
+      expect(Search.resultsAreEqual(results)).toEqual(true)
+    })
+
+    it('returns false when Search.searchResults and input are inequal', () => {
+      Search.searchResults = [{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]
+      expect(Search.resultsAreEqual([{id: 1, name: "Cheese"}, {id: 2, name: "Tomato"}, {id: 3, name: "Bread"}])).toEqual(false)
+    })
+
+    it('handles arrays of different lengths', () => {
+      Search.searchResults = [{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]
+      expect(Search.resultsAreEqual([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}])).toEqual(false)
+    })
+  })
+})
