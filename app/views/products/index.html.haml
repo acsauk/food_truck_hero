@@ -1,3 +1,5 @@
+= javascript_pack_tag 'AutoComplete'
+
 .section
   .container
     .is-size-3
@@ -36,16 +38,14 @@
     = pagy_bulma_nav(@pagy).html_safe
 
 .container
-  = search_form_for @q, url: search_products_path, html: { method: :post } do |f|
+  = search_form_for @q, url: search_products_path, format: :json, html: { method: :post } do |f|
     .field.has-addons
       .control.has-icons-left
-        = f.search_field :name_cont, class: 'input', id: 'search'
+        = f.search_field :name_cont, class: 'input', id: 'search', data: { url: search_async_products_path }
         %span.icon.is-left 
           %i.fas.fa-search{ "aria-hidden": true }
       .actions
         = f.submit 'Search', class: 'button is-link'
-    #search-results
-      Product Name 7
 
 .section
   .container

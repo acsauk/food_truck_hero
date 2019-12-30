@@ -1,4 +1,5 @@
-import Search from '../../app/javascript/src/Search';
+import Search from '../../app/javascript/packs/Search';
+import ResultsDisplayer from '../../app/javascript/packs/ResultsDisplayer';
 
 let setDocumentBody = () => {
   document.body.innerHTML = `
@@ -73,6 +74,18 @@ describe('search', () => {
 
       await Search.handleUpdateValue(event).catch(failTest)
       expect(Search.searchResults).toEqual(["Ham", "Eggs", "Chips"])
+    })
+
+    it('appends search results below search input', async () => {
+      const event = new Event('input')
+      const searchInput = document.getElementById('search')
+      searchInput.dispatchEvent(event)
+
+      await Search.handleUpdateValue(event).catch(failTest)
+
+      expect(searchInput.parentElement.innerHTML).toMatch(/Ham/)
+      expect(searchInput.parentElement.innerHTML).toMatch(/Eggs/)
+      expect(searchInput.parentElement.innerHTML).toMatch(/Chips/)
     })
   })
 });

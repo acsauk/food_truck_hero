@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :products do
     collection do
       match 'search' => 'products#search', via: [:get, :post], as: :search
+      match 'search_async' => 'products#search_async', via: [:get, :post], as: :search_async
     end
   end
   resources :users, only: [:show]
