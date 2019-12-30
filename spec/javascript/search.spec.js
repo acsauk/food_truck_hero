@@ -14,9 +14,9 @@ let failTest = err => {
 }
 
 beforeEach(() => {
-  fetch.resetMocks();
-  setDocumentBody();
-  fetch.mockResponseOnce(JSON.stringify({products: ["Ham", "Eggs", "Chips"]}))
+  fetch.resetMocks()
+  setDocumentBody()
+  fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
 });
 
 describe('search', () => {
@@ -49,7 +49,7 @@ describe('search', () => {
 
     it('returns a list of product strings in an array from json fetch results', async () => {
       const res = await Search.searchProducts('abc').catch(failTest)
-      expect(res).toEqual(["Ham", "Eggs", "Chips"])
+      expect(res).toEqual([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}])
     })
   })
 
@@ -73,7 +73,7 @@ describe('search', () => {
       searchInput.dispatchEvent(event)
 
       await Search.handleUpdateValue(event).catch(failTest)
-      expect(Search.searchResults).toEqual(["Ham", "Eggs", "Chips"])
+      expect(Search.searchResults).toEqual([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}])
     })
 
     it('appends search results below search input', async () => {
