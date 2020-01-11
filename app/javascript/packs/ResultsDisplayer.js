@@ -5,22 +5,21 @@ class ResultsDisplayer {
 
     static appendResultsTo(inputId, resultsElement) {
         let element = document.getElementById(inputId).parentElement
-
         element.replaceChild(resultsElement, element.lastChild)
     }
 
-    static generateResultsHTML(searchResults) {
+    static generateResultsHTML(searchResults, resultsParentClass, resultItemClass) {
         let parser = new DOMParser()
-        let resultsHTML = parser.parseFromString(`<div class='results-list'></div>`, 'text/html')
+        let resultsHTML = parser.parseFromString(`<div class='${resultsParentClass} list is-hoverable'></div>`, 'text/html').body
 
         if (Array.isArray(searchResults)) {
             searchResults.forEach(r => {
-                let result = parser.parseFromString(`<p class='result'>${r.name}</p>`, 'text/html')
-                resultsHTML.body.firstChild.appendChild(result.body.firstChild)
+                let result = parser.parseFromString(`<a href='#' class='${resultItemClass}'>${r.name}</p>`, 'text/html').body
+                resultsHTML.firstChild.appendChild(result.firstChild)
             })
         }
 
-        return resultsHTML.body
+        return resultsHTML
     }
 }
 

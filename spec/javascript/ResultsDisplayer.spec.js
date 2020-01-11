@@ -37,17 +37,26 @@ describe('appendResultsTo', () => {
 describe('generateResultsHTML', () => {
     it('generates results HTML from JSON', () => {
       const searchResults = ["result 1", "result 2"]
+      const resultsHTMLString = ResultsDisplayer.generateResultsHTML(searchResults, "parentClass", "itemClass")
 
-      const resultsHTMLString = ResultsDisplayer.generateResultsHTML(searchResults)
-
-      expect(resultsHTMLString.querySelector('.results-list').childElementCount).toEqual(2)
+      expect(resultsHTMLString.querySelector('.parentClass').childElementCount).toEqual(2)
     })
 
     it('return empty div when searchResults is not an array', () => {
       const searchResults = ""
+      const resultsHTMLString = ResultsDisplayer.generateResultsHTML(searchResults, "parentClass", "itemClass")
 
-      const resultsHTMLString = ResultsDisplayer.generateResultsHTML(searchResults)
+      expect(resultsHTMLString.querySelector('.parentClass').childElementCount).toEqual(0)
+    })
 
-      expect(resultsHTMLString.querySelector('.results-list').childElementCount).toEqual(0)
+    it('assigns the value of resultsParentClass and resultItemClass to the class of results parent and each result item', () => {
+      const searchResults = ["result 1", "result 2"]
+      const resultsHTMLString = ResultsDisplayer.generateResultsHTML(searchResults, "parentClass", "itemClass")
+
+      const resultsParent = resultsHTMLString.querySelectorAll('.parentClass')
+      expect(resultsParent.length).toEqual(1)
+
+      const resultItems = resultsHTMLString.querySelectorAll('.itemClass')
+      expect(resultItems.length).toEqual(2)
     })
 })

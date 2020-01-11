@@ -1,10 +1,11 @@
 import Search from '../../app/javascript/packs/Search';
 import ResultsDisplayer from '../../app/javascript/packs/ResultsDisplayer';
+import FieldPopulator from '../../app/javascript/packs/FieldPopulator';
 
 let setDocumentBody = () => {
   document.body.innerHTML = `
       <div>
-        <input id="search" type="search" data-url="/search" value="test">
+        <input id="search" class="commonClass" type="search" data-url="/search" value="test">
       </div>
   `
 };
@@ -24,14 +25,14 @@ describe('search', () => {
     it('adds required eventListeners to search element', () => {
       const spy = jest.spyOn(document.getElementById('search'), 'addEventListener');
 
-      Search.init('search');
+      Search.init('search', 'resultsParentClass', 'resultsItemClass');
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith('input', Search.handleUpdateValue);
     });
 
     it('sets search endpoint from value of data-url on input element', () => {
-      Search.init('search');
+      Search.init('search', 'resultsParentClass', 'resultsItemClass');
       expect(Search.searchEndpoint).toEqual('/search')
     })
   });
@@ -117,6 +118,22 @@ describe('search', () => {
 
       expect(spy).toHaveBeenCalledTimes(2)
     })
+
+    it('adds click event listener to generated results HTML that calls FieldPopulator.handleOnClick', async () => {
+      fetch.mockResponseOnce(JSON.stringify([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]))
+      Search.resultsParentClass = 'resultsParentClass'
+
+      const clickEvent = new Event('input')
+      const searchInput = document.getElementById('search')
+      const spy = jest.spyOn(Search, 'addEventListenerToResultsParent');
+
+      searchInput.dispatchEvent(clickEvent)
+      await Search.handleUpdateValue(clickEvent).catch(failTest)
+
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(spy).toHaveBeenCalledWith('resultsParentClass')
+
+    })
   })
 
   describe('resultsAreEqual', () => {
@@ -134,6 +151,17 @@ describe('search', () => {
     it('handles arrays of different lengths', () => {
       Search.searchResults = [{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}, {id: 3, name: "Chips"}]
       expect(Search.resultsAreEqual([{id: 1, name: "Ham"}, {id: 2, name: "Eggs"}])).toEqual(false)
+    })
+  })
+
+  describe('addEventListenerToResultsParent', () => {
+    it('adds click events to elements with class name passed to function with callback to FieldPopulator.handleOnClick', () => {
+      let searchSpy = jest.spyOn(document.getElementById('search'), 'addEventListener');
+
+      Search.addEventListenerToResultsParent('commonClass')
+
+      expect(searchSpy).toHaveBeenCalled()
+      expect(searchSpy).toHaveBeenCalledWith('click', Search.handleOnResultClick)
     })
   })
 })

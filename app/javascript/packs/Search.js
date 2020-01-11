@@ -1,14 +1,19 @@
 import ResultsDisplayer from './ResultsDisplayer';
+import FieldPopulator from './FieldPopulator';
 
 class Search {
     constructor() {
         this.searchResults = []
         this.searchEndpoint = null
         this.inputId = inputId
+        this.resultsParentClass = resultsParentClass
+        this.resultsItemClass = resultsItemClass
     }
 
-    static init(inputId) {
+    static init(inputId, resultsParentClass, resultsItemClass) {
         Search.inputId = inputId
+        Search.resultsParentClass = resultsParentClass
+        Search.resultsItemClass = resultsItemClass
         Search.searchResults = []
         let inputElement = document.getElementById(inputId)
         
@@ -21,8 +26,9 @@ class Search {
 
         if (!Search.resultsAreEqual(results)) {
             Search.searchResults = results
-            const resultsHTML = ResultsDisplayer.generateResultsHTML(Search.searchResults)
+            const resultsHTML = ResultsDisplayer.generateResultsHTML(Search.searchResults, Search.resultsParentClass, Search.resultsItemClass)
             ResultsDisplayer.appendResultsTo(Search.inputId, resultsHTML)
+            Search.addEventListenerToResultsParent(Search.resultsParentClass)
         }
     }
 
@@ -37,6 +43,15 @@ class Search {
         return (newResults.length == Search.searchResults.length) && newResults.every(function(element, index) {
             return element.name === Search.searchResults[index].name; 
         });
+    }
+
+    static addEventListenerToResultsParent(resultsParentClass) {
+        let resultsParent = document.querySelector(`.${resultsParentClass}`)
+        resultsParent.addEventListener('click', Search.handleOnResultClick)
+    }
+
+    static handleOnResultClick(e) {
+        FieldPopulator.handleOnClick(e, Search.inputId)
     }
 }
 

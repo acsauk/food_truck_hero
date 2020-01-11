@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
     end
 
     @q = Product.ransack(name_cont: params[:q])
-    render json: @q.result(distinct: true)
+    render json: @q.result(distinct: true).limit(10)
   end
 
   private
