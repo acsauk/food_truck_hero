@@ -53,10 +53,7 @@ describe('generateResultsHTML', () => {
       const searchResults = ["result 1", "result 2"]
       const resultsHTMLString = ResultsDisplayer.generateResultsHTML(searchResults, "parentClass", "itemClass")
 
-      const resultsParent = resultsHTMLString.querySelectorAll('.parentClass')
-      expect(resultsParent.length).toEqual(1)
-
-      const resultItems = resultsHTMLString.querySelectorAll('.itemClass')
-      expect(resultItems.length).toEqual(2)
+      expect(resultsHTMLString.querySelectorAll('.parentClass').length).toEqual(1)
+      expect(resultsHTMLString.querySelectorAll('.itemClass').length).toEqual(2)
     })
 })
