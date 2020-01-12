@@ -8,13 +8,13 @@ class ResultsDisplayer {
         element.replaceChild(resultsElement, element.lastChild)
     }
 
-    static generateResultsHTML(searchResults, resultsParentClass, resultItemClass) {
+    static generateResultsHTML(searchResults, resultsParentClass, resultItemClass, paramToSearchOn) {
         let parser = new DOMParser()
         let resultsHTML = parser.parseFromString(`<div class='${resultsParentClass} list is-hoverable'></div>`, 'text/html').body
 
         if (Array.isArray(searchResults)) {
             searchResults.forEach(r => {
-                let result = parser.parseFromString(`<a href='#' class='${resultItemClass}'>${r.name}</p>`, 'text/html').body
+                let result = parser.parseFromString(`<div class='${resultItemClass}'>${r[paramToSearchOn]}</div>`, 'text/html').body
                 resultsHTML.firstChild.appendChild(result.firstChild)
             })
         }

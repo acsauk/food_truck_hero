@@ -8,12 +8,14 @@ class Search {
         this.inputId = inputId
         this.resultsParentClass = resultsParentClass
         this.resultsItemClass = resultsItemClass
+        this.paramToSearchOn = paramToSearchOn
     }
 
-    static init(inputId, resultsParentClass, resultsItemClass) {
+    static init(inputId, resultsParentClass, resultsItemClass, paramToSearchOn) {
         Search.inputId = inputId
         Search.resultsParentClass = resultsParentClass
         Search.resultsItemClass = resultsItemClass
+        Search.paramToSearchOn = paramToSearchOn
         Search.searchResults = []
         let inputElement = document.getElementById(inputId)
         
@@ -26,7 +28,7 @@ class Search {
 
         if (!Search.resultsAreEqual(results)) {
             Search.searchResults = results
-            const resultsHTML = ResultsDisplayer.generateResultsHTML(Search.searchResults, Search.resultsParentClass, Search.resultsItemClass)
+            const resultsHTML = ResultsDisplayer.generateResultsHTML(Search.searchResults, Search.resultsParentClass, Search.resultsItemClass, Search.paramToSearchOn)
             ResultsDisplayer.appendResultsTo(Search.inputId, resultsHTML)
             Search.addEventListenerToResultsParent(Search.resultsParentClass)
         }

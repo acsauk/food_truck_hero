@@ -34,6 +34,9 @@
                 data: { confirm: 'Are you sure?' }
 
     = pagy_bulma_nav(@pagy).html_safe
+
+= render partial: 'layouts/search', locals: {search_path: search_meals_path, async_search_path: search_async_meals_path, param_to_search_on: 'name', ransack_search_term: :name_cont} 
+
 .section
   .container
     = link_to 'New Meal', new_meal_path, class: 'button is-link'

@@ -1,11 +1,10 @@
 import Search from '../../app/javascript/packs/Search';
 import ResultsDisplayer from '../../app/javascript/packs/ResultsDisplayer';
-import FieldPopulator from '../../app/javascript/packs/FieldPopulator';
 
 let setDocumentBody = () => {
   document.body.innerHTML = `
       <div>
-        <input id="search" class="commonClass" type="search" data-url="/search" value="test">
+        <input id="search" class="commonClass" type="search" data-url="/search" data-param-to-search-on="name" value="test">
       </div>
   `
 };
@@ -25,7 +24,7 @@ describe('search', () => {
     it('adds required eventListeners to search element', () => {
       const spy = jest.spyOn(document.getElementById('search'), 'addEventListener');
 
-      Search.init('search', 'resultsParentClass', 'resultsItemClass');
+      Search.init('search', 'resultsParentClass', 'resultsItemClass', 'name');
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith('input', Search.handleUpdateValue);
@@ -90,6 +89,7 @@ describe('search', () => {
       const searchInput = document.getElementById('search')
       searchInput.dispatchEvent(event)
 
+      Search.init('search', 'resultsParentClass', 'resultsItemClass', 'name');
       await Search.handleUpdateValue(event).catch(failTest)
 
       expect(searchInput.parentElement.innerHTML).toMatch(/Ham/)

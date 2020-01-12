@@ -5,7 +5,9 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @pagy, @records = pagy(Recipe.all)
+    @q = Recipe.ransack(params[:q])
+    @recipes = @q.result(distinct: true)
+    @pagy, @records = pagy(@recipes)
   end
 
   # GET /recipes/1
@@ -64,6 +66,20 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    index
+    render :index
+  end
+
+  def search_async
+    if params[:q].blank?
+      return render json: {}
+    end
+
+    @q = Recipe.ransack(name_cont: params[:q])
+    render json: @q.result(distinct: true).limit(10)
   end
 
   private
