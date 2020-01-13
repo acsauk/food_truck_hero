@@ -15,6 +15,10 @@ require 'spec_helper'
 require 'money-rails/test_helpers'
 require 'capybara/apparition'
 
+Capybara.register_driver :apparition do |app|
+  Capybara::Apparition::Driver.new(app, {js_errors: false})
+end
+
 Capybara.javascript_driver = :apparition
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -25,6 +29,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
   config.include Warden::Test::Helpers
+
+  # Timeout.timeout(300) do
+  #   loop until Webpacker.config.public_manifest_path.exist?
+  # end
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

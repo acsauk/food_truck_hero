@@ -4,7 +4,9 @@ class MealsController < ApplicationController
   # GET /meals
   # GET /meals.json
   def index
-    @pagy, @records = pagy(Meal.all)
+    @q = Meal.ransack(params[:q])
+    @meals = @q.result(distinct: true)
+    @pagy, @records = pagy(@meals)
   end
 
   # GET /meals/1
@@ -70,6 +72,20 @@ class MealsController < ApplicationController
     shopping_list.add_meal @meal
     flash[:notice] = "#{@meal.name} added to shopping list"
     redirect_to @meal
+  end
+
+  def search
+    index
+    render :index
+  end
+
+  def search_async
+    if params[:q].blank?
+      return render json: {}
+    end
+
+    @q = Meal.ransack(name_cont: params[:q])
+    render json: @q.result(distinct: true).limit(10)
   end
 
   private

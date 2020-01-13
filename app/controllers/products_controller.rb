@@ -68,6 +68,15 @@ class ProductsController < ApplicationController
     render :index
   end
 
+  def search_async
+    if params[:q].blank?
+      return render json: {}
+    end
+
+    @q = Product.ransack(name_cont: params[:q])
+    render json: @q.result(distinct: true).limit(10)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

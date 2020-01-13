@@ -27,14 +27,15 @@ MoneyRails.configure do |config|
 
   # Default ActiveRecord migration configuration values for columns:
   #
-  config.amount_column = { prefix: '',           # column name prefix
-                           postfix: '_pence',    # column name  postfix
-                           column_name: nil,     # full column name (overrides prefix, postfix and accessor name)
-                           type: :integer,       # column type
-                           present: true,        # column will be created
-                           null: false,          # other options will be treated as column options
-                           default: 0
-                         }
+  config.amount_column = {
+    prefix: '',           # column name prefix
+    postfix: '_pence',    # column name  postfix
+    column_name: nil,     # full column name (overrides prefix, postfix and accessor name)
+    type: :integer,       # column type
+    present: true,        # column will be created
+    null: false,          # other options will be treated as column options
+    default: 0
+  }
   #
   # config.currency_column = { prefix: '',
   #                            postfix: '_currency',
@@ -73,16 +74,16 @@ MoneyRails.configure do |config|
   #
   # set to BigDecimal::ROUND_HALF_EVEN by default
   #
-  config.rounding_mode = BigDecimal::ROUND_HALF_UP
+  config.rounding_mode = BigDecimal::ROUND_HALF_EVEN
 
   # Set default money format globally.
   # Default value is nil meaning "ignore this option".
   # Example:
   #
   config.default_format = {
-    :no_cents_if_whole => false,
-    :symbol => nil,
-    :sign_before_symbol => nil
+    no_cents_if_whole: false,
+    symbol: nil,
+    sign_before_symbol: nil,
   }
 
   config.locale_backend = :currency

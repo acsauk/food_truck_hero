@@ -1,0 +1,11 @@
+= javascript_pack_tag 'AutoComplete'
+
+.container
+  = search_form_for @q, url: search_path, format: :json, html: { method: :post } do |f|
+    .field.has-addons
+      .control.has-icons-left
+        = f.search_field ransack_search_term, class: 'input', id: 'search', data: { url: async_search_path, param_to_search_on: param_to_search_on  }
+        %span.icon.is-left 
+          %i.fas.fa-search{ "aria-hidden": true }
+      .actions
+        = f.submit 'Search', class: 'button is-link'

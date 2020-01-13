@@ -44,6 +44,21 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      # Store yarn / webpacker cache
+      - save_cache:
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
       # Database setup
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
@@ -54,6 +69,8 @@ jobs:
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+
+            bundle exec rails webpacker:compile
 
             bundle exec rspec --format progress \
                             --format RspecJunitFormatter \

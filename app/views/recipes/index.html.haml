@@ -28,6 +28,9 @@
         There are currently no recipes created. Why don't you make one?
     
     = pagy_bulma_nav(@pagy).html_safe
+
+= render partial: 'layouts/search', locals: {search_path: search_recipes_path, async_search_path: search_async_recipes_path, param_to_search_on: 'title', ransack_search_term: :title_cont} 
+
 .section
   .container
     = link_to 'New Recipe', new_recipe_path, class: 'button is-link'
