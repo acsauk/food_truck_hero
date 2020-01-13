@@ -24,7 +24,7 @@
             %td
               = humanized_money_with_symbol product.price
             %td
-              #{product.smu_price}p
+              #{humanized_money product.smu_price}p
             %td
               = link_to 'Edit', edit_product_path(product)
               |
@@ -35,13 +35,7 @@
 
     = pagy_bulma_nav(@pagy).html_safe
 
-.container
-  = search_form_for @q, url: search_products_path, html: { method: :post } do |f|
-    .field.has-addons
-      .control
-        = f.search_field :name_cont, class: 'input', id: 'search'
-      .actions
-        = f.submit 'Search', class: 'button is-link'
+= render partial: 'layouts/search', locals: {search_path: search_products_path, async_search_path: search_async_products_path, param_to_search_on: 'name', ransack_search_term: :name_cont} 
 
 .section
   .container

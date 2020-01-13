@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Recipes', :js => true do
+feature 'Recipes', js: true do
   let(:rwi) { FactoryBot.create :recipe_with_ingredients, ingredients_count: 3 }
 
   before {

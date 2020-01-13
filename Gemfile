@@ -7,7 +7,7 @@ end
 
 ruby '2.6.5'
 
-gem "apparition", "~> 0.4.0"
+gem 'apparition', '~> 0.4.0'
 gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 4.3'
@@ -16,16 +16,18 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
-gem 'haml-rails', "~> 2.0"
+gem 'haml-rails', '~> 2.0'
 gem 'money-rails', '~> 1'
-gem "bulma-rails", "~> 0.7.1"
+gem 'bulma-rails', '~> 0.7.1'
 gem 'cocoon'
 gem 'jquery-rails'
 gem 'active_model_attributes'
-gem "sassc", "~> 2.2"
-gem "sassc-rails", "~> 2.1"
+gem 'sassc', '~> 2.2'
+gem 'sassc-rails', '~> 2.1'
 gem 'pagy', '~> 3.5'
 gem 'ransack', '~> 2.3.0'
+gem 'font_awesome5_rails'
+gem 'webpacker', '~> 4.x'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
