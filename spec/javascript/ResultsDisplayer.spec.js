@@ -1,5 +1,7 @@
 import ResultsDisplayer from '../../app/javascript/packs/ResultsDisplayer';
 
+console.log('JS is working')
+
 let setDocumentBody = () => {
   document.body.innerHTML = `
       <div id="parent">

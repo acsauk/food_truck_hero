@@ -17,6 +17,3 @@
 
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-
-const hello = 'Hello World from Webpacker'
-console.log(hello)
