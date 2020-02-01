@@ -73,4 +73,12 @@ RSpec.describe Meal, type: :model do
     actual_ingredients = mwrwi_two_pound_product.ingredients
     expect(actual_ingredients).to eq expected_ingredients
   end
+
+  it 'has a use by days based on the ingedient with the smallest use by days' do
+    meal_3_days_ubd = FactoryBot.create(:meal_3_days_ubd)
+    expect(meal_3_days_ubd.use_by_days).to eq 3
+
+    meal_5_days_ubd = FactoryBot.create(:meal_5_days_ubd)
+    expect(meal_5_days_ubd.use_by_days).to eq 5
+  end
 end

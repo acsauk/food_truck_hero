@@ -1,14 +1,18 @@
-def create_product(name: 'Product Name',
-                   brand: 'Product Brand',
-                   amount: 2000,
-                   unit: 'grams',
-                   price: 20)
+def create_product(
+  name: 'Product Name',
+  brand: 'Product Brand',
+  amount: 2000,
+  unit: 'grams',
+  price: 20,
+  use_by_days: 3
+)
   find("a[href='#{new_product_path}']").click
   fill_in 'Name', with: name
   fill_in :product_brand, with: brand
   fill_in :product_unit, with: unit
   fill_in :product_amount, with: amount
   fill_in :product_price, with: price
+  select use_by_days, from: :product_use_by_days
   click_button 'Create Product'
 end
 
