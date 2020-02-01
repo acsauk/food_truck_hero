@@ -11,6 +11,7 @@ FactoryBot.define do
     unit { 'Grams' }
     amount { 100 }
     price { 1 }
+    use_by_days { 3 }
 
     trait :price_two_pound do
       price { 2 }

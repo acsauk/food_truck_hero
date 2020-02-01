@@ -10,7 +10,7 @@ feature 'Products' do
 
   scenario 'adding a Product' do
     click_link 'Products'
-    create_product(name: 'A product name', brand: 'Some brand', price: '2.50', amount: '250', unit: 'Grams')
+    create_product(name: 'A product name', brand: 'Some brand', price: '2.50', amount: '250', unit: 'Grams', use_by_days: 3)
     expect(page).to have_content 'Product was successfully created'
     expect(page).to have_content 'A product name'
     expect(page).to have_content 'Some brand'
