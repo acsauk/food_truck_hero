@@ -26,6 +26,7 @@ feature 'Products' do
     expect(page).to have_content product.brand.to_s
     expect(page).to have_content "£#{product.price}"
     expect(page).to have_content "#{product.amount} #{product.unit}"
+    expect(page).to have_content "#{product.use_by_days} days"
   end
 
   scenario 'showing products index' do

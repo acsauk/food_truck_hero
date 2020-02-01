@@ -38,6 +38,9 @@
             .column.profit
               %p.title.title.is-5 Profit per portion
               #{humanized_money_with_symbol @meal.profit_per_portion}
+            .column.use_by_days
+              %p.title.title.is-5 Use by days
+              #{@meal.use_by_days} days
       %footer.card-footer
         = link_to 'Edit', edit_meal_path(@meal), class: 'card-footer-item'
         = link_to 'Delete', @meal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-footer-item'

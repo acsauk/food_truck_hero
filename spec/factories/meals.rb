@@ -51,5 +51,19 @@ FactoryBot.define do
         end
       end
     end
+
+    factory :meal_3_days_ubd do
+      after(:create) do |meal, evaluator|
+        recipe = FactoryBot.create(:recipe_3_days_ubd)
+        meal.recipe_lists << FactoryBot.create(:recipe_list, recipe: recipe)
+      end
+    end
+
+    factory :meal_5_days_ubd do
+      after(:create) do |meal, evaluator|
+        recipe = FactoryBot.create(:recipe_5_days_ubd)
+        meal.recipe_lists << FactoryBot.create(:recipe_list, recipe: recipe)
+      end
+    end
   end
 end

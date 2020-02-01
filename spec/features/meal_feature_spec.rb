@@ -75,14 +75,14 @@ feature 'Meals' do
   end
 
   scenario 'deleting a meal via meal#show' do
-    meal = FactoryBot.create :meal
+    meal = FactoryBot.create :meal_with_recipes_with_ingredients
     visit meal_path meal
     click_link 'Delete'
     expect(page).to have_content 'Meal was successfully destroyed.'
   end
 
   scenario 'deleting a meal via meals#index' do
-    meal = FactoryBot.create :meal
+    meal = FactoryBot.create :meal_with_recipes_with_ingredients
     visit meals_path
     delete_link = find("a[href='#{meal_path meal}']") { |el| el['data-method'] == 'delete' }
     delete_link.click
@@ -106,5 +106,11 @@ feature 'Meals' do
     meal = FactoryBot.create :meal_with_recipes_with_ingredients
     visit meal_path meal
     expect(page).to have_content "#{meal.margin} %"
+  end
+
+  scenario 'viewing the use by days of the meal' do
+    meal = FactoryBot.create(:meal_5_days_ubd)
+    visit meal_path meal
+    expect(page).to have_content "5 days"
   end
 end
