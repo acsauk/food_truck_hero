@@ -43,4 +43,12 @@ class Meal < ApplicationRecord
     end
     ingredients_array
   end
+
+  def use_by_days
+    shortest_ubd_ingredient = ingredients.reduce { 
+      |i1, i2| i1.product.use_by_days <= i2.product.use_by_days ? i1 : i2
+    }
+
+    shortest_ubd_ingredient.product.use_by_days
+  end
 end

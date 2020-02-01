@@ -37,5 +37,11 @@
         = f.label :price
         .control
           = f.text_field :price, id: :product_price, class: 'input'
+      .field.use-by-days
+        = f.label :use_by_days
+        .control
+          .select
+            = f.select :use_by_days, (1..10).to_a
+
       .actions
         = f.submit class: 'button is-link'

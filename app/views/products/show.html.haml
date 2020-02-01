@@ -22,6 +22,9 @@
             .column.smu
               %p.title.title.is-4 SMU Price
               #{@product.smu_price}p
+            .column.use_by_days
+              %p.title.title.is-4 Use by days
+              #{@product.use_by_days} days
       %footer.card-footer
         = link_to 'Edit', edit_product_path(@product), class: 'card-footer-item'
         = link_to 'Delete',

@@ -3,9 +3,11 @@ FactoryBot.define do
     sequence :title do |n|
       "Title text #{n}"
     end
+
     sequence :instructions do |n|
       "Instructions text #{n}"
     end
+
     association :user
 
     transient do
@@ -38,6 +40,34 @@ FactoryBot.define do
               )
             end
         end
+      end
+    end
+
+    factory :recipe_3_days_ubd do
+      after(:create) do |recipe, evaluator|
+        recipe.ingredient_lists <<
+          FactoryBot.create(
+            :ingredient_list, ingredient: FactoryBot.create(:ingredient, :use_by_days_three_product)
+          )
+
+          recipe.ingredient_lists <<
+          FactoryBot.create(
+            :ingredient_list, ingredient: FactoryBot.create(:ingredient, :use_by_days_five_product)
+          )
+      end
+    end
+
+    factory :recipe_5_days_ubd do
+      after(:create) do |recipe, evaluator|
+        recipe.ingredient_lists <<
+          FactoryBot.create(
+            :ingredient_list, ingredient: FactoryBot.create(:ingredient, :use_by_days_five_product)
+          )
+
+          recipe.ingredient_lists <<
+          FactoryBot.create(
+            :ingredient_list, ingredient: FactoryBot.create(:ingredient, :use_by_days_seven_product)
+          )
       end
     end
   end
