@@ -1,0 +1,9 @@
+.section
+  .container
+    = form_for @label, html: {class: 'ui form grid container'} do |f|
+      .columns
+        .field.label-amount
+          = label :label, :amount
+          .control
+            .select
+              = select :label, :amount, (1..24).to_a

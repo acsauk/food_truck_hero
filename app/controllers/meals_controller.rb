@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: %i[show edit update destroy add_to_shopping_list]
+  before_action :set_meal, only: %i[show edit update destroy add_to_shopping_list labels]
 
   # GET /meals
   # GET /meals.json
@@ -88,10 +88,16 @@ class MealsController < ApplicationController
     render json: @q.result(distinct: true).limit(10)
   end
 
+  # GET /meals/1/labels
+  def labels
+    @meal
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_meal
-    @meal = Meal.find(params[:id])
+    id = params[:meal_id] ? params[:meal_id] : params[:id]
+    @meal = Meal.find(id)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

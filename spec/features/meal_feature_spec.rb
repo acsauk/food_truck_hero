@@ -113,4 +113,12 @@ feature 'Meals' do
     visit meal_path meal
     expect(page).to have_content "5 days"
   end
+
+  scenario 'creating labels for a meal' do
+    meal = FactoryBot.create(:meal_with_recipes_with_ingredients)
+    visit meal_labels_path meal
+    select 3, from: :label_amount
+    click_button 'Create labels'
+    expect(page).to have_css("meal-label", count: 3)
+  end
 end
