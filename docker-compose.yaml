@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: 'postgres:10.3-alpine'
+    ports:
+      - 5432:5432
+    env_file:
+      - '.env'
+
+  web:
+    build:
+      context: .
+    command: ["./scripts/wait-for-it.sh", "postgres:5432", "--", "./scripts/start_rails.sh"]
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://postgres@postgres
+      - WEBPACKER_DEV_SERVER_HOST=webpacker
+    depends_on:
+      - webpacker
+      - postgres
+
+  webpacker:
+    build: .
+    env_file:
+      - '.env.docker'
+    command: ["./scripts/start_webpacker_dev.sh"]
+    volumes:
+      - .:/app
+    ports:
+      - '3035:3035'
+
+volumes:
+  postgres:
+  webpacker:

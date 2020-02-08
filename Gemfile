@@ -7,6 +7,7 @@ end
 
 ruby '2.6.5'
 
+gem 'tzinfo-data'
 gem 'apparition', '~> 0.4.0'
 gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.18'
@@ -52,6 +53,3 @@ group :test do
   gem 'launchy'
   gem 'rspec_junit_formatter'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
