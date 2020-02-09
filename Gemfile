@@ -7,13 +7,13 @@ end
 
 ruby '2.6.5'
 
+gem 'tzinfo-data'
 gem 'apparition', '~> 0.4.0'
 gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 4.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'haml-rails', '~> 2.0'
@@ -30,6 +30,7 @@ gem 'font_awesome5_rails'
 gem 'webpacker', '~> 4.x'
 
 group :development, :test do
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'factory_bot_rails'
@@ -52,6 +53,3 @@ group :test do
   gem 'launchy'
   gem 'rspec_junit_formatter'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
