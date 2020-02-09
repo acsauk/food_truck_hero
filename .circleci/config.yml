@@ -15,6 +15,7 @@ jobs:
            PGHOST: 127.0.0.1
            PGUSER: acsauk
            RAILS_ENV: test
+           DATABASE_HOST: localhost
        - image: circleci/postgres:10.4-alpine
          environment:
            POSTGRES_USER: acsauk
