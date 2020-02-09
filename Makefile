@@ -1,13 +1,11 @@
-ENV ?=development
-export ENV
+RAILS_ENV ?=development
+export RAILS_ENV
 
 build-up:
 	docker-compose up -d --build
-create-migrate-db: create-db migrate-db
 create-db:
-	docker-compose run --rm web rails db:create
+	docker-compose run --rm web rails db:create RAILS_ENV=$(RAILS_ENV)
 migrate-db:
-
-	docker-compose run --rm web rails db:migrate RAILS_ENV=$(ENV)
+	docker-compose run --rm web rails db:migrate RAILS_ENV=$(RAILS_ENV)
 rspec:
 	docker-compose run --rm web rspec

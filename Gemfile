@@ -14,7 +14,6 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 4.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'haml-rails', '~> 2.0'
@@ -31,6 +30,7 @@ gem 'font_awesome5_rails'
 gem 'webpacker', '~> 4.x'
 
 group :development, :test do
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'factory_bot_rails'
