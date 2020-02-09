@@ -16,7 +16,17 @@ require 'money-rails/test_helpers'
 require 'capybara/apparition'
 
 Capybara.register_driver :apparition do |app|
-  Capybara::Apparition::Driver.new(app, {js_errors: false})
+  opts = {
+    js_errors: false,
+    headless: true,
+    browser_options: [
+      :no_sandbox,
+      { disable_features: 'VizDisplayCompositor' },
+      :disable_gpu
+    ]
+  }
+
+  Capybara::Apparition::Driver.new(app, opts)
 end
 
 Capybara.javascript_driver = :apparition
@@ -33,6 +43,8 @@ RSpec.configure do |config|
   # Timeout.timeout(300) do
   #   loop until Webpacker.config.public_manifest_path.exist?
   # end
+
+  DatabaseCleaner.url_whitelist = ['postgres://postgres@postgres']
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

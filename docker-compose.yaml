@@ -27,8 +27,6 @@ services:
 
   webpacker:
     build: .
-    env_file:
-      - '.env.docker'
     command: ["./scripts/start_webpacker_dev.sh"]
     volumes:
       - .:/app
